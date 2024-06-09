@@ -1,1 +1,6 @@
 @import url('./common/reset.css');
+
+:root {
+  --sys-text-color: #333;
+  --sys-border-color: #dedede;
+}
