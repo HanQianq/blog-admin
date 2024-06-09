@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">首页</div>
+  <div class="p-4">工作台</div>
 </template>
 <script setup lang="ts"></script>
 <style lang="scss" scoped></style>

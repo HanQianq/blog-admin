@@ -1,0 +1,1 @@
+type SysModeType = 'light' | 'dark';

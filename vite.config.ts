@@ -4,7 +4,7 @@ import UnoCSS from 'unocss/vite';
 import { resolve } from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { PrimeVueResolver } from 'unplugin-vue-components/resolvers';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,14 +12,14 @@ export default defineConfig({
     UnoCSS(),
     vue(),
     AutoImport({
-      resolvers: [PrimeVueResolver()],
+      resolvers: [NaiveUiResolver()],
       imports: [
         'vue',
         {
           'vue-router/auto': ['useRoute', 'useRouter'],
         },
       ],
-      dirs: ['src/types', 'src/utils/tool'],
+      dirs: ['src/utils/tool'],
       dts: 'auto-imports.d.ts',
       eslintrc: {
         enabled: true,
@@ -27,7 +27,7 @@ export default defineConfig({
       vueTemplate: true,
     }),
     Components({
-      resolvers: [PrimeVueResolver()],
+      resolvers: [NaiveUiResolver()],
       dirs: ['src/views/components', 'src/components'],
       dts: true,
       directoryAsNamespace: true,
@@ -37,5 +37,10 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
     },
+  },
+  server: {
+    cors: true,
+    host: '0.0.0.0',
+    port: 9999,
   },
 });
