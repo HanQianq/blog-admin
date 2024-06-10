@@ -1,6 +1,4 @@
 html.dark {
-  :root {
-    --sys-text-color: #eee;
-    --sys-border-color: #3c3333e5;
-  }
+  --sys-text-color: #eee;
+  --sys-border-color: #3c3333e5;
 }

@@ -1,6 +1,4 @@
 html.light {
-  :root {
-    --sys-text-color: #333;
-    --sys-border-color: #dedede;
-  }
+  --sys-text-color: #333;
+  --sys-border-color: #dedede;
 }

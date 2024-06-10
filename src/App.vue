@@ -1,10 +1,14 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div class="app">
+    <SysSettings></SysSettings>
     <RouterView></RouterView>
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.app {
+  color: var(--sys-text-color);
+}
+</style>

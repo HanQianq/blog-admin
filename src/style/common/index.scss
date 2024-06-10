@@ -1,0 +1,27 @@
+.hover-wrapper {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: var(--sys-main-color);
+  }
+}
+
+.hover-text {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: var(--sys-main-color);
+  }
+}
+
+.xy-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-item {
+  background-color: #fff;
+  border-radius: var(--sys-border-size);
+  border: solid 1px var(--sys-border-color);
+}

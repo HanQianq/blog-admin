@@ -1,6 +1,44 @@
 @import url('./common/reset.css');
+@import url('./common/index.scss');
+@import url('./UIFramework/index.scss');
 
 :root {
   --sys-text-color: #333;
   --sys-border-color: #dedede;
+  --sys-border-size: 6px;
+  --sys-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+@font-face {
+  font-family: 'roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../assets/font/roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+  font-family: 'NotoSansSC';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../assets/font/notoSansSC/NotoSansSC-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'ZCOOLKuaiLe';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../assets/font/zcool/ZCOOLKuaiLe-Regular.ttf);
+}
+
+.font-beauty {
+  font-family: roboto;
+  font-weight: bold;
+}
+
+.font-title {
+  font-family: ZCOOLKuaiLe;
+  font-weight: bold;
 }
