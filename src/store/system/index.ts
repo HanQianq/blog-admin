@@ -1,25 +1,32 @@
 import { defineStore } from 'pinia';
 import type { SysModeType, SysThemeType } from './type';
-import { useColorMode, useDark, useToggle } from '@vueuse/core';
 
 export const useSystemStore = defineStore(
   'userInfo',
   () => {
-    const mode = ref<SysModeType>('light');
-    const theme = ref<SysThemeType>('blue');
+    const mode = ref<SysModeType>('dark');
+    const theme = ref<SysThemeType>('green');
 
-    const isDark = useDark();
-    const colorMode = useColorMode();
-    const toggleDark = useToggle(isDark);
-
-    const changeMode = async (newSysMode: 'light' | 'dark') => {
-      mode.value = newSysMode;
-      colorMode.value = newSysMode;
+    const changeMode = async (newMode: 'light' | 'dark') => {
+      document.documentElement.classList.remove(mode.value);
+      document.documentElement.classList.add(newMode);
+      mode.value = newMode;
     };
 
     const switchMode = () => {
-      toggleDark();
       mode.value === 'light' ? changeMode('dark') : changeMode('light');
+    };
+
+    const changeTheme = (newTheme: SysThemeType) => {
+      document.documentElement.classList.remove(theme.value);
+      document.documentElement.classList.add(newTheme);
+      theme.value = newTheme;
+    };
+
+    const initModeAndTheme = () => {
+      document.documentElement.classList.add(theme.value);
+      document.documentElement.classList.add(mode.value);
+      console.log('🚀 ~ initModeAndTheme ~ mode.value:', mode.value);
     };
 
     return {
@@ -27,6 +34,8 @@ export const useSystemStore = defineStore(
       theme,
       changeMode,
       switchMode,
+      changeTheme,
+      initModeAndTheme,
     };
   },
   {

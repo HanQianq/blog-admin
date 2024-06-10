@@ -1,10 +1,9 @@
 @import url('./common/reset.css');
 @import url('./common/index.scss');
 @import url('./UIFramework/index.scss');
+@import url('./syscolors/index.css');
 
 :root {
-  --sys-text-color: #333;
-  --sys-border-color: #dedede;
   --sys-border-size: 6px;
   --sys-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
 }

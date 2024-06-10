@@ -1,4 +1,7 @@
 html.light {
+  --sys-bg-color: #fff;
+  --sys-wrapper-bg-color: #eee;
   --sys-text-color: #333;
-  --sys-border-color: #dedede;
+  --sys-text-contrast-color: #fff;
+  --sys-border-color: #eeeaea;
 }

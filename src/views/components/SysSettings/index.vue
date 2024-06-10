@@ -1,5 +1,5 @@
 <template>
-  <div class="system-settings font-beauty">
+  <div class="system-settings">
     <div
       class="trigger-btn xy-center rounded-full w-16 h-16"
       @click="openDrawer"
@@ -10,28 +10,37 @@
     </div>
     <n-drawer v-model:show="visible" :width="400" placement="right">
       <n-drawer-content title="系统设置">
-        <div class="settings-mode setting-item mb-4">
+        <div class="settings-mode font-beauty setting-item mb-4">
           <div class="settings-title mb-4 font-title text-xl">系统模式</div>
           <div class="setting-content">
-            <ul class="settings-list flex gap-4">
+            <ul class="settings-mode-list flex gap-4">
               <li
                 v-for="item in modeList"
-                class="wrapper-item hover-wrapper xy-center flex-1 p-4"
-                :class="{ active: mode === 'light' }"
+                class="wrapper-item hover-wrapper text-sm xy-center flex-1 p-4"
+                :class="{ 'active-item': mode === item.value }"
                 :key="item.value"
                 @click="changeMode(item.value as SysModeType)"
               >
-                <!-- <n-icon size="28">
-                  <LightMode></LightMode>
-                </n-icon> -->
                 <div class="settings-item-text">{{ item.label }}</div>
               </li>
             </ul>
           </div>
         </div>
-        <div class="settings-theme">
-          <div class="settings-title font-title text-xl">系统模式</div>
-          <div class="setting-content"></div>
+        <div class="settings-theme font-beauty">
+          <div class="settings-title font-title text-xl">系统主题</div>
+          <div class="setting-content">
+            <ul class="settings-theme-list flex gap-4">
+              <li
+                v-for="item in themeList"
+                class="wrapper-item hover-wrapper xy-center p-4 text-sm"
+                :class="{ 'active-item': theme === item.value }"
+                :key="item.value"
+                @click="changeTheme(item.value as SysThemeType)"
+              >
+                <div class="settings-item-text">{{ item.label }}</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </n-drawer-content>
     </n-drawer>
@@ -41,18 +50,15 @@
 import { useSystemStore } from '@/store/system';
 import { storeToRefs } from 'pinia';
 import { SettingsRound } from '@vicons/material';
-import type { SysModeType } from '@/store/system/type';
+import type { SysModeType, SysThemeType } from '@/store/system/type';
 
 const visible = ref(false);
 const { mode, theme } = storeToRefs(useSystemStore());
+const { initModeAndTheme, changeMode, changeTheme } = useSystemStore();
 const modeList: DictType[] = [
   { label: '浅色', value: 'light' },
   { label: '深色', value: 'dark' },
 ];
-
-const changeMode = (value: 'light' | 'dark') => {
-  useSystemStore().changeMode(value);
-};
 
 const themeList: DictType[] = [
   { label: '蓝色', value: 'blue' },
@@ -64,6 +70,10 @@ const themeList: DictType[] = [
 const openDrawer = () => {
   visible.value = true;
 };
+
+onMounted(() => {
+  initModeAndTheme();
+});
 </script>
 <style lang="scss" scoped>
 .system-settings {
@@ -73,11 +83,20 @@ const openDrawer = () => {
   .trigger-btn {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    background-color: #136ddc;
+    background-color: var(--sys-main-color);
     color: #fff;
     &:hover {
       opacity: 0.7;
     }
   }
+}
+.settings-title {
+  margin-bottom: 1rem;
+  font-size: 16px;
+}
+.settings-theme-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
 }
 </style>

@@ -3,6 +3,7 @@
   transition: all 0.3s ease-in-out;
   &:hover {
     background-color: var(--sys-main-color);
+    color: var(--sys-text-contrast-color);
   }
 }
 
@@ -21,7 +22,12 @@
 }
 
 .wrapper-item {
-  background-color: #fff;
+  background-color: var(--sys-wrapper-bg-color);
   border-radius: var(--sys-border-size);
   border: solid 1px var(--sys-border-color);
+}
+
+.active-item {
+  background-color: var(--sys-main-color);
+  color: var(--sys-text-contrast-color);
 }
