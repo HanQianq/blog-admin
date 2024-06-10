@@ -31,3 +31,7 @@
   background-color: var(--sys-main-color);
   color: var(--sys-text-contrast-color);
 }
+
+.border-bottom {
+  border-bottom: solid 1px var(--sys-border-color);
+}

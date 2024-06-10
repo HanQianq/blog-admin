@@ -1,5 +1,5 @@
 <template>
-  <div class="top-bar w-full h-full px-2">
+  <div class="top-bar w-full h-full px-4">
     <n-icon size="28">
       <ForkLeftFilled></ForkLeftFilled>
     </n-icon>
