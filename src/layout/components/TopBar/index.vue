@@ -1,13 +1,7 @@
 <template>
-  <div class="top-bar w-full h-full px-4">
-    <n-icon size="28">
-      <ForkLeftFilled></ForkLeftFilled>
-    </n-icon>
-  </div>
+  <div class="top-bar w-full h-full px-4"></div>
 </template>
-<script lang="ts" setup>
-import { ForkLeftFilled } from '@vicons/material';
-</script>
+<script lang="ts" setup></script>
 <style lang="scss" scoped>
 .top-bar {
   border-bottom: solid 1px var(--sys-border-color);

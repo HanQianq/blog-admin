@@ -7,17 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ADrawer: typeof import('@arco-design/web-vue')['Drawer']
     MyDialog: typeof import('./src/components/MyDialog/index.vue')['default']
     MyEcharts: typeof import('./src/components/MyEcharts/index.vue')['default']
     MyPagination: typeof import('./src/components/MyPagination/index.vue')['default']
     MyTable: typeof import('./src/components/MyTable/index.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
-    NConfigProvider: typeof import('naive-ui')['NConfigProvider']
-    NDrawer: typeof import('naive-ui')['NDrawer']
-    NDrawerContent: typeof import('naive-ui')['NDrawerContent']
-    NIcon: typeof import('naive-ui')['NIcon']
-    NSpace: typeof import('naive-ui')['NSpace']
-    NSwitch: typeof import('naive-ui')['NSwitch']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SysSettings: typeof import('./src/views/components/SysSettings/index.vue')['default']

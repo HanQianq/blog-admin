@@ -4,12 +4,21 @@
       class="trigger-btn xy-center rounded-full w-16 h-16"
       @click="openDrawer"
     >
-      <n-icon size="28">
-        <SettingsRound></SettingsRound>
-      </n-icon>
+      <icon-setting-one theme="outline" size="24" fill="#fff" />
     </div>
-    <n-drawer v-model:show="visible" :width="400" placement="right">
-      <n-drawer-content title="系统设置">
+    <a-drawer
+      :visible="visible"
+      :width="400"
+      placement="right"
+      :footer="false"
+      @ok="handleOk"
+      @cancel="handleCancel"
+      unmountOnClose
+    >
+      <template #title>
+        <div class="settings-title font-beauty text-xl">系统设置</div>
+      </template>
+      <div>
         <div class="settings-mode font-beauty setting-item mb-4">
           <div class="settings-title mb-4 font-title text-xl">系统模式</div>
           <div class="setting-content">
@@ -42,14 +51,13 @@
             </ul>
           </div>
         </div>
-      </n-drawer-content>
-    </n-drawer>
+      </div>
+    </a-drawer>
   </div>
 </template>
 <script lang="ts" setup>
 import { useSystemStore } from '@/store/system';
 import { storeToRefs } from 'pinia';
-import { SettingsRound } from '@vicons/material';
 import type { SysModeType, SysThemeType } from '@/store/system/type';
 
 const visible = ref(false);
@@ -69,6 +77,13 @@ const themeList: DictType[] = [
 ];
 const openDrawer = () => {
   visible.value = true;
+};
+
+const handleOk = () => {
+  visible.value = false;
+};
+const handleCancel = () => {
+  visible.value = false;
 };
 
 onMounted(() => {
@@ -91,7 +106,6 @@ onMounted(() => {
   }
 }
 .settings-title {
-  margin-bottom: 1rem;
   font-size: 16px;
 }
 .settings-theme-list {

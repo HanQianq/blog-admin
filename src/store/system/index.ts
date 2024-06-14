@@ -10,6 +10,9 @@ export const useSystemStore = defineStore(
     const changeMode = async (newMode: 'light' | 'dark') => {
       document.documentElement.classList.remove(mode.value);
       document.documentElement.classList.add(newMode);
+      newMode === 'dark'
+        ? document.body.setAttribute('arco-theme', newMode)
+        : document.body.removeAttribute('arco-theme');
       mode.value = newMode;
     };
 
