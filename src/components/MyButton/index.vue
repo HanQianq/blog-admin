@@ -56,7 +56,7 @@ withDefaults(defineProps<PropsType>(), {
   &-text {
     color: var(--sys-main-color);
     &:hover {
-      border-bottom: solid 1px var(--sys-main-color);
+      opacity: 0.8;
     }
   }
 }

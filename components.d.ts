@@ -14,6 +14,7 @@ declare module 'vue' {
     AFormItem: typeof import('@arco-design/web-vue')['FormItem']
     AInput: typeof import('@arco-design/web-vue')['Input']
     AInputNumber: typeof import('@arco-design/web-vue')['InputNumber']
+    AInputPassword: typeof import('@arco-design/web-vue')['InputPassword']
     AInputTag: typeof import('@arco-design/web-vue')['InputTag']
     AOption: typeof import('@arco-design/web-vue')['Option']
     ARangePicker: typeof import('@arco-design/web-vue')['RangePicker']

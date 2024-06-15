@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import type { SysModeType, SysThemeType } from './type';
 
 export const useSystemStore = defineStore(
-  'userInfo',
+  'system',
   () => {
     const mode = ref<SysModeType>('dark');
     const theme = ref<SysThemeType>('green');
