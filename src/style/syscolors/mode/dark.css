@@ -1,6 +1,7 @@
 html.dark {
   --sys-bg-color: #171c23;
-  --sys-wrapper-bg-color: #35363f;
+  --sys-box-bg-color: #35363f;
+  --sys-wrapper-bg-color: #333339;
   --sys-text-color: #eee;
   --sys-text-contrast-color: #000;
   --sys-border-color: #2a323c;

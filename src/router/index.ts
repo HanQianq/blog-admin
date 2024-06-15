@@ -8,6 +8,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/layout/index.vue'),
     children: routeList,
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/pages/Global/Login/index.vue'),
+  },
 ];
 
 const router = createRouter({

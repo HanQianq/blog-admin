@@ -66,6 +66,10 @@
     "watchPostEffect": true,
     "watchSyncEffect": true,
     "getImg": true,
-    "tool": true
+    "tool": true,
+    "copyClick": true,
+    "dateDiff": true,
+    "fmtTime": true,
+    "getSvg": true
   }
 }

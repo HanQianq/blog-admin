@@ -11,7 +11,7 @@
       :width="400"
       placement="right"
       :footer="false"
-      @ok="handleOk"
+      @ok="openDrawer"
       @cancel="handleCancel"
       unmountOnClose
     >
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="settings-theme font-beauty">
-          <div class="settings-title font-title text-xl">系统主题</div>
+          <div class="settings-title font-title text-xl mb-4">系统主题</div>
           <div class="setting-content">
             <ul class="settings-theme-list flex gap-4">
               <li
@@ -79,9 +79,6 @@ const openDrawer = () => {
   visible.value = true;
 };
 
-const handleOk = () => {
-  visible.value = false;
-};
 const handleCancel = () => {
   visible.value = false;
 };
@@ -99,7 +96,6 @@ onMounted(() => {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     background-color: var(--sys-main-color);
-    color: #fff;
     &:hover {
       opacity: 0.7;
     }

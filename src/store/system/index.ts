@@ -29,7 +29,9 @@ export const useSystemStore = defineStore(
     const initModeAndTheme = () => {
       document.documentElement.classList.add(theme.value);
       document.documentElement.classList.add(mode.value);
-      console.log('🚀 ~ initModeAndTheme ~ mode.value:', mode.value);
+      mode.value === 'dark'
+        ? document.body.setAttribute('arco-theme', mode.value)
+        : document.body.removeAttribute('arco-theme');
     };
 
     return {

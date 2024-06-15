@@ -7,14 +7,18 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const computed: typeof import('vue')['computed']
+  const copyClick: typeof import('./src/utils/tool/index')['copyClick']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
+  const dateDiff: typeof import('./src/utils/tool/index')['dateDiff']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const effectScope: typeof import('vue')['effectScope']
+  const fmtTime: typeof import('./src/utils/tool/index')['fmtTime']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getImg: typeof import('./src/utils/tool/index')['getImg']
+  const getSvg: typeof import('./src/utils/tool/index')['getSvg']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
   const isProxy: typeof import('vue')['isProxy']
@@ -75,14 +79,18 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
+    readonly copyClick: UnwrapRef<typeof import('./src/utils/tool/index')['copyClick']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
+    readonly dateDiff: UnwrapRef<typeof import('./src/utils/tool/index')['dateDiff']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly fmtTime: UnwrapRef<typeof import('./src/utils/tool/index')['fmtTime']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getImg: UnwrapRef<typeof import('./src/utils/tool/index')['getImg']>
+    readonly getSvg: UnwrapRef<typeof import('./src/utils/tool/index')['getSvg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
@@ -136,14 +144,18 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
+    readonly copyClick: UnwrapRef<typeof import('./src/utils/tool/index')['copyClick']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
+    readonly dateDiff: UnwrapRef<typeof import('./src/utils/tool/index')['dateDiff']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly fmtTime: UnwrapRef<typeof import('./src/utils/tool/index')['fmtTime']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getImg: UnwrapRef<typeof import('./src/utils/tool/index')['getImg']>
+    readonly getSvg: UnwrapRef<typeof import('./src/utils/tool/index')['getSvg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>

@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { useSystemStore } from './store/system';
 
-const { mode } = storeToRefs(useSystemStore());
+const { initModeAndTheme } = useSystemStore();
+
+onMounted(() => {
+  initModeAndTheme();
+});
 </script>
 
 <template>
@@ -13,5 +16,7 @@ const { mode } = storeToRefs(useSystemStore());
 .app {
   color: var(--sys-text-color);
   background-color: var(--sys-bg-color);
+  width: 100vw;
+  height: 100vh;
 }
 </style>
