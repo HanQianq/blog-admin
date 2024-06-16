@@ -27,7 +27,9 @@
             />
           </a-form-item>
           <a-form-item>
-            <MyButton class="w-full mt-4" size="large">登&nbsp;录</MyButton>
+            <MyButton class="w-full mt-4 font-beauty" size="large"
+              >登&nbsp;录</MyButton
+            >
           </a-form-item>
         </a-form>
         <div class="flex mt-6">

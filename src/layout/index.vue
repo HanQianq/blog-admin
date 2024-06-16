@@ -1,6 +1,6 @@
 <template>
   <div class="app-layout-wrapper">
-    <div class="side-bar-wrapper">
+    <div class="side-bar-wrapper" :style="{ width: sideWidth }">
       <SideBar></SideBar>
     </div>
     <div class="main-wrapper flex-1 w-0 flex flex-col">
@@ -14,8 +14,16 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import SideBar from './components/SideBar/index.vue';
 import TopBar from './components/TopBar/index.vue';
+import { useSystemStore } from '@/store/system';
+
+const { isSideExpand } = storeToRefs(useSystemStore());
+
+const sideWidth = computed(() => {
+  return isSideExpand.value ? '15rem' : '3rem';
+});
 </script>
 <style lang="scss" scoped>
 .app-layout-wrapper {
@@ -23,7 +31,7 @@ import TopBar from './components/TopBar/index.vue';
   height: 100vh;
   display: flex;
   .side-bar-wrapper {
-    width: 240px;
+    transition: all ease 0.2s;
   }
   .top-bar-wrapper {
     height: 4rem;
