@@ -9,6 +9,7 @@ import type {
 import { setSessionStorage } from '../storage';
 import { storeToRefs } from 'pinia';
 import { useUserInfoStore } from '@/store/user';
+import { Message } from '@arco-design/web-vue';
 
 class Request {
   // axios 实例
@@ -21,12 +22,13 @@ class Request {
     // 使用axios.create创建axios实例
     this.instance = axios.create(this.baseConfig);
 
-    const { token } = storeToRefs(useUserInfoStore());
+    const { token, csrfToken } = storeToRefs(useUserInfoStore());
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         if (token.value) {
           if (config.headers) {
             config.headers.Authorization = `${token.value}`;
+            config.headers['X-CSRFToken'] = `${csrfToken.value}`;
           }
         }
 
@@ -50,7 +52,7 @@ class Request {
           console.log(res.data.data);
         }
         if (res.data.code && res.data.code !== 401) {
-          // ElMessage.error(res.data.msg || res.data.message);
+          Message.error(res.data.msg || res.data.message);
         }
         return type === 'base' ? res.data : res;
       },
@@ -96,12 +98,7 @@ class Request {
             message = `连接出错(${err.response.status})!`;
         }
         // 这里错误消息可以使用全局弹框展示出来
-        // 比如element plus 可以使用 ElMessage
-        // ElMessage({
-        //   showClose: true,
-        //   message: `${message}，请检查网络或联系管理员！`,
-        //   type: 'error',
-        // });
+        Message.error(message);
         // 这里是AxiosError类型，所以一般我们只reject我们需要的响应即可
         return Promise.reject(err.response);
       }

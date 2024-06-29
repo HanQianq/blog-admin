@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AAvatar: typeof import('@arco-design/web-vue')['Avatar']
     AButton: typeof import('@arco-design/web-vue')['Button']
     ADatePicker: typeof import('@arco-design/web-vue')['DatePicker']
     ADrawer: typeof import('@arco-design/web-vue')['Drawer']
@@ -19,9 +20,11 @@ declare module 'vue' {
     AMenu: typeof import('@arco-design/web-vue')['Menu']
     AMenuItem: typeof import('@arco-design/web-vue')['MenuItem']
     AOption: typeof import('@arco-design/web-vue')['Option']
+    APopover: typeof import('@arco-design/web-vue')['Popover']
     ARangePicker: typeof import('@arco-design/web-vue')['RangePicker']
     ASelect: typeof import('@arco-design/web-vue')['Select']
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
+    ATag: typeof import('@arco-design/web-vue')['Tag']
     ATimePicker: typeof import('@arco-design/web-vue')['TimePicker']
     MyButton: typeof import('./src/components/MyButton/index.vue')['default']
     MyDialog: typeof import('./src/components/MyDialog/index.vue')['default']

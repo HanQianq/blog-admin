@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import { h } from 'vue';
+import { Modal, Button, Message } from '@arco-design/web-vue';
 
 export const getImg = (baseUrl: string, detailUrl: string) => {
   return new URL(`../../assets/image/${baseUrl}/${detailUrl}`, import.meta.url)
@@ -63,6 +65,25 @@ export const copyClick = (content: string) => {
       textArea.remove();
     });
   }
+};
+
+export const confirmHandler = (content: string, cb: () => void) => {
+  Modal.warning({
+    title: '提醒',
+    content: `${content},是否继续`,
+    hideCancel: false,
+    onOk() {
+      cb();
+    },
+    bodyStyle: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    onCancel() {
+      Message.info('已取消');
+    },
+  });
 };
 
 export default {

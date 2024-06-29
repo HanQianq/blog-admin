@@ -1,7 +1,14 @@
 <template>
-  <div class="top-bar w-full h-full px-4"></div>
+  <div class="top-bar w-full h-full px-4 flex items-center justify-between">
+    <div></div>
+    <div>
+      <UserInfo></UserInfo>
+    </div>
+  </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import UserInfo from './components/UserInfo/index.vue';
+</script>
 <style lang="scss" scoped>
 .top-bar {
   border-bottom: solid 1px var(--sys-border-color);

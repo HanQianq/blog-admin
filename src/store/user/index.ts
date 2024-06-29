@@ -4,34 +4,33 @@ import type { UserInfoType } from './type';
 export const useUserInfoStore = defineStore(
   'user',
   () => {
-    const userInfo = ref<UserInfoType>({
+    const baseInfo: UserInfoType = {
       nickName: '',
       avatar: '',
-      roleId: '',
       bgCover: null,
-      email: '',
       sex: '',
+      loginTime: '',
       createTime: '',
+    };
+
+    const userInfo = ref<UserInfoType>({
+      ...baseInfo,
     });
     const token = ref<string>('');
+    const csrfToken = ref<string>('');
     const isLogin = ref<boolean>(false);
 
     const clearUserData = () => {
-      userInfo.value = {
-        nickName: '',
-        avatar: '',
-        roleId: '',
-        bgCover: null,
-        email: '',
-        sex: '',
-        createTime: '',
-      };
+      userInfo.value = { ...baseInfo };
       token.value = '';
+      csrfToken.value = '';
+      isLogin.value = false;
     };
 
     return {
       userInfo,
       token,
+      csrfToken,
       isLogin,
       clearUserData,
     };

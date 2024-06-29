@@ -7,6 +7,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const computed: typeof import('vue')['computed']
+  const confirmHandler: typeof import('./src/utils/tool/index')['confirmHandler']
   const copyClick: typeof import('./src/utils/tool/index')['copyClick']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
@@ -79,6 +80,7 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
+    readonly confirmHandler: UnwrapRef<typeof import('./src/utils/tool/index')['confirmHandler']>
     readonly copyClick: UnwrapRef<typeof import('./src/utils/tool/index')['copyClick']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -144,6 +146,7 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
+    readonly confirmHandler: UnwrapRef<typeof import('./src/utils/tool/index')['confirmHandler']>
     readonly copyClick: UnwrapRef<typeof import('./src/utils/tool/index')['copyClick']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>

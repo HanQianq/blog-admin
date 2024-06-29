@@ -70,6 +70,7 @@
     "copyClick": true,
     "dateDiff": true,
     "fmtTime": true,
-    "getSvg": true
+    "getSvg": true,
+    "confirmHandler": true
   }
 }

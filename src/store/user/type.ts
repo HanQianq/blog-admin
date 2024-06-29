@@ -1,9 +1,8 @@
 export type UserInfoType = {
   nickName: string;
-  avatar: string;
-  roleId: string;
+  avatar: string | null;
   bgCover: string | null;
-  email: string;
   sex: string;
   createTime: string;
+  loginTime: string;
 };

@@ -22,7 +22,7 @@ import { useSystemStore } from '@/store/system';
 const { isSideExpand } = storeToRefs(useSystemStore());
 
 const sideWidth = computed(() => {
-  return isSideExpand.value ? '15rem' : '3rem';
+  return isSideExpand.value ? '14rem' : '3rem';
 });
 </script>
 <style lang="scss" scoped>
