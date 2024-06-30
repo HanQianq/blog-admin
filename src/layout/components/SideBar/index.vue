@@ -3,7 +3,9 @@
     <div class="border-bottom xy-center h-16">
       <span class="flex items-center overflow-hidden">
         <MyIcon name="all-application" :size="18"></MyIcon>
-        <span v-show="isSideExpand" class="text-lg ml-2 flex-shrink-0"
+        <span
+          v-show="isSideExpand"
+          class="font-title text-base ml-2 flex-shrink-0"
           >博客后台管理系统</span
         >
       </span>
@@ -44,5 +46,6 @@ const onCollapse = (isCollapse: boolean) => {
 .side-bar {
   border-right: solid 1px var(--sys-border-color);
   overflow: hidden;
+  background-color: var(--sys-box-bg-color);
 }
 </style>

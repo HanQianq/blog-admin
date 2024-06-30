@@ -32,12 +32,20 @@
   src: url(../assets/font/zcool/ZCOOLKuaiLe-Regular.ttf);
 }
 
+@font-face {
+  font-family: 'Ali FangYuan';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../assets/font/ali/ailifangyuan.ttf);
+}
+
 .font-beauty {
   font-family: roboto;
   font-weight: bold;
 }
 
 .font-title {
-  font-family: ZCOOLKuaiLe;
+  font-family: Ali FangYuan;
   font-weight: bold;
 }
