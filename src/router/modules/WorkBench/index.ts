@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-export const workBenchRouteList: RouteRecordRaw[] = [
+export const WorkBenchRouteList: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',

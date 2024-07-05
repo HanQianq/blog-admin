@@ -30,7 +30,7 @@ export default defineConfig({
       resolvers: [ArcoResolver()],
       dirs: ['src/views/components', 'src/components'],
       dts: true,
-      directoryAsNamespace: true,
+      directoryAsNamespace: false,
     }),
   ],
   resolve: {

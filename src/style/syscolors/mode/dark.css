@@ -4,5 +4,9 @@ html.dark {
   --sys-wrapper-bg-color: #333339;
   --sys-text-color: #eee;
   --sys-text-contrast-color: #000;
-  --sys-border-color: #2a323c;
+  --sys-border-color: #454a51;
+}
+
+body[arco-theme='dark'] {
+  --color-menu-light-bg: #35363f !important;
 }

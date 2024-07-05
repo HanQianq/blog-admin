@@ -1,3 +1,4 @@
-import { workBenchRouteList } from './WorkBench';
+import { WorkBenchRouteList } from './WorkBench';
+import { AuthRouteList } from './Auth';
 
-export const routeList = [...workBenchRouteList];
+export const routeList = [...WorkBenchRouteList, ...AuthRouteList];
