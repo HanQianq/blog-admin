@@ -9,3 +9,10 @@ export const loginApi = (data: {
 
 export const getValidCodeApi = (data: { key: string }) =>
   request.post<string>('/user/valid/code', data);
+
+export const uploadFileApi = (data: FormData) =>
+  request.post<string>('/upload/file', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });

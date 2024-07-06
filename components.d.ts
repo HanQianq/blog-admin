@@ -28,7 +28,7 @@ declare module 'vue' {
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
     ATag: (typeof import('@arco-design/web-vue'))['Tag']
     ATimePicker: (typeof import('@arco-design/web-vue'))['TimePicker']
-    MyAutoUpload: typeof import('./src/components/common/MyAutoUpload/index.vue')['default']
+    MyAutoUpload: typeof import('./src/components/common/Upload/MyAutoUpload/index.vue')['default']
     MyButton: typeof import('./src/components/common/MyButton/index.vue')['default']
     MyDialog: typeof import('./src/components/common/MyDialog/index.vue')['default']
     MyEcharts: typeof import('./src/components/common/MyEcharts/index.vue')['default']
