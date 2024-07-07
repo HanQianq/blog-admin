@@ -11,9 +11,6 @@ export const useSystemStore = defineStore(
     const changeMode = async (newMode: 'light' | 'dark') => {
       document.documentElement.classList.remove(mode.value);
       document.documentElement.classList.add(newMode);
-      newMode === 'dark'
-        ? document.body.setAttribute('arco-theme', newMode)
-        : document.body.removeAttribute('arco-theme');
       mode.value = newMode;
     };
 
@@ -30,9 +27,6 @@ export const useSystemStore = defineStore(
     const initModeAndTheme = () => {
       document.documentElement.classList.add(theme.value);
       document.documentElement.classList.add(mode.value);
-      mode.value === 'dark'
-        ? document.body.setAttribute('arco-theme', mode.value)
-        : document.body.removeAttribute('arco-theme');
     };
 
     return {

@@ -6,47 +6,52 @@
         :style="{ background: `url(${loginBg}) 100% 100% no-repeat` }"
       >
         <div class="my-8 font-title text-2xl login-title">用户登录</div>
-        <a-form
+        <el-form
           ref="formRef"
           :model="loginForm"
           :rules="loginRules"
-          size="large"
           layout="vertical"
           class="!w-2/3"
         >
-          <a-form-item field="username" label="用户名" class="!mb-6" feedback>
-            <a-input
+          <el-form-item prop="username" class="!mb-6">
+            <el-input
               v-model="loginForm.username"
-              size="medium"
               placeholder="请输入用户名..."
             />
-          </a-form-item>
-          <a-form-item field="password" label="密码" feedback>
-            <a-input-password
+          </el-form-item>
+          <el-form-item field="password" class="!mb-6">
+            <el-input
               v-model="loginForm.password"
-              size="medium"
+              password
               placeholder="请输入密码..."
             />
-          </a-form-item>
-          <a-form-item field="code" label="验证码" feedback>
-            <a-input
-              v-model="loginForm.code"
-              size="medium"
-              placeholder="请输入验证码..."
-            />
-            <a-tag
-              class="w-120px ml-2 xy-center font-beauty"
+          </el-form-item>
+          <el-form-item field="code" class="!mb-6">
+            <div class="flex w-full">
+              <el-input
+                v-model="loginForm.code"
+                placeholder="请输入验证码..."
+                class="flex-1"
+              />
+              <el-tag
+                class="w-120px ml-4 xy-center font-beauty cursor-pointer"
+                size="large"
+                @click="getValidCode"
+                >{{ currentCode }}
+              </el-tag>
+            </div>
+          </el-form-item>
+          <el-form-item>
+            <el-button
+              :loading="loading"
+              type="primary"
+              class="w-full"
               size="large"
-              @click="getValidCode"
-              >{{ currentCode }}
-            </a-tag>
-          </a-form-item>
-          <a-form-item>
-            <a-button type="primary" long size="large" @click="loginHandler"
+              @click="loginHandler"
               >登&nbsp;录
-            </a-button>
-          </a-form-item>
-        </a-form>
+            </el-button>
+          </el-form-item>
+        </el-form>
         <div class="flex mt-6">
           游客账号
           <MyButton type="text">一键登录</MyButton>
@@ -61,9 +66,10 @@ import { MD5 } from 'crypto-js';
 import { getValidCodeApi, loginApi } from '@/api';
 import { useSystemStore } from '@/store/system';
 import { useUserInfoStore } from '@/store/user';
-import { Message } from '@arco-design/web-vue';
 import { nanoid } from 'nanoid';
 import { storeToRefs } from 'pinia';
+import { setCookie } from '@/utils/tool';
+import { ElMessage } from 'element-plus';
 
 const router = useRouter();
 
@@ -74,6 +80,7 @@ const loginBg = computed(() => {
   return getSvg('waves', theme.value + '.svg');
 });
 
+const loading = ref(false);
 const currentKey = ref('');
 const currentCode = ref('');
 
@@ -102,8 +109,9 @@ const getValidCode = async () => {
 };
 
 const loginHandler = () => {
-  formRef.value.validate(async (noValid: any) => {
-    if (!noValid) {
+  formRef.value.validate(async (valid: boolean) => {
+    if (valid) {
+      loading.value = true;
       const { username, password, code } = loginForm.value;
       const { code: isFailed, data } = await loginApi({
         username,
@@ -112,10 +120,12 @@ const loginHandler = () => {
         code,
       });
       if (isFailed === 0) {
-        Message.success('登录成功');
+        ElMessage.success('登录成功');
+        loading.value = false;
         isLogin.value = true;
         userInfo.value = { ...data.userInfo };
         csrfToken.value = data.csrfToken;
+        setCookie('csrftoken', csrfToken.value);
         token.value = data.token;
         router.push('/');
       }

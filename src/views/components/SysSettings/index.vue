@@ -4,18 +4,10 @@
       class="trigger-btn xy-center rounded-full w-16 h-16"
       @click="openDrawer"
     >
-      <icon-setting-one theme="outline" size="24" fill="#fff" />
+      <MyIcon name="setting-one" color="#fff" :size="22"></MyIcon>
     </div>
-    <a-drawer
-      :visible="visible"
-      :width="400"
-      placement="right"
-      :footer="false"
-      @ok="openDrawer"
-      @cancel="handleCancel"
-      unmountOnClose
-    >
-      <template #title>
+    <el-drawer v-model="visible" :width="400">
+      <template #header>
         <div class="settings-title font-beauty text-xl">系统设置</div>
       </template>
       <div>
@@ -52,7 +44,7 @@
           </div>
         </div>
       </div>
-    </a-drawer>
+    </el-drawer>
   </div>
 </template>
 <script lang="ts" setup>
@@ -77,10 +69,6 @@ const themeList: DictType[] = [
 ];
 const openDrawer = () => {
   visible.value = true;
-};
-
-const handleCancel = () => {
-  visible.value = false;
 };
 
 onMounted(() => {

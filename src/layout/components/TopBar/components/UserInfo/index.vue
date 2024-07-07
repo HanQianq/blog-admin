@@ -1,18 +1,17 @@
 <template>
-  <div class="">
-    <a-popover position="br" :show-arrow="false">
-      <a-avatar>
-        <img v-if="userInfo.avatar" alt="avatar" :src="userInfo.avatar" />
-        <span v-else>{{ userInfo.nickName.substring(0, 1) }}</span>
-      </a-avatar>
-      <template #content>
-        <div class="w-240px h-300px">
-          <a-button type="primary" long @click="logoutHandle">
-            退&nbsp;出</a-button
-          >
-        </div>
+  <div class="userinfo-container">
+    <el-popover trigger="hover" :show-arrow="false" placement="bottom-end">
+      <template #reference>
+        <el-avatar>
+          <img v-if="userInfo.avatar" alt="avatar" :src="userInfo.avatar" />
+          <span v-else>{{ userInfo.nickName.substring(0, 1) }}</span>
+        </el-avatar>
       </template>
-    </a-popover>
+
+      <div class="w-full h-full">
+        <el-button type="primary" @click="logoutHandle"> 退&nbsp;出</el-button>
+      </div>
+    </el-popover>
   </div>
 </template>
 <script lang="ts" setup>

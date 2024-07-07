@@ -1,16 +1,5 @@
 <template>
-  <div class="w-full h-full">
-    <a-table :columns="columnList" :data="dataList" />
-  </div>
+  <div class="w-full h-full"></div>
 </template>
-<script lang="ts" setup>
-type PropsType = {
-  dataList?: any[];
-  columnList: any[];
-};
-
-withDefaults(defineProps<PropsType>(), {
-  dataList: (): any[] => [],
-});
-</script>
+<script lang="ts" setup></script>
 <style lang="scss" scoped></style>

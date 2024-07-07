@@ -1,23 +1,27 @@
 <template>
   <div class="my-dialog w-full h-full">
-    <a-modal
-      :visible="visible"
+    <el-dialog
+      :model-value="visible"
       draggable
       :title="title"
       :width="width"
       title-align="start"
-      :footer="!hideFooter"
-      @ok="handleOk"
-      @cancel="handleCancel"
+      :before-close="handleCancel"
       @close="handleCancel"
     >
-      <template #title>
-        <slot name="title"></slot>
+      <template #header>
+        <slot name="header"></slot>
       </template>
       <div>
         <slot></slot>
       </div>
-    </a-modal>
+      <template v-if="!hideFooter" #footer>
+        <div>
+          <el-button type="info" @click="handleCancel">取消</el-button>
+          <el-button type="primary" @click="confirmHandler">确定</el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script lang="ts" setup>
@@ -35,12 +39,12 @@ withDefaults(defineProps<PropsType>(), {
 
 const emit = defineEmits(['confirm', 'close']);
 
-const handleOk = () => {
-  emit('confirm');
-};
-
 const handleCancel = () => {
   emit('close');
+};
+
+const confirmHandler = () => {
+  emit('confirm');
 };
 </script>
 <style lang="scss" scoped></style>

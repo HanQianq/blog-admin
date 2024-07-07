@@ -71,6 +71,8 @@
     "dateDiff": true,
     "fmtTime": true,
     "getSvg": true,
-    "confirmHandler": true
+    "confirmHandler": true,
+    "getCookie": true,
+    "setCookie": true
   }
 }

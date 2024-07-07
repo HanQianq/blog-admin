@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
-import { h } from 'vue';
-import { Modal, Button, Message } from '@arco-design/web-vue';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 export const getImg = (baseUrl: string, detailUrl: string) => {
   return new URL(`../../assets/image/${baseUrl}/${detailUrl}`, import.meta.url)
@@ -24,7 +23,7 @@ export const dateDiff = (
   nowTime = new Date().getTime()
 ) => {
   const diffValue = nowTime - new Date(hisTime).getTime();
-  let result = '';
+  let result;
   const minute = 1000 * 60;
   const hour = minute * 60;
   const day = hour * 24;
@@ -50,7 +49,7 @@ export const dateDiff = (
 export const copyClick = (content: string) => {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(content);
-    // ElMessage.success('复制成功');
+    ElMessage.success('复制成功');
   } else {
     const textArea = document.createElement('textarea');
     textArea.value = content;
@@ -58,7 +57,7 @@ export const copyClick = (content: string) => {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    // ElMessage.success('复制成功');
+    ElMessage.success('复制成功');
     return new Promise((res: any, rej: any) => {
       // 执行复制命令并移除文本框
       document.execCommand('copy') ? res() : rej();
@@ -68,26 +67,45 @@ export const copyClick = (content: string) => {
 };
 
 export const confirmHandler = (content: string, cb: () => void) => {
-  Modal.warning({
-    title: '提醒',
-    content: `${content},是否继续`,
-    hideCancel: false,
-    onOk() {
+  ElMessageBox.confirm(`${content}，是否继续?`, '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
       cb();
-    },
-    bodyStyle: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    onCancel() {
-      Message.info('已取消');
-    },
-  });
+    })
+    .catch(() => {
+      ElMessage.info('已取消');
+    });
+};
+
+export const getCookie = (name: string) => {
+  let matches = document.cookie.match(
+    new RegExp(
+      '(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\/+^])/g, '\\$&') + '=([^;]*)'
+    )
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+export const setCookie = (key: string, value: string, days = 7) => {
+  // 构造过期时间
+  let expires = '';
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = '; expires=' + date.toUTCString();
+  }
+
+  // 设置Cookie
+  document.cookie = key + '=' + (value || '') + expires + '; path=/';
 };
 
 export default {
   getImg,
   dateDiff,
   copyClick,
+  getCookie,
+  setCookie,
 };

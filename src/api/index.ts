@@ -5,7 +5,7 @@ export const loginApi = (data: {
   password: string;
   key: string;
   code: string;
-}) => request.post<ResLoginType>('/user/login/admin', data);
+}) => request.post<ResLoginType>('/user/login', data);
 
 export const getValidCodeApi = (data: { key: string }) =>
   request.post<string>('/user/valid/code', data);

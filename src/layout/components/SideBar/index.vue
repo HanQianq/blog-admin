@@ -15,43 +15,38 @@
         </span>
       </span>
     </div>
-    <div class="flex-1 h-0">
-      <a-menu
-        :style="{ width: '100%', height: '100%' }"
-        show-collapse-button
-        :default-collapsed="!isSideExpand"
-        @collapse="onCollapse"
-      >
+    <div class="flex-1 h-0" :class="{ 'is-collapse': !isSideExpand }">
+      <el-menu :collapse="!isSideExpand">
         <div v-for="item in menuList" :key="item.id">
           <template v-if="item.type === 'fold'">
-            <a-sub-menu :key="item.id">
-              <template v-if="item.icon" #icon>
-                <MyIcon :name="item.icon"></MyIcon>
+            <el-sub-menu :index="item.route" :key="item.id">
+              <template #title>
+                <MyIcon class="ml-1" size="18" :name="item.icon"></MyIcon>
+                <span ml="5">{{ item.name }}</span>
               </template>
-              <template #title>{{ item.name }}</template>
-              <a-menu-item
-                v-for="subItem in item.children as MenuItem[]"
+
+              <el-menu-item
+                v-for="subItem in item.children"
                 :key="subItem.id"
                 @click="gotoRelatedPage(subItem)"
               >
-                <template v-if="subItem.icon" #icon>
+                <template #title>
                   <MyIcon :name="subItem.icon"></MyIcon>
+                  <span ml="4">{{ subItem.name }}</span>
                 </template>
-
-                {{ subItem.name }}
-              </a-menu-item>
-            </a-sub-menu>
+              </el-menu-item>
+            </el-sub-menu>
           </template>
           <template v-else>
-            <a-menu-item @click="gotoRelatedPage(item)" :key="item.id">
-              <template v-if="item.icon" #icon>
-                <MyIcon :name="item.icon"></MyIcon>
+            <el-menu-item @click="gotoRelatedPage(item)">
+              <MyIcon :name="item.icon" class="ml-1" size="18"></MyIcon>
+              <template #title>
+                <span ml="4">{{ item.name }}</span>
               </template>
-              {{ item.name }}
-            </a-menu-item>
+            </el-menu-item>
           </template>
         </div>
-      </a-menu>
+      </el-menu>
     </div>
   </div>
 </template>
@@ -60,13 +55,9 @@
 import { useSystemStore } from '@/store/system';
 import { MenuItem, menuList } from '@/config/mock';
 import { storeToRefs } from 'pinia';
-import { Message } from '@arco-design/web-vue';
+import { ElMessage } from 'element-plus';
 
 const { isSideExpand } = storeToRefs(useSystemStore());
-
-const onCollapse = (isCollapse: boolean) => {
-  isSideExpand.value = !isCollapse;
-};
 
 const router = useRouter();
 
@@ -80,7 +71,7 @@ const gotoRelatedPage = (item: MenuItem) => {
       router.push(item.route);
     }
   } catch (err) {
-    return Message.warning('该路由尚未添加');
+    return ElMessage.warning('该路由尚未添加');
   }
 };
 </script>
@@ -89,5 +80,13 @@ const gotoRelatedPage = (item: MenuItem) => {
   border-right: solid 1px var(--sys-border-color);
   overflow: hidden;
   background-color: var(--sys-box-bg-color);
+}
+:deep(.el-menu) {
+  border-right: none !important;
+}
+.is-collapse {
+  :deep(.el-sub-menu__icon-arrow) {
+    display: none;
+  }
 }
 </style>

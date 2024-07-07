@@ -1,9 +1,9 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 import { routeList } from './modules';
 import { getSessionStorage } from '@/utils/storage';
-import { Message } from '@arco-design/web-vue';
 import { useUserInfoStore } from '@/store/user';
 import { storeToRefs } from 'pinia';
+import { ElMessage } from 'element-plus';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
   const { isLogin } = storeToRefs(useUserInfoStore());
   if (isLogin.value) {
     if (to.name === 'Login') {
-      Message.warning('您已经登录');
+      ElMessage.warning('您已经登录');
       next(from.path);
     } else {
       next();
@@ -40,11 +40,11 @@ router.beforeEach((to, from, next) => {
       // document.title = (to.meta.name as string) || 'hans博客后台管理系统';
       next();
       if (getSessionStorage('tokenValid')) {
-        Message.error('token过期或无效，请重新登录');
+        ElMessage.error('token过期或无效，请重新登录');
         sessionStorage.removeItem('tokenValid');
       }
     } else {
-      Message.error('您尚未登录');
+      ElMessage.error('您尚未登录');
       next({ name: 'Login' });
     }
   }

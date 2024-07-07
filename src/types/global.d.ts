@@ -20,3 +20,11 @@ type StrictNameOrLabel =
 type DictType = {
   value: string;
 } & StrictNameOrLabel;
+
+type IdType = {
+  id: string;
+};
+
+type IdsType = {
+  ids: string[];
+};
