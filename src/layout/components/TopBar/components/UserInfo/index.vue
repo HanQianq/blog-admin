@@ -9,7 +9,9 @@
       </template>
 
       <div class="w-full h-full">
-        <el-button type="primary" @click="logoutHandle"> 退&nbsp;出</el-button>
+        <el-button class="w-full" type="primary" @click="logoutHandle">
+          退&nbsp;出</el-button
+        >
       </div>
     </el-popover>
   </div>

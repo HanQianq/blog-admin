@@ -1,9 +1,13 @@
+:root {
+  --el-border-radius-base: 0!important;
+}
+
 .el-drawer__header {
   height: 4rem;
   display: flex;
   align-items: center;
   margin-bottom: 0!important;
-  padding: 0 1rem;
+  padding: 0 1rem!important;
   color: var(--sys-text-color)!important;
-  border: solid 1px var(--sys-border-color);
+  border-bottom: solid 1px var(--sys-border-color);
 }

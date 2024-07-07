@@ -1,6 +1,6 @@
 export type RoleFormType = {
-  roleName: string;
-  roleCode: string;
+  name: string;
+  code: string;
   sort: number;
   limit: number;
 };

@@ -21,7 +21,7 @@
           <template v-if="item.type === 'fold'">
             <el-sub-menu :index="item.route" :key="item.id">
               <template #title>
-                <MyIcon class="ml-1" size="18" :name="item.icon"></MyIcon>
+                <MyIcon class="ml-1" size="20" :name="item.icon"></MyIcon>
                 <span ml="5">{{ item.name }}</span>
               </template>
 
@@ -39,7 +39,7 @@
           </template>
           <template v-else>
             <el-menu-item @click="gotoRelatedPage(item)">
-              <MyIcon :name="item.icon" class="ml-1" size="18"></MyIcon>
+              <MyIcon :name="item.icon" class="ml-1" size="20"></MyIcon>
               <template #title>
                 <span ml="4">{{ item.name }}</span>
               </template>
