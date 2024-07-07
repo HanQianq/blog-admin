@@ -1,13 +1,18 @@
 <template>
   <div class="side-bar w-full h-full flex flex-col">
     <div class="border-bottom xy-center h-16">
-      <span class="flex items-center overflow-hidden">
+      <span
+        class="flex items-center overflow-hidden cursor-pointer"
+        text="hover:blue-500"
+        @click="goBackToIndex"
+      >
         <MyIcon name="all-application" :size="20"></MyIcon>
         <span
           v-show="isSideExpand"
           class="font-title text-lg ml-2 flex-shrink-0"
-          >博客后台管理系统</span
         >
+          博客后台管理系统
+        </span>
       </span>
     </div>
     <div class="flex-1 h-0">
@@ -21,8 +26,8 @@
           <template v-if="item.type === 'fold'">
             <a-sub-menu :key="item.id">
               <template v-if="item.icon" #icon>
-                <MyIcon :name="item.icon"></MyIcon
-              ></template>
+                <MyIcon :name="item.icon"></MyIcon>
+              </template>
               <template #title>{{ item.name }}</template>
               <a-menu-item
                 v-for="subItem in item.children as MenuItem[]"
@@ -40,8 +45,8 @@
           <template v-else>
             <a-menu-item @click="gotoRelatedPage(item)" :key="item.id">
               <template v-if="item.icon" #icon>
-                <MyIcon :name="item.icon"></MyIcon
-              ></template>
+                <MyIcon :name="item.icon"></MyIcon>
+              </template>
               {{ item.name }}
             </a-menu-item>
           </template>
@@ -56,6 +61,7 @@ import { useSystemStore } from '@/store/system';
 import { MenuItem, menuList } from '@/config/mock';
 import { storeToRefs } from 'pinia';
 import { Message } from '@arco-design/web-vue';
+
 const { isSideExpand } = storeToRefs(useSystemStore());
 
 const onCollapse = (isCollapse: boolean) => {
@@ -63,6 +69,11 @@ const onCollapse = (isCollapse: boolean) => {
 };
 
 const router = useRouter();
+
+const goBackToIndex = () => {
+  router.push({ name: 'Home' });
+};
+
 const gotoRelatedPage = (item: MenuItem) => {
   try {
     if (item.route) {

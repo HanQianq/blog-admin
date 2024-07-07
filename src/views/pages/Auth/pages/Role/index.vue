@@ -49,8 +49,8 @@ const closeDialog = () => {
 const form = reactive({
   name: '',
   code: '',
-  sort: '',
-  limit: '',
+  sort: 0,
+  limit: 1,
 });
 </script>
 <style lang="scss" scoped></style>

@@ -30,9 +30,11 @@ const sideWidth = computed(() => {
   width: 100vw;
   height: 100vh;
   display: flex;
+
   .side-bar-wrapper {
     transition: all ease 0.2s;
   }
+
   .top-bar-wrapper {
     height: 4rem;
     display: flex;

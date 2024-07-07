@@ -38,17 +38,18 @@
               class="w-120px ml-2 xy-center font-beauty"
               size="large"
               @click="getValidCode"
-              >{{ currentCode }}</a-tag
-            >
+              >{{ currentCode }}
+            </a-tag>
           </a-form-item>
           <a-form-item>
             <a-button type="primary" long size="large" @click="loginHandler"
-              >登&nbsp;录</a-button
-            >
+              >登&nbsp;录
+            </a-button>
           </a-form-item>
         </a-form>
         <div class="flex mt-6">
-          游客账号<MyButton type="text">一键登录</MyButton>
+          游客账号
+          <MyButton type="text">一键登录</MyButton>
         </div>
       </div>
       <div class="login-intro flex-1"></div>
@@ -77,8 +78,7 @@ const currentKey = ref('');
 const currentCode = ref('');
 
 const initKey = () => {
-  const key = nanoid();
-  currentKey.value = key;
+  currentKey.value = nanoid();
 };
 
 const formRef = ref();
@@ -134,6 +134,7 @@ onBeforeMount(() => {
   height: 650px;
   background: var(--sys-box-bg-color);
   overflow: hidden;
+
   .login-title {
     letter-spacing: 6px;
   }
@@ -145,6 +146,7 @@ onBeforeMount(() => {
     align-items: center;
     position: relative;
   }
+
   .login-intro {
     background-color: var(--sys-main-color);
   }
