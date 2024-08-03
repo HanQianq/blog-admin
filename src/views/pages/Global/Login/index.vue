@@ -22,7 +22,7 @@
           <el-form-item field="password" class="!mb-6">
             <el-input
               v-model="loginForm.password"
-              password
+              show-password
               placeholder="请输入密码..."
             />
           </el-form-item>
@@ -128,6 +128,8 @@ const loginHandler = () => {
         setCookie('csrftoken', csrfToken.value);
         token.value = data.token;
         router.push('/');
+      } else {
+        loading.value = false;
       }
     }
   });

@@ -41,7 +41,6 @@ export default defineConfig({
   server: {
     cors: true,
     host: '0.0.0.0',
-    port: 9999,
     proxy: {
       '/backapi': {
         target: 'http://127.0.0.1:8000/',

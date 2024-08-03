@@ -8,12 +8,12 @@
     </div>
     <el-drawer v-model="visible" :size="400">
       <template #header>
-        <div class="settings-title font-beauty text-xl">系统设置</div>
+        <div class="font-title text-xl">系统设置</div>
       </template>
       <div>
-        <div class="settings-mode font-beauty setting-item mb-4">
-          <div class="settings-title mb-4 font-title text-xl">系统模式</div>
-          <div class="setting-content">
+        <div class="settings-mode setting-item mb-4">
+          <div class="settings-title mb-4 font-title">系统模式</div>
+          <div class="setting-content font-beauty">
             <ul class="settings-mode-list flex gap-4">
               <li
                 v-for="item in modeList"
@@ -27,9 +27,9 @@
             </ul>
           </div>
         </div>
-        <div class="settings-theme font-beauty">
+        <div class="settings-theme">
           <div class="settings-title font-title text-xl mb-4">系统主题</div>
-          <div class="setting-content">
+          <div class="setting-content font-beauty">
             <ul class="settings-theme-list flex gap-4">
               <li
                 v-for="item in themeList"

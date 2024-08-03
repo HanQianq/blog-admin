@@ -40,12 +40,19 @@
   src: url(../assets/font/ali/ailifangyuan.ttf);
 }
 
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../assets/font/YouSheBiaoTiHei/YouSheBiaoTiHei.ttf);
+}
+
 .font-beauty {
-  font-family: roboto;
+  font-family: roboto, serif;
   font-weight: bold;
 }
 
 .font-title {
-  font-family: Ali FangYuan;
-  font-weight: bold;
+  font-family: YouSheBiaoTiHei, serif;
 }

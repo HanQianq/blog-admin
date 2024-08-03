@@ -2,14 +2,13 @@
   <div class="side-bar w-full h-full flex flex-col">
     <div class="border-bottom xy-center h-16">
       <span
-        class="flex items-center overflow-hidden cursor-pointer"
-        text="hover:blue-500"
+        class="flex items-center overflow-hidden hover-text"
         @click="goBackToIndex"
       >
-        <MyIcon name="all-application" :size="20"></MyIcon>
+        <MyIcon name="all-application" :size="18"></MyIcon>
         <span
           v-show="isSideExpand"
-          class="font-title text-lg ml-2 flex-shrink-0"
+          class="font-title text-xl ml-2 flex-shrink-0 relative top-2px"
         >
           博客后台管理系统
         </span>
