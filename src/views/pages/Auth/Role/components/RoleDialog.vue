@@ -9,46 +9,31 @@
     <el-form
       ref="formRef"
       :model="form"
-      label-width="100px"
+      :rules="formRules"
+      label-width="110px"
       :style="{ width: '100%' }"
     >
-      <el-form-item
-        field="roleName"
-        label="角色名"
-        validate-trigger="input"
-        required
-      >
+      <el-form-item prop="name" label="角色名">
         <el-input v-model="form.name" placeholder="请输入角色名" />
       </el-form-item>
-      <el-form-item
-        field="roleCode"
-        label="角色码"
-        validate-trigger="input"
-        required
-      >
+      <el-form-item prop="code" label="角色码">
         <el-input v-model="form.code" placeholder="请输入角色码" />
       </el-form-item>
-      <el-form-item field="limit" label="角色数量限制">
+      <el-form-item prop="limit" label="角色数量限制">
         <el-input-number v-model="form.limit" :min="1" class="!w-full" />
       </el-form-item>
-      <el-form-item field="sort" label="角色排序">
+      <el-form-item prop="sort" label="角色排序">
         <el-input-number v-model="form.sort" :min="0" class="!w-full" />
       </el-form-item>
     </el-form>
   </MyDialog>
 </template>
 <script setup lang="ts">
-import type { RoleItemType } from '@/api/authority/role/type.ts';
 import { addRoleApi, editRoleApi } from '@/api/authority/role';
 import { ElMessage } from 'element-plus';
-import { originalForm } from '@/views/pages/Auth/Role/service.ts';
+import { FormDialogPropsType, formRules, originalForm } from '../service.ts';
 
-type PropsType = {
-  visible: boolean;
-  optType: string;
-  row: RoleItemType;
-};
-const props = defineProps<PropsType>();
+const props = defineProps<FormDialogPropsType>();
 const emits = defineEmits(['close', 'changeSuccess']);
 
 const formRef = ref();
@@ -84,7 +69,6 @@ const confirmHandler = () => {
 onMounted(() => {
   if (props.optType === 'edit') {
     form.value = { ...props.row };
-    console.log(form.value);
   }
 });
 </script>

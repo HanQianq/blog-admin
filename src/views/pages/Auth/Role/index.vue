@@ -29,11 +29,11 @@
         </el-table-column>
       </el-table>
     </div>
-    <div v-if="visible">
+    <div v-if="formDialogProps.visible">
       <RoleDialog
-        :visible="visible"
-        :opt-type="optType"
-        :row="currentRow"
+        :visible="formDialogProps.visible"
+        :opt-type="formDialogProps.optType"
+        :row="formDialogProps.row"
         @close="closeDialog"
         @change-success="getRoleList"
       ></RoleDialog>
@@ -44,25 +44,28 @@
 import { deleteRoleApi, getRoleListApi } from '@/api/authority/role';
 import type { RoleItemType } from '@/api/authority/role/type.ts';
 import RoleDialog from '@/views/pages/Auth/Role/components/RoleDialog.vue';
-import { originalForm, columnList } from '@/views/pages/Auth/Role/service.ts';
+import {
+  originalForm,
+  columnList,
+  FormDialogPropsType,
+} from '@/views/pages/Auth/Role/service.ts';
 import { ElMessage } from 'element-plus';
 
 const roleList = ref<RoleItemType[]>([]);
 
-const visible = ref(false);
-const optType = ref('');
-const currentRow = ref<RoleItemType>({
-  id: '',
-  ...originalForm,
+const formDialogProps = reactive<FormDialogPropsType>({
+  visible: false,
+  optType: '',
+  row: { id: '', ...originalForm },
 });
 
-const openDialog = (type: string, row?: any) => {
-  visible.value = true;
-  optType.value = type;
-  row && (currentRow.value = row);
+const openDialog = (optType: string, row?: any) => {
+  formDialogProps.visible = true;
+  formDialogProps.optType = optType;
+  row && (formDialogProps.row = row);
 };
 const closeDialog = () => {
-  visible.value = false;
+  formDialogProps.visible = false;
 };
 
 const getRoleList = async () => {

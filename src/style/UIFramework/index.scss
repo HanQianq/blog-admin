@@ -1,5 +1,6 @@
 :root {
   --el-border-radius-base: 0!important;
+  --el-color-primary: var(--sys-main-color)!important;
 }
 
 .el-drawer__header {
@@ -10,4 +11,8 @@
   padding: 0 1rem!important;
   color: var(--sys-text-color)!important;
   border-bottom: solid 1px var(--sys-border-color);
+}
+.el-drawer__title {
+  font-family: YouSheBiaoTiHei, serif;
+  font-size: 18px!important;
 }

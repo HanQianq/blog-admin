@@ -4,15 +4,22 @@
       <img v-if="imgUrl" :src="imgUrl" alt="" />
       <div v-else class="w-full h-full">未上传图片</div>
     </div>
-    <div v-else>
+    <div
+      v-else
+      class="w-full h-full hover-text hover-border"
+      border="1px dashed #d9d9d9"
+    >
       <el-upload
+        class="pic-uploader w-full h-full"
         ref="uploadRef"
-        auto-upload
         accept=".jpg,.jpeg,.png,.webp,.svg,.gif"
         :before-upload="beforeUploadHandler"
         :show-file-list="false"
         :http-request="uploadFileHandler"
-      ></el-upload>
+      >
+        <img v-if="imgUrl" :src="imgUrl" alt="" />
+        <my-icon v-else name="plus" size="40"></my-icon>
+      </el-upload>
     </div>
   </div>
 </template>
@@ -20,6 +27,7 @@
 import { ElMessage, UploadProps } from 'element-plus';
 import { uploadFileApi } from '@/api';
 import { nanoid } from 'nanoid';
+import { MAX_IMAGE_SIZE } from '@/config';
 
 type PropsType = {
   editable: boolean;
@@ -31,12 +39,12 @@ const imgUrl = ref<string | null>(null);
 
 const uploadRef = ref();
 
-const beforeUploadHandler: UploadProps['beforeUpload'] = (rawFile) => {
-  if (rawFile.size / 1024 / 1024 > MAX_IMAGE_SIZE) {
-    ElMessage.error(`上传图片大小不能超过${MAX_IMAGE_SIZE}M`);
-    return false;
+const beforeUploadHandler: UploadProps['beforeUpload'] = (rawFile: any) => {
+  const fileLimit = rawFile.size / 1024 / 1024 < MAX_IMAGE_SIZE;
+  if (!fileLimit) {
+    ElMessage.error(`上传文件大小不超过${MAX_IMAGE_SIZE}M！`);
   }
-  return true;
+  return fileLimit;
 };
 
 const uploadFileHandler = async (raw: any) => {
@@ -54,4 +62,9 @@ const uploadFileHandler = async (raw: any) => {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+:deep(.el-upload) {
+  width: 100%;
+  height: 100%;
+}
+</style>

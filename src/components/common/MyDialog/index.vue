@@ -6,8 +6,8 @@
       :title="title"
       :width="width"
       title-align="start"
-      :before-close="handleCancel"
-      @close="handleCancel"
+      :before-close="cancelHandler"
+      @close="cancelHandler"
     >
       <template #header>
         <slot name="header"></slot>
@@ -17,7 +17,7 @@
       </div>
       <template v-if="!hideFooter" #footer>
         <div>
-          <el-button size="small" type="info" @click="handleCancel"
+          <el-button size="small" type="info" @click="cancelHandler"
             >取消</el-button
           >
           <el-button size="small" type="primary" @click="confirmHandler"
@@ -43,7 +43,7 @@ withDefaults(defineProps<PropsType>(), {
 
 const emit = defineEmits(['confirm', 'close']);
 
-const handleCancel = () => {
+const cancelHandler = () => {
   emit('close');
 };
 
@@ -61,8 +61,8 @@ const confirmHandler = () => {
   align-items: center;
 }
 :deep(.el-dialog__title) {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 15px;
+  font-family: YouSheBiaoTiHei, serif;
 }
 :deep(.el-dialog__body) {
   padding: 0 2rem;

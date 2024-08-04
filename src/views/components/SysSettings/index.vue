@@ -6,10 +6,7 @@
     >
       <MyIcon name="setting-one" color="#fff" :size="22"></MyIcon>
     </div>
-    <el-drawer v-model="visible" :size="400">
-      <template #header>
-        <div class="font-title text-xl">系统设置</div>
-      </template>
+    <el-drawer v-model="visible" :size="400" title="系统设置">
       <div>
         <div class="settings-mode setting-item mb-4">
           <div class="settings-title mb-4 font-title">系统模式</div>
