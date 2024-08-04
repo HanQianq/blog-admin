@@ -28,3 +28,8 @@ type IdType = {
 type IdsType = {
   ids: string[];
 };
+
+type ResPageType<T> = {
+  total: number;
+  result: T[];
+};

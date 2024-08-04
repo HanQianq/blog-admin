@@ -1,18 +1,37 @@
 :root {
-  --el-border-radius-base: 0!important;
-  --el-color-primary: var(--sys-main-color)!important;
+  --el-border-radius-base: 0 !important;
+  --el-color-primary: var(--sys-main-color) !important;
 }
 
 .el-drawer__header {
   height: 4rem;
   display: flex;
   align-items: center;
-  margin-bottom: 0!important;
-  padding: 0 1rem!important;
-  color: var(--sys-text-color)!important;
+  margin-bottom: 0 !important;
+  padding: 0 1rem !important;
+  color: var(--sys-text-color) !important;
   border-bottom: solid 1px var(--sys-border-color);
 }
 .el-drawer__title {
   font-family: YouSheBiaoTiHei, serif;
-  font-size: 18px!important;
+  font-size: 18px !important;
+}
+
+.el-tabs__header {
+  margin-bottom: 0 !important;
+  font-family: YouSheBiaoTiHei, serif;
+}
+
+.el-tabs__nav-scroll {
+  padding: 0 1rem;
+}
+.el-tabs__item {
+  font-size: 16px !important;
+}
+.el-segmented__group {
+  border: solid 1px var(--sys-main-color);
+}
+
+.el-tabs__nav-wrap:after {
+  height: 1px !important;
 }

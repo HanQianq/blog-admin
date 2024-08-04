@@ -1,46 +1,167 @@
 <template>
-  <div class="icon-manage border-bottom">
-    <div class="header-wrapper p-4 flex justify-between items-center">
+  <div class="flex flex-col wh-full" :class="currentLayout">
+    <div
+      class="header-wrapper border-bottom p-4 flex justify-between items-center"
+    >
       <div class="flex items-center">
-        <el-input placeholder="输入名称搜索" class="mr-4 !w-280px"></el-input>
-        <el-button type="primary" @click="openDialog('add')"
-          >新建图标</el-button
+        <el-input
+          v-model="searchParams.name"
+          placeholder="输入名称搜索"
+          class="mr-4 !w-280px"
+          clearable
+          @change="filterIconList"
+        ></el-input>
+        <el-button type="primary" @click="openDialog('add')">
+          <MyIcon name="plus" size="14"></MyIcon>
+          <span class="ml-1">新建图标</span></el-button
         >
       </div>
 
-      <el-segmented v-model="currentLayout" :options="options" />
+      <el-segmented v-model="currentLayout" :options="options">
+        <template #default="{ item }">
+          <div class="xy-center">
+            <my-icon :name="item.icon" size="16"> </my-icon>
+          </div>
+        </template>
+      </el-segmented>
+    </div>
+    <div class="category-wrapper border-bottom h-10">
+      <ul class="flex items-center h-full px-4">
+        <li
+          class="hover-wrapper text-xs rounded px-2 py-1 mr-2"
+          :class="{ 'active-item': searchParams.category === item.id }"
+          v-for="item in categoryList"
+          :key="item.id"
+          @click="changeCategory(item.id)"
+        >
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div
+      v-loading="pageConfig.loading"
+      class="icon-wrapper flex-1 h-0 flex flex-col p-4"
+    >
+      <ul
+        class="icon-list-wrapper flex-1 h-0 overflow-auto flex flex-wrap gap-3"
+      >
+        <li class="icon-item-wrapper" v-for="item in iconList" :key="item.id">
+          <IconCardItem :item="item" :layout="currentLayout"></IconCardItem>
+        </li>
+      </ul>
+      <div class="mt-4">
+        <MyPagination
+          :total="pageConfig.total"
+          :page-number="pageConfig.pageNumber"
+          :page-size="pageConfig.pageSize"
+          @page-change="pageChangeHandler"
+        ></MyPagination>
+      </div>
     </div>
     <div v-if="formDialogProps.visible">
       <IconFormDialog
         :visible="formDialogProps.visible"
         :opt-type="formDialogProps.optType"
         :row="formDialogProps.row"
+        :category-list="formDialogProps.categoryList"
         @close="closeDialog"
+        @change-success="getIconList"
       ></IconFormDialog>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {
+  getIconCategoryListApi,
+  getIconListApi,
+} from '@/api/resource/icon/index.ts';
 import IconFormDialog from '../../components/IconFormDialog.vue';
 import { type FormDialogPropsType, originalForm } from '../../service.ts';
+import { IconItemType, IconSearchType } from '@/api/resource/icon/type.ts';
+import IconCardItem from '../../components/IconCardItem.vue';
+import { CategoryItemType } from '@/api/resource/type.ts';
 const currentLayout = ref('card');
 const options = [
   {
-    label: '卡片',
-    value: 'card',
+    label: '列表',
+    value: 'list',
+    icon: 'view-grid-list',
   },
   {
-    label: '简洁',
-    value: 'simple',
+    label: '卡片',
+    value: 'card',
+    icon: 'view-grid-card',
   },
 ];
+
+const iconList = ref<IconItemType[]>([]);
+const categoryList = ref<CategoryItemType[]>([]);
+const pageConfig = ref({
+  pageNumber: 1,
+  pageSize: 20,
+  total: 0,
+  loading: true,
+});
+
+const originalParams: IconSearchType = { name: '', category: '' };
+const searchParams = ref<IconSearchType>({
+  ...originalParams,
+});
+
+const getIconList = async () => {
+  pageConfig.value.loading = true;
+  const { pageNumber, pageSize } = pageConfig.value;
+  const {
+    data: { total, result },
+  } = await getIconListApi({ pageNumber, pageSize, ...searchParams.value });
+  pageConfig.value.total = total;
+  iconList.value = result;
+  pageConfig.value.loading = false;
+};
+
+const filterIconList = async () => {
+  pageConfig.value.pageNumber = 1;
+  await getIconList();
+};
+
+const changeCategory = (category: string) => {
+  searchParams.value.category = category;
+  filterIconList();
+};
+
+const pageChangeHandler = async ({ pageNumber, pageSize }: PageType) => {
+  pageConfig.value.pageNumber = pageNumber;
+  pageConfig.value.pageSize = pageSize;
+  await getIconList();
+};
+const initIconList = async () => {
+  searchParams.value = { ...originalParams };
+  pageConfig.value.pageNumber = 1;
+  await getIconList();
+};
 
 const formDialogProps = reactive<FormDialogPropsType>({
   visible: false,
   optType: '',
   row: { id: '', createTime: '', ...originalForm },
+  categoryList: [],
 });
+
+const getCategoryList = async () => {
+  const { data } = await getIconCategoryListApi();
+  formDialogProps.categoryList = data;
+  categoryList.value = [
+    {
+      id: '',
+      name: '全部',
+      value: '',
+      sort: 0,
+      createTime: '',
+    },
+    ...data,
+  ];
+};
 
 const openDialog = (optType: string, row?: any) => {
   formDialogProps.visible = true;
@@ -50,5 +171,27 @@ const openDialog = (optType: string, row?: any) => {
 const closeDialog = () => {
   formDialogProps.visible = false;
 };
+
+const initData = async () => {
+  await initIconList();
+  await getCategoryList();
+};
+
+onBeforeMount(() => {
+  initData();
+});
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.list {
+  .icon-item-wrapper {
+    width: 128px;
+    height: 64px;
+  }
+}
+.card {
+  .icon-item-wrapper {
+    width: 64px;
+    height: 64px;
+  }
+}
+</style>

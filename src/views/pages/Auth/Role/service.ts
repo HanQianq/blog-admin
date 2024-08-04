@@ -1,4 +1,4 @@
-import type { RoleFormType } from '@/api/authority/role/type.ts';
+import type { RoleFormType, RoleItemType } from '@/api/authority/role/type.ts';
 import type { FormDialogProps } from '@/types/type.ts';
 
 export const originalForm: RoleFormType = {
@@ -21,4 +21,4 @@ export const formRules = {
   limit: [{ required: true, trigger: 'change', message: '请输入角色用户上限' }],
 };
 
-export type FormDialogPropsType = FormDialogProps<RoleFormType>;
+export type FormDialogPropsType = FormDialogProps<RoleItemType>;

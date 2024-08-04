@@ -13,6 +13,7 @@ export type IconIdType = {
 
 export type IconSearchType = {
   name: string;
+  category: string;
 };
 
 export type IconItemType = {

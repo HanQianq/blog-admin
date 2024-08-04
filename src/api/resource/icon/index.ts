@@ -14,8 +14,8 @@ export const editIconApi = (data: IconFormType & IconIdType) =>
 export const deleteIconApi = (data: IdsType) =>
   request.post<boolean>('/resource/icon/delete', data);
 
-export const getIconListApi = (data: IconSearchType) =>
-  request.post<IconItemType[]>('/resource/icon/list', data);
+export const getIconListApi = (data: IconSearchType & PageType) =>
+  request.post<ResPageType<IconItemType>>('/resource/icon/list', data);
 
 export const addIconCategoryApi = (data: CategoryFormType) =>
   request.post<boolean>('/resource/icon/category/add', data);
@@ -27,7 +27,7 @@ export const deleteIconCategoryApi = (data: IdsType) =>
   request.post<boolean>('/resource/icon/category/delete', data);
 
 export const getIconCategoryListApi = () =>
-  request.get<CategoryItemType[]>('/resource/icon/list');
+  request.get<CategoryItemType[]>('/resource/icon/category/list');
 
 export default {
   addIconApi,

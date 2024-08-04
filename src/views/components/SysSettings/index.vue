@@ -1,10 +1,10 @@
 <template>
   <div class="system-settings">
     <div
-      class="trigger-btn xy-center rounded-full w-16 h-16"
+      class="trigger-btn xy-center rounded-full w-12 h-12"
       @click="openDrawer"
     >
-      <MyIcon name="setting-one" color="#fff" :size="22"></MyIcon>
+      <MyIcon name="setting-one" color="#fff" :size="20"></MyIcon>
     </div>
     <el-drawer v-model="visible" :size="400" title="系统设置">
       <div>
@@ -75,8 +75,8 @@ onMounted(() => {
 <style lang="scss" scoped>
 .system-settings {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 6px;
+  left: 6px;
   .trigger-btn {
     cursor: pointer;
     transition: all 0.3s ease-in-out;

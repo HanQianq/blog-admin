@@ -7,6 +7,6 @@ html.dark {
   --sys-border-color: #454a51;
 }
 
-body[arco-theme='dark'] {
-  --color-menu-light-bg: #35363f !important;
+html.dark .icon img {
+  filter: invert(1);
 }

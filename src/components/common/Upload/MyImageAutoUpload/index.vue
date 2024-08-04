@@ -6,8 +6,7 @@
     </div>
     <div
       v-else
-      class="w-full h-full hover-text hover-border"
-      border="1px dashed #d9d9d9"
+      class="w-full h-full hover-text hover-border border-wrapper border-dashed"
     >
       <el-upload
         class="pic-uploader w-full h-full"
@@ -17,7 +16,7 @@
         :show-file-list="false"
         :http-request="uploadFileHandler"
       >
-        <img v-if="imgUrl" :src="imgUrl" alt="" />
+        <img v-if="imgUrl" :src="imgUrl" alt="" class="w-full h-full" />
         <my-icon v-else name="plus" size="32"></my-icon>
       </el-upload>
     </div>

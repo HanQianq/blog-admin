@@ -2,6 +2,7 @@
   <MyDialog
     :visible="props.visible"
     :title="dialogTitle"
+    width="500px"
     @close="closeHandler"
     @confirm="confirmHandler"
   >
@@ -16,14 +17,24 @@
         <el-input v-model="form.name" placeholder="请输入图标名称" />
       </el-form-item>
       <el-form-item prop="category" label="图标类型">
-        <el-input v-model="form.category" placeholder="请选择图标类型" />
+        <el-select v-model="form.category" placeholder="请选择图标类型">
+          <el-option
+            v-for="item in props.categoryList"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+          />
+        </el-select>
       </el-form-item>
-      <el-form-item prop="category" label="图标来源">
-        <el-input v-model="form.category" placeholder="请选择图标类型" />
+      <el-form-item prop="source" label="图标来源">
+        <el-input v-model="form.source" placeholder="请选择图标类型" />
       </el-form-item>
 
       <el-form-item prop="sort" label="图标排序">
         <el-input-number v-model="form.sort" :min="0" class="!w-full" />
+      </el-form-item>
+      <el-form-item prop="desc" label="图标描述">
+        <el-input v-model="form.desc" type="textarea" class="!w-full" />
       </el-form-item>
       <el-form-item prop="url" label="上传图标">
         <div class="w-100px h-100px">

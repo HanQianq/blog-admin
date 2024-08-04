@@ -14,7 +14,7 @@
     color: var(--sys-main-color);
   }
 }
-.hover-border{
+.hover-border {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
@@ -37,6 +37,10 @@
 .active-item {
   background-color: var(--sys-main-color);
   color: var(--sys-text-contrast-color);
+}
+.border-wrapper {
+  border: solid 1px var(--sys-border-color);
+  background-color: var(--sys-wrapper-bg-color);
 }
 
 .border-bottom {
