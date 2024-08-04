@@ -5,5 +5,10 @@ import { ResourceRouteList } from '@/router/modules/Resource';
 export const routeList = [
   ...WorkBenchRouteList,
   ...AuthRouteList,
-  ...ResourceRouteList,
+  {
+    path: '/IconManage',
+    name: 'IconManage',
+    component: () => import('@/views/pages/Resource/Icon/index.vue'),
+    children: [...ResourceRouteList],
+  },
 ];

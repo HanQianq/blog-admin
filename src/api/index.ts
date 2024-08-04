@@ -11,7 +11,7 @@ export const getValidCodeApi = (data: { key: string }) =>
   request.post<string>('/user/valid/code', data);
 
 export const uploadFileApi = (data: FormData) =>
-  request.post<string>('/upload/file', data, {
+  request.post<string>('/sys/file/upload', data, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

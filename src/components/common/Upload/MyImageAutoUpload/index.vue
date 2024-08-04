@@ -18,7 +18,7 @@
         :http-request="uploadFileHandler"
       >
         <img v-if="imgUrl" :src="imgUrl" alt="" />
-        <my-icon v-else name="plus" size="40"></my-icon>
+        <my-icon v-else name="plus" size="32"></my-icon>
       </el-upload>
     </div>
   </div>

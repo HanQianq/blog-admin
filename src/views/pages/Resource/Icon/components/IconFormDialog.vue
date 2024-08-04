@@ -9,7 +9,7 @@
       ref="formRef"
       :model="form"
       :rules="formRules"
-      label-width="100px"
+      label-width="90px"
       :style="{ width: '100%' }"
     >
       <el-form-item prop="name" label="图标名称">
@@ -21,17 +21,18 @@
       <el-form-item prop="category" label="图标来源">
         <el-input v-model="form.category" placeholder="请选择图标类型" />
       </el-form-item>
+
+      <el-form-item prop="sort" label="图标排序">
+        <el-input-number v-model="form.sort" :min="0" class="!w-full" />
+      </el-form-item>
       <el-form-item prop="url" label="上传图标">
-        <div class="w-full h-200px">
+        <div class="w-100px h-100px">
           <MyImageAutoUpload
             type="icon"
             :editable="optType === 'add'"
             @upload-success="uploadSuccessHandler"
           ></MyImageAutoUpload>
         </div>
-      </el-form-item>
-      <el-form-item field="sort" label="图标排序">
-        <el-input-number v-model="form.sort" :min="0" class="!w-full" />
       </el-form-item>
     </el-form>
   </MyDialog>

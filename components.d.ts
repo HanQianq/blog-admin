@@ -25,6 +25,8 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     MyAutoUpload: typeof import('./src/components/common/Upload/MyAutoUpload/index.vue')['default']
@@ -40,5 +42,6 @@ declare module 'vue' {
     SelectIcon: typeof import('./src/components/SelectIcon/index.vue')['default']
     SelectImage: typeof import('./src/components/SelectImage/index.vue')['default']
     SysSettings: typeof import('./src/views/components/SysSettings/index.vue')['default']
+    TabPage: typeof import('./src/views/components/TabPage/index.vue')['default']
   }
 }
