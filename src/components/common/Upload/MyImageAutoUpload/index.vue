@@ -55,6 +55,7 @@ const uploadFileHandler = async (raw: any) => {
     const { data } = await uploadFileApi(formData);
     imgUrl.value = data;
     emits('uploadSuccess', data);
+    ElMessage.success('上传成功');
   } catch {
     ElMessage.error('上传文件失败');
   }

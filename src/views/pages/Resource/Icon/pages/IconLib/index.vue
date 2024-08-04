@@ -38,20 +38,17 @@
         </li>
       </ul>
     </div>
-    <div
-      v-loading="pageConfig.loading"
-      class="icon-wrapper flex-1 h-0 flex flex-col p-4"
-    >
+    <div v-loading="loading" class="icon-wrapper flex-1 h-0 flex flex-col p-4">
       <ul
         class="icon-list-wrapper flex-1 h-0 overflow-auto flex flex-wrap gap-3"
       >
-        <li class="icon-item-wrapper" v-for="item in iconList" :key="item.id">
+        <li class="icon-item-wrapper" v-for="item in dataList" :key="item.id">
           <IconCardItem :item="item" :layout="currentLayout"></IconCardItem>
         </li>
       </ul>
       <div class="mt-4">
         <MyPagination
-          :total="pageConfig.total"
+          :total="total"
           :page-number="pageConfig.pageNumber"
           :page-size="pageConfig.pageSize"
           @page-change="pageChangeHandler"
@@ -81,6 +78,7 @@ import { type FormDialogPropsType, originalForm } from '../../service.ts';
 import { IconItemType, IconSearchType } from '@/api/resource/icon/type.ts';
 import IconCardItem from '../../components/IconCardItem.vue';
 import { CategoryItemType } from '@/api/resource/type.ts';
+import { useSearch } from '@/hooks/useSearch.ts';
 const currentLayout = ref('card');
 const options = [
   {
@@ -95,50 +93,39 @@ const options = [
   },
 ];
 
-const iconList = ref<IconItemType[]>([]);
 const categoryList = ref<CategoryItemType[]>([]);
-const pageConfig = ref({
-  pageNumber: 1,
-  pageSize: 20,
-  total: 0,
-  loading: true,
-});
-
 const originalParams: IconSearchType = { name: '', category: '' };
-const searchParams = ref<IconSearchType>({
-  ...originalParams,
-});
 
-const getIconList = async () => {
-  pageConfig.value.loading = true;
-  const { pageNumber, pageSize } = pageConfig.value;
-  const {
-    data: { total, result },
-  } = await getIconListApi({ pageNumber, pageSize, ...searchParams.value });
-  pageConfig.value.total = total;
-  iconList.value = result;
-  pageConfig.value.loading = false;
-};
+const {
+  searchParams,
+  dataList,
+  loading,
+  total,
+  pageConfig,
+  getDataListHandler,
+  pageChangeHandler,
+} = useSearch<IconSearchType, IconItemType>(originalParams, getIconList);
 
+async function getIconList() {
+  const { data } = await getIconListApi({
+    ...pageConfig,
+    ...searchParams.value,
+  });
+  return data;
+}
 const filterIconList = async () => {
-  pageConfig.value.pageNumber = 1;
-  await getIconList();
+  pageConfig.pageNumber = 1;
+  await getDataListHandler();
 };
 
-const changeCategory = (category: string) => {
+const changeCategory = async (category: string) => {
   searchParams.value.category = category;
-  filterIconList();
+  await filterIconList();
 };
 
-const pageChangeHandler = async ({ pageNumber, pageSize }: PageType) => {
-  pageConfig.value.pageNumber = pageNumber;
-  pageConfig.value.pageSize = pageSize;
-  await getIconList();
-};
 const initIconList = async () => {
   searchParams.value = { ...originalParams };
-  pageConfig.value.pageNumber = 1;
-  await getIconList();
+  await filterIconList();
 };
 
 const formDialogProps = reactive<FormDialogPropsType>({
@@ -182,6 +169,9 @@ onBeforeMount(() => {
 });
 </script>
 <style scoped lang="scss">
+.icon-list-wrapper {
+  align-content: start;
+}
 .list {
   .icon-item-wrapper {
     width: 128px;
