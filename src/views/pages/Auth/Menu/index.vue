@@ -5,19 +5,15 @@
     >
       <el-button type="primary" @click="openDrawer"> 新增菜单 </el-button>
     </div>
-    <MenuFormDrawer :visible="drawer.visible"></MenuFormDrawer>
+    <MenuFormDrawer ref="drawerRef"></MenuFormDrawer>
   </div>
 </template>
 <script lang="ts" setup>
 import MenuFormDrawer from './components/MenuFormDrawer.vue';
 
-const drawer = reactive({
-  visible: false,
-  row: {},
-});
-
+const drawerRef = ref();
 const openDrawer = () => {
-  drawer.visible = true;
+  drawerRef.value.openDrawerHandler();
 };
 </script>
 <style lang="scss" scoped></style>
