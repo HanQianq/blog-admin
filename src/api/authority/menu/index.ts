@@ -9,5 +9,5 @@ export const editMenuApi = (data: MenuItemType) =>
 export const deleteMenuApi = (data: IdsType) =>
   request.post<boolean>('/authority/menu/delete', data);
 
-export const getMenuTreeApi = () =>
-  request.get<MenuItemType[]>('/authority/menu/tree');
+export const getAllMenuTreeApi = () =>
+  request.get<MenuItemType[]>('/authority/menu/tree/all');

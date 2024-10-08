@@ -7,6 +7,7 @@ export type MenuFormType = {
   type: string;
   sort: number;
   level: number;
+  father: string | null;
 };
 
 export type MenuItemType = MenuFormType & {
