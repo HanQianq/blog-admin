@@ -11,6 +11,7 @@ import App from './App.vue';
 import 'virtual:uno.css';
 import setupIconParkIcon from './plugins/iconpark';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import vMdEditorPlugin from './plugins/v-md-editor';
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
@@ -25,6 +26,7 @@ app
   .use(pinia)
   .use(ElementPlus, { locale: zhCn })
   .use(setupIconParkIcon)
-  .use(router);
+  .use(router)
+  .use(vMdEditorPlugin);
 
 app.mount('#app');

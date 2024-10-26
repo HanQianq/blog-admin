@@ -3,13 +3,15 @@
     <div>
       <FoldBtn></FoldBtn>
     </div>
-    <div>
+    <div class="flex items-center">
+      <ShortcutEntrance class="mr-6"></ShortcutEntrance>
       <UserInfo></UserInfo>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import FoldBtn from './components/FoldBtn/index.vue';
+import ShortcutEntrance from './components/ShortcutEntrance/index.vue';
 import UserInfo from './components/UserInfo/index.vue';
 </script>
 <style lang="scss" scoped>

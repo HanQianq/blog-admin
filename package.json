@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
+    "@kangc/v-md-editor": "^2.3.18",
     "@vueuse/core": "^10.10.0",
     "axios": "^1.6.8",
     "crypto-js": "^4.2.0",
@@ -18,6 +19,7 @@
     "nanoid": "^5.0.7",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "prismjs": "^1.29.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"
   },

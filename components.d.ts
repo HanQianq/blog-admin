@@ -39,6 +39,7 @@ declare module 'vue' {
     MyEcharts: typeof import('./src/components/common/MyEcharts/index.vue')['default']
     MyIcon: typeof import('./src/components/common/MyIcon/index.vue')['default']
     MyImageAutoUpload: typeof import('./src/components/common/Upload/MyImageAutoUpload/index.vue')['default']
+    MyMdEditor: typeof import('./src/components/common/MyMdEditor/index.vue')['default']
     MyPagination: typeof import('./src/components/common/MyPagination/index.vue')['default']
     MyTable: typeof import('./src/components/common/MyTable/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

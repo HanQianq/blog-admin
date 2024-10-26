@@ -86,6 +86,28 @@ export const menuList: MenuItem[] = [
     ],
   },
   {
+    id: 'article',
+    name: '文章管理',
+    route: 'article-manage',
+    icon: 'data-display',
+    color: '',
+    code: '10000',
+    type: 'fold',
+    sort: 0,
+    children: [
+      {
+        id: 'release',
+        name: '发表文章',
+        route: 'release-article',
+        icon: 'picture',
+        color: '',
+        code: '10002',
+        type: 'menu-item',
+        sort: 1,
+      },
+    ],
+  },
+  {
     id: 'user',
     name: '用户管理',
     route: 'user-manage',
