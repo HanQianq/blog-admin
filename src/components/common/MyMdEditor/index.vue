@@ -3,6 +3,7 @@
     <v-md-editor
       v-model="text"
       height="100%"
+      placeholder="请输入内容……"
       :disabled-menus="[]"
       :left-toolbar="toolbar"
     ></v-md-editor>
@@ -18,4 +19,8 @@ const getText = () => {
 };
 defineExpose({ getText });
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.v-md-textarea-editor textarea) {
+  background-color: var(--sys-deep-wrapper-bg-color);
+}
+</style>

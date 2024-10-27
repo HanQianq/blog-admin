@@ -1,15 +1,15 @@
 <template>
-  <div class="w-full h-full">
-    <div v-if="!editable" class="img-wrapper w-full h-full">
+  <div class="w-full h-full flex flex-col">
+    <div v-if="!editable" class="img-wrapper w-full flex-1 h-0">
       <img v-if="imgUrl" :src="imgUrl" alt="" />
       <div v-else class="w-full h-full">未上传图片</div>
     </div>
     <div
       v-else
-      class="w-full h-full hover-text hover-border border-wrapper border-dashed"
+      class="w-full flex-1 h-0 hover-text hover-border border-wrapper border-dashed"
     >
       <el-upload
-        class="pic-uploader w-full h-full"
+        class="pic-uploader deep-wrapper-item w-full h-full"
         ref="uploadRef"
         accept=".jpg,.jpeg,.png,.webp,.svg,.gif"
         :before-upload="beforeUploadHandler"
@@ -17,7 +17,10 @@
         :http-request="uploadFileHandler"
       >
         <img v-if="imgUrl" :src="imgUrl" alt="" class="w-full h-full" />
-        <my-icon v-else name="upload" size="32" title="上传"></my-icon>
+        <div v-else class="xy-center flex-col">
+          <my-icon name="upload" size="24" title="上传"></my-icon>
+          <span v-if="desc">{{ desc }}</span>
+        </div>
       </el-upload>
     </div>
   </div>
@@ -31,6 +34,7 @@ import { MAX_IMAGE_SIZE } from '@/config';
 type PropsType = {
   editable: boolean;
   type: string;
+  desc?: string;
 };
 const props = defineProps<PropsType>();
 const emits = defineEmits(['uploadSuccess']);

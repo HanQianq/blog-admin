@@ -11,3 +11,6 @@ export const deleteMenuApi = (data: IdsType) =>
 
 export const getAllMenuTreeApi = () =>
   request.get<MenuItemType[]>('/authority/menu/tree/all');
+
+export const getNavMenuTreeApi = () =>
+  request.post<MenuItemType[]>('/authority/menu/tree/nav');

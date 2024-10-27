@@ -17,16 +17,19 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useMenuStore } from '@/store/menu';
 import { useUserInfoStore } from '@/store/user';
 import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const { userInfo } = storeToRefs(useUserInfoStore());
+const { menuTreeList } = storeToRefs(useMenuStore());
 const { clearUserData } = useUserInfoStore();
 
 const logoutHandle = () => {
   confirmHandler('您的确要退出吗？', () => {
     clearUserData();
+    menuTreeList.value = [];
     router.push({ name: 'Login' });
   });
 };

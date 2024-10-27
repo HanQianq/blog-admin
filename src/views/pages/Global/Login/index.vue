@@ -70,11 +70,13 @@ import { nanoid } from 'nanoid';
 import { storeToRefs } from 'pinia';
 import { setCookie } from '@/utils/tool';
 import { ElMessage } from 'element-plus';
+import { useMenuStore } from '@/store/menu';
 
 const router = useRouter();
 
 const { theme } = storeToRefs(useSystemStore());
 const { isLogin, userInfo, token, csrfToken } = storeToRefs(useUserInfoStore());
+const { getNavMenuTreeList } = useMenuStore();
 
 const loginBg = computed(() => {
   return getSvg('waves', theme.value + '.svg');
@@ -121,12 +123,13 @@ const loginHandler = () => {
       });
       if (isFailed === 0) {
         ElMessage.success('登录成功');
-        loading.value = false;
         isLogin.value = true;
         userInfo.value = { ...data.userInfo };
         csrfToken.value = data.csrfToken;
         setCookie('csrftoken', csrfToken.value);
         token.value = data.token;
+        loading.value = false;
+        await getNavMenuTreeList();
         router.push('/');
       } else {
         loading.value = false;

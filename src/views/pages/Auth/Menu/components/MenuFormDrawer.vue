@@ -3,7 +3,7 @@
     <el-drawer
       :model-value="visible"
       title="菜单管理"
-      :size="500"
+      :size="490"
       :lock-scroll="false"
       :before-close="closeDrawerHandler"
     >
@@ -23,22 +23,14 @@
           <el-input v-model="menuForm.route"></el-input>
         </el-form-item>
         <el-form-item prop="father" label="父菜单">
-          <el-input v-model="menuForm.father"></el-input>
+          <el-input v-model="fatherName" disabled></el-input>
         </el-form-item>
         <el-form-item prop="type" label="菜单类型">
-          <el-radio-group v-model="menuForm.type">
-            <el-radio value="1" size="small" border>目录</el-radio>
-            <el-radio value="2" size="small" border>菜单</el-radio>
-            <el-radio value="3" size="small" border>TAB</el-radio>
-            <el-radio value="4" size="small" border>按钮</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item prop="level" label="菜单层级">
-          <el-radio-group v-model="menuForm.level">
-            <el-radio :value="1" size="small" border>一级</el-radio>
-            <el-radio :value="2" size="small" border>二级</el-radio>
-            <el-radio :value="3" size="small" border>三级</el-radio>
-            <el-radio :value="4" size="small" border>四级</el-radio>
+          <el-radio-group v-model="menuForm.type" disabled>
+            <el-radio value="1">目录</el-radio>
+            <el-radio value="2">菜单</el-radio>
+            <el-radio value="3">TAB</el-radio>
+            <el-radio value="4">按钮</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item prop="color" label="菜单颜色">
@@ -52,7 +44,7 @@
           ></el-input-number>
         </el-form-item>
         <el-form-item prop="color" label="菜单图标">
-          <SelectIcon></SelectIcon>
+          <SelectIcon @confirm="selectIconHandler"></SelectIcon>
         </el-form-item>
       </el-form>
       <div class="flex justify-end mt-4">
@@ -63,9 +55,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { addMenuApi } from '@/api/authority/menu';
+import { addMenuApi, editMenuApi } from '@/api/authority/menu';
 import { MenuFormType } from '@/api/authority/menu/type';
 import { ElMessage } from 'element-plus';
+import { DrawerPropsType } from '../service';
+import { IconItemType } from '@/api/resource/icon/type';
+
+const props = defineProps<DrawerPropsType>();
+const emits = defineEmits(['addSuccess', 'close']);
 
 const formRef = ref();
 const visible = ref(false);
@@ -75,37 +72,49 @@ const originalForm: MenuFormType = {
   icon: '',
   color: '',
   code: '',
-  type: '',
+  type: '1',
   sort: 0,
-  level: 0,
   father: null,
 };
 
 const menuForm = ref<MenuFormType>({
   ...originalForm,
 });
-
-const emits = defineEmits(['addSuccess']);
+const fatherName = ref('');
 
 const menuFormRules = {
   name: [{ required: true, message: '菜单名称不能为空', trigger: 'blur' }],
   code: [{ required: true, message: '菜单码不能为空', trigger: 'blur' }],
   route: [{ required: true, message: '菜单路由不能为空', trigger: 'blur' }],
   type: [{ required: true, message: '菜单类型不能为空', trigger: 'change' }],
-  level: [{ required: true, message: '菜单层级不能为空', trigger: 'blur' }],
 };
 const openDrawerHandler = () => {
   visible.value = true;
 };
 const closeDrawerHandler = () => {
   menuForm.value = { ...originalForm };
+  fatherName.value = '';
   visible.value = false;
+  emits('close');
+};
+
+const selectIconHandler = (item: IconItemType | null) => {
+  item && (menuForm.value.icon = item.url);
 };
 
 const submitFormHandler = async () => {
   formRef.value.validate(async (valid: boolean) => {
     if (!valid) return;
-    const res = await addMenuApi(menuForm.value);
+    let res: ResType<any> | null;
+    if (props.optType === 'add') {
+      res = await addMenuApi(menuForm.value);
+    } else {
+      res = await editMenuApi({
+        id: props.currentMenuItem?.id as string,
+        ...menuForm.value,
+      });
+    }
+
     if (res.code === 0) {
       closeDrawerHandler();
       ElMessage.success(res.msg);
@@ -113,6 +122,22 @@ const submitFormHandler = async () => {
     }
   });
 };
+
+watch([() => props.optType, () => visible.value], () => {
+  if (props.optType === 'add' && visible.value) {
+    menuForm.value.father = props.fatherMenuItem.id;
+    fatherName.value = props.fatherMenuItem.name;
+    menuForm.value.type = (
+      parseFloat(props.fatherMenuItem.type) + 1
+    ).toString();
+  }
+  if (props.optType === 'edit' && props.currentMenuItem && visible.value) {
+    fatherName.value = props.fatherMenuItem.name;
+    const { name, route, color, code, sort, type, father, icon } =
+      props.currentMenuItem;
+    menuForm.value = { name, route, color, code, sort, type, father, icon };
+  }
+});
 
 defineExpose({
   openDrawerHandler,

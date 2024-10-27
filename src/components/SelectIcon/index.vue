@@ -33,7 +33,7 @@
           class="w-16 h-16 xy-center hover-text hover-border border-wrapper border-dashed"
           title="从图标库中选择"
         >
-          <my-icon name="selected" size="32"></my-icon>
+          <my-icon name="selected" size="24"></my-icon>
         </div>
       </template>
       <div v-loading="loading">

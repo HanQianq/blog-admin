@@ -36,6 +36,10 @@
 .wrapper-color {
   background-color: var(--sys-wrapper-bg-color);
 }
+.deep-wrapper-item {
+  background-color: var(--sys-deep-wrapper-bg-color);
+  color: var(--sys-deep-text-color);
+}
 
 .active-item {
   background-color: var(--sys-main-color);
