@@ -20,7 +20,7 @@
           <template v-if="item.type === '1'">
             <el-sub-menu :index="item.route" :key="item.id">
               <template #title>
-                <img v-if="item.icon" :src="item.icon" class="ml-1" />
+                <img v-if="item.icon" :src="item.icon" class="ml-1 icon-item" />
                 <span ml="5">{{ item.name }}</span>
               </template>
 
@@ -30,7 +30,11 @@
                 @click="gotoRelatedPage(subItem)"
               >
                 <template #title>
-                  <img v-if="subItem.icon" :src="subItem.icon" class="ml-1" />
+                  <img
+                    v-if="subItem.icon"
+                    :src="subItem.icon"
+                    class="ml-1 icon-item"
+                  />
                   <span ml="4">{{ subItem.name }}</span>
                 </template>
               </el-menu-item>
@@ -38,7 +42,7 @@
           </template>
           <template v-else>
             <el-menu-item @click="gotoRelatedPage(item)">
-              <img v-if="item.icon" :src="item.icon" class="ml-1" />
+              <img v-if="item.icon" :src="item.icon" class="ml-1 icon-item" />
               <template #title>
                 <span ml="4">{{ item.name }}</span>
               </template>
@@ -89,5 +93,9 @@ const gotoRelatedPage = (item: MenuItemType) => {
   :deep(.el-sub-menu__icon-arrow) {
     display: none;
   }
+}
+.icon-item {
+  width: 20px;
+  height: 20px;
 }
 </style>

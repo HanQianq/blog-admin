@@ -40,9 +40,9 @@ const baseValidDate = () => {
   return flag;
 };
 const openDrawerHandler = () => {
-  // if (!baseValidDate()) {
-  //   return;
-  // }
+  if (!baseValidDate()) {
+    return;
+  }
   drawerRef.value.openDrawer();
 };
 </script>

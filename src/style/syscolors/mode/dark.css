@@ -10,3 +10,7 @@ html.dark {
 html.dark .icon img {
   filter: invert(1);
 }
+
+html.dark .icon-item {
+  filter: invert(1);
+}

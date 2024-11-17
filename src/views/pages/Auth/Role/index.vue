@@ -1,34 +1,53 @@
 <template>
-  <div class="">
-    <div class="flex items-center justify-between p-4">
-      <el-button @click="openDialog('add')" type="primary">创建角色</el-button>
-    </div>
-    <div class="px-4">
-      <el-table :data="roleList" size="large">
-        <el-table-column
-          v-for="item in columnList"
-          :key="item.prop"
-          :prop="item.prop"
-          :label="item.title"
-          align="center"
-        ></el-table-column>
-        <el-table-column label="操作" fixed="right" width="200" align="center">
-          <template #default="{ row }">
-            <div flex w-full class="justify-center">
-              <el-button link type="primary" @click="openDialog('edit', row)">
-                修改
-              </el-button>
-              <el-button link type="danger" @click="deleteRoleHandler(row)">
-                删除
-              </el-button>
-              <el-button link type="info" plain @click="deleteRoleHandler(row)">
-                权限分配
-              </el-button>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
+  <div class="role-manage">
+    <MySearchPanel
+      :data-exist="roleList.length > 0"
+      :loading="loading"
+      hide-bottom
+    >
+      <template #header>
+        <el-button @click="openDialog('add')" type="primary"
+          >创建角色</el-button
+        >
+      </template>
+      <div class="p-4">
+        <el-table :data="roleList" size="large" border>
+          <el-table-column
+            v-for="item in columnList"
+            :key="item.prop"
+            :prop="item.prop"
+            :label="item.title"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            label="操作"
+            fixed="right"
+            width="200"
+            align="center"
+          >
+            <template #default="{ row }">
+              <div flex w-full class="justify-center">
+                <el-button link type="primary" @click="openDialog('edit', row)">
+                  修改
+                </el-button>
+                <el-button link type="danger" @click="deleteRoleHandler(row)">
+                  删除
+                </el-button>
+                <el-button
+                  link
+                  type="info"
+                  plain
+                  @click="deleteRoleHandler(row)"
+                >
+                  权限分配
+                </el-button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </MySearchPanel>
+
     <div v-if="formDialogProps.visible">
       <RoleDialog
         :visible="formDialogProps.visible"
@@ -52,6 +71,7 @@ import {
 import { ElMessage } from 'element-plus';
 
 const roleList = ref<RoleItemType[]>([]);
+const loading = ref(true);
 
 const formDialogProps = reactive<FormDialogPropsType>({
   visible: false,
@@ -69,8 +89,15 @@ const closeDialog = () => {
 };
 
 const getRoleList = async () => {
-  const { data } = await getRoleListApi();
-  roleList.value = data;
+  try {
+    loading.value = true;
+    const { data } = await getRoleListApi();
+    roleList.value = data;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 const deleteRoleHandler = (row: RoleItemType) => {
