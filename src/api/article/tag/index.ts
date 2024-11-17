@@ -14,4 +14,4 @@ export const deleteArticleTagApi = (data: IdsType) =>
   request.post<boolean>('/article/tag/delete', data);
 
 export const getArticleTagListApi = (data: PageType & SearchArticleTagType) =>
-  request.post<ArticleTagItemType[]>('/article/tag/list', data);
+  request.post<ResPageType<ArticleTagItemType>>('/article/tag/list', data);

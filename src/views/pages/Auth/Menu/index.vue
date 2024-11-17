@@ -12,6 +12,7 @@
           style="width: 100%; margin-bottom: 20px"
           row-key="id"
           size="large"
+          stripe
           border
           default-expand-all
         >
@@ -24,7 +25,6 @@
               <div v-if="row.icon" flex w-full class="justify-center">
                 <img :src="row.icon" alt="" class="icon-item" />
               </div>
-              <div v-else>无</div>
             </template>
           </el-table-column>
           <el-table-column

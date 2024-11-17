@@ -1,8 +1,8 @@
 <template>
   <MyDialog
     :visible="visible"
-    width="450px"
-    :title="optType === 'add' ? '创建角色' : '修改角色'"
+    width="500px"
+    :title="optType === 'add' ? '创建文章标签' : '修改文章标签'"
     @close="closeHandler"
     @confirm="confirmHandler"
   >
@@ -13,26 +13,34 @@
       label-width="110px"
       :style="{ width: '100%' }"
     >
-      <el-form-item prop="name" label="角色名">
-        <el-input v-model="form.name" placeholder="请输入角色名" />
+      <el-form-item prop="name" label="文章标签名">
+        <el-input v-model="form.name" placeholder="请输入文章标签名" />
       </el-form-item>
-      <el-form-item prop="code" label="角色码">
-        <el-input v-model="form.code" placeholder="请输入角色码" />
+      <el-form-item prop="alias" label="文章标签别名">
+        <el-input v-model="form.alias" placeholder="请输入文章标签别名" />
       </el-form-item>
-      <el-form-item prop="limit" label="角色数量限制">
-        <el-input-number v-model="form.limit" :min="1" class="!w-full" />
+      <el-form-item prop="color" label="文章标签颜色">
+        <el-input v-model="form.color" placeholder="请选择文章标签颜色" />
       </el-form-item>
-      <el-form-item prop="sort" label="角色排序">
+      <el-form-item prop="sort" label="文章标签排序">
         <el-input-number v-model="form.sort" :min="0" class="!w-full" />
+      </el-form-item>
+      <el-form-item prop="description" label="描述">
+        <el-input
+          v-model="form.description"
+          type="textarea"
+          rows="3"
+          placeholder="请输入文章标签描述"
+        />
       </el-form-item>
     </el-form>
   </MyDialog>
 </template>
 <script setup lang="ts">
-import { addRoleApi, editRoleApi } from '@/api/authority/role';
+import { addArticleTagApi, editArticleTagApi } from '@/api/article/tag';
 import { ElMessage } from 'element-plus';
-import { FormDialogPropsType, formRules, originalForm } from '../service.ts';
-import { RoleItemType } from '@/api/authority/role/type.ts';
+import { FormDialogPropsType, formRules, originalForm } from '../service';
+import { ArticleTagItemType } from '@/api/article/tag/type';
 
 const props = defineProps<FormDialogPropsType>();
 const emits = defineEmits(['close', 'changeSuccess']);
@@ -53,9 +61,9 @@ const confirmHandler = () => {
       try {
         const { data, msg } =
           props.optType === 'add'
-            ? await addRoleApi(form.value)
-            : await editRoleApi({
-                id: (props.row as RoleItemType).id,
+            ? await addArticleTagApi(form.value)
+            : await editArticleTagApi({
+                ...(props.row as ArticleTagItemType),
                 ...form.value,
               });
         if (data) {

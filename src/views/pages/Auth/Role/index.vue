@@ -11,7 +11,7 @@
         >
       </template>
       <div class="p-4">
-        <el-table :data="roleList" size="large" border>
+        <el-table :data="roleList" size="large" stripe border>
           <el-table-column
             v-for="item in columnList"
             :key="item.prop"
@@ -62,32 +62,15 @@
 <script lang="ts" setup>
 import { deleteRoleApi, getRoleListApi } from '@/api/authority/role';
 import type { RoleItemType } from '@/api/authority/role/type.ts';
+import { useDialog } from '@/hooks/useDialog';
 import RoleDialog from '@/views/pages/Auth/Role/components/RoleDialog.vue';
-import {
-  originalForm,
-  columnList,
-  FormDialogPropsType,
-} from '@/views/pages/Auth/Role/service.ts';
+import { columnList } from '@/views/pages/Auth/Role/service.ts';
 import { ElMessage } from 'element-plus';
 
 const roleList = ref<RoleItemType[]>([]);
 const loading = ref(true);
 
-const formDialogProps = reactive<FormDialogPropsType>({
-  visible: false,
-  optType: '',
-  row: { id: '', ...originalForm },
-});
-
-const openDialog = (optType: string, row?: any) => {
-  formDialogProps.visible = true;
-  formDialogProps.optType = optType;
-  row && (formDialogProps.row = row);
-};
-const closeDialog = () => {
-  formDialogProps.visible = false;
-};
-
+const { formDialogProps, openDialog, closeDialog } = useDialog<RoleItemType>();
 const getRoleList = async () => {
   try {
     loading.value = true;

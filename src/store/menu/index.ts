@@ -8,7 +8,6 @@ export const useMenuStore = defineStore(
     const menuTreeList = ref<MenuItemType[]>([]);
     const getNavMenuTreeList = async () => {
       const { data } = await getNavMenuTreeApi();
-      console.log('🚀 ~ getNavMenuTreeList ~ data:', data);
       menuTreeList.value = data;
     };
 

@@ -8,6 +8,7 @@ export type ArticleTagFormType = {
 
 export type ArticleTagItemType = ArticleTagFormType & {
   id: string;
+  createTime: string | Date;
 };
 
 export type SearchArticleTagType = {

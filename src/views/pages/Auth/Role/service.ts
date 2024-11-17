@@ -21,4 +21,4 @@ export const formRules = {
   limit: [{ required: true, trigger: 'change', message: '请输入角色用户上限' }],
 };
 
-export type FormDialogPropsType = FormDialogProps<RoleItemType>;
+export type FormDialogPropsType = FormDialogProps<RoleItemType | null>;
