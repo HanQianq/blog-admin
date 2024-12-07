@@ -3,7 +3,7 @@
     <MySearchPanel :data-exist="menuTreeList.length > 0" :loading="loading">
       <template #header>
         <el-button type="primary" @click="addDrawerHandler()">
-          新增菜单
+          <MyIcon name="plus"></MyIcon>新增菜单
         </el-button>
       </template>
       <div class="p-4">

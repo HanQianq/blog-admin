@@ -7,6 +7,23 @@
   }
 }
 
+.hover-common-wrapper {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: var(--sys-deep-wrapper-bg-color);
+  }
+}
+
+.hover-weak-wrapper {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: var(--sys-main-color);
+    background-color: var(--sys-main-color-secondary);
+  }
+}
+
 .hover-text {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -44,7 +61,21 @@
 .active-item {
   background-color: var(--sys-main-color);
   color: var(--sys-text-contrast-color);
+  &:hover {
+    background-color: var(--sys-main-color);
+    color: var(--sys-text-contrast-color);
+  }
 }
+
+.weak-active-item {
+  color: var(--sys-main-color);
+  background-color: var(--sys-main-color-secondary);
+  &:hover {
+    color: var(--sys-main-color);
+    background-color: var(--sys-main-color-secondary);
+  }
+}
+
 .border-wrapper {
   border: solid 1px var(--sys-border-color);
   background-color: var(--sys-wrapper-bg-color);

@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const ElMessage: typeof import('element-plus/es')['ElMessage']
   const computed: typeof import('vue')['computed']
   const confirmHandler: typeof import('./src/utils/tool/index')['confirmHandler']
   const copyClick: typeof import('./src/utils/tool/index')['copyClick']
@@ -81,6 +82,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly confirmHandler: UnwrapRef<typeof import('./src/utils/tool/index')['confirmHandler']>
     readonly copyClick: UnwrapRef<typeof import('./src/utils/tool/index')['copyClick']>
@@ -149,6 +151,7 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly confirmHandler: UnwrapRef<typeof import('./src/utils/tool/index')['confirmHandler']>
     readonly copyClick: UnwrapRef<typeof import('./src/utils/tool/index')['copyClick']>

@@ -73,6 +73,7 @@
     "getSvg": true,
     "confirmHandler": true,
     "getCookie": true,
-    "setCookie": true
+    "setCookie": true,
+    "ElMessage": true
   }
 }

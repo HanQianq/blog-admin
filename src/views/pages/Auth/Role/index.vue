@@ -7,7 +7,7 @@
     >
       <template #header>
         <el-button @click="openDialog('add')" type="primary"
-          >创建角色</el-button
+          ><MyIcon name="plus"></MyIcon>创建角色</el-button
         >
       </template>
       <div class="p-4">
