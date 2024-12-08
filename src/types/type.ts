@@ -3,3 +3,10 @@ export interface FormDialogProps<T> {
   optType: string;
   row: T;
 }
+
+export type TabItem = {
+  name: string;
+  routeName: string;
+  id: string;
+  icon: string;
+};

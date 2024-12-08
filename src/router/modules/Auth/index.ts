@@ -5,15 +5,27 @@ export const AuthRouteList: RouteRecordRaw[] = [
     path: '/menu-manage',
     name: 'MenuManage',
     component: () => import('@/views/pages/Auth/Menu/index.vue'),
+    meta: {
+      name: '菜单管理',
+      icon: 'application',
+    },
   },
   {
     path: '/interface-manage',
     name: 'InterfaceManage',
     component: () => import('@/views/pages/Auth/Interface/index.vue'),
+    meta: {
+      name: '接口管理',
+      icon: 'application',
+    },
   },
   {
     path: '/role-manage',
     name: 'RoleManage',
     component: () => import('@/views/pages/Auth/Role/index.vue'),
+    meta: {
+      name: '角色管理',
+      icon: 'application-one',
+    },
   },
 ];

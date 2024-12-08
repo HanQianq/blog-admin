@@ -4,8 +4,14 @@
       <SideBar></SideBar>
     </div>
     <div class="main-wrapper flex-1 w-0 flex flex-col">
-      <div class="top-bar-wrapper">
-        <TopBar></TopBar>
+      <div class="flex flex-col">
+        <div class="h-12">
+          <TabBar></TabBar>
+        </div>
+
+        <div class="top-bar-wrapper">
+          <TopBar></TopBar>
+        </div>
       </div>
       <div class="content-wrapper flex-1 h-0">
         <RouterView></RouterView>
@@ -17,6 +23,7 @@
 import { storeToRefs } from 'pinia';
 import SideBar from './components/SideBar/index.vue';
 import TopBar from './components/TopBar/index.vue';
+import TabBar from './components/TabBar/index.vue';
 import { useSystemStore } from '@/store/system';
 
 const { isSideExpand } = storeToRefs(useSystemStore());

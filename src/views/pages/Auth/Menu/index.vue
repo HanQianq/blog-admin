@@ -64,9 +64,9 @@ import { MenuItemType } from '@/api/authority/menu/type';
 import MenuFormDrawer from './components/MenuFormDrawer.vue';
 import { getAllMenuTreeApi } from '@/api/authority/menu';
 import { DrawerPropsType } from './service';
-import { useMenuStore } from '@/store/menu';
+import { useMenu } from '@/hooks/useMenu';
 
-const { getNavMenuTreeList } = useMenuStore();
+const { getNavMenuTreeList } = useMenu();
 const loading = ref(false);
 const drawerRef = ref();
 const drawerProps = reactive<DrawerPropsType>({

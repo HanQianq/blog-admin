@@ -12,12 +12,20 @@ export const ResourceRouteList: RouteRecordRaw[] = [
         name: 'IconLib',
         component: () =>
           import('@/views/pages/Resource/Icon/pages/IconLib/index.vue'),
+        meta: {
+          name: '图片库',
+          icon: 'picture',
+        },
       },
       {
         path: '/icon-category',
         name: 'IconCategory',
         component: () =>
           import('@/views/pages/Resource/Icon/pages/IconCategory/index.vue'),
+        meta: {
+          name: '图片类别',
+          icon: 'picture',
+        },
       },
     ],
   },

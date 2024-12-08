@@ -70,13 +70,13 @@ import { nanoid } from 'nanoid';
 import { storeToRefs } from 'pinia';
 import { setCookie } from '@/utils/tool';
 import { ElMessage } from 'element-plus';
-import { useMenuStore } from '@/store/menu';
+import { useMenu } from '@/hooks/useMenu';
 
 const router = useRouter();
 
 const { theme } = storeToRefs(useSystemStore());
 const { isLogin, userInfo, token, csrfToken } = storeToRefs(useUserInfoStore());
-const { getNavMenuTreeList } = useMenuStore();
+const { getNavMenuTreeList } = useMenu();
 
 const loginBg = computed(() => {
   return getSvg('waves', theme.value + '.svg');

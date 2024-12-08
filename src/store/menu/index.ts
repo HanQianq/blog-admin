@@ -1,19 +1,13 @@
 import { defineStore } from 'pinia';
 import type { MenuItemType } from '@/api/authority/menu/type';
-import { getNavMenuTreeApi } from '@/api/authority/menu';
 
 export const useMenuStore = defineStore(
   'menu',
   () => {
     const menuTreeList = ref<MenuItemType[]>([]);
-    const getNavMenuTreeList = async () => {
-      const { data } = await getNavMenuTreeApi();
-      menuTreeList.value = data;
-    };
 
     return {
       menuTreeList,
-      getNavMenuTreeList,
     };
   },
   {
