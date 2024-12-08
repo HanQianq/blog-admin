@@ -20,7 +20,14 @@
         <el-input v-model="form.alias" placeholder="请输入文章标签别名" />
       </el-form-item>
       <el-form-item prop="color" label="文章标签颜色">
-        <el-input v-model="form.color" placeholder="请选择文章标签颜色" />
+        <el-select v-model="form.color" placeholder="请选择文章标签颜色">
+          <el-option
+            v-for="item in colorList"
+            :key="item.key"
+            :value="item.key"
+            :label="item.value"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item prop="sort" label="文章标签排序">
         <el-input-number v-model="form.sort" :min="0" class="!w-full" />
@@ -41,9 +48,13 @@ import { addArticleTagApi, editArticleTagApi } from '@/api/article/tag';
 import { ElMessage } from 'element-plus';
 import { FormDialogPropsType, formRules, originalForm } from '../service';
 import { ArticleTagItemType } from '@/api/article/tag/type';
+import { useDict } from '@/hooks/useDict';
 
 const props = defineProps<FormDialogPropsType>();
 const emits = defineEmits(['close', 'changeSuccess']);
+
+const { dictDataList: colorList, getDictDataList: getColorList } =
+  useDict('ARTICLE_TAG_COLOR');
 
 const formRef = ref();
 const form = ref({
@@ -78,7 +89,8 @@ const confirmHandler = () => {
   });
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await getColorList();
   if (props.optType === 'edit' && props.row) {
     form.value = { ...props.row };
   }

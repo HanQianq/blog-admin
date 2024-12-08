@@ -1,4 +1,4 @@
-import { DictFormType, DictItemType } from './type';
+import { DictFormType, DictItemType, type DictSimpleItemType } from './type';
 import request from '@/utils/request';
 export const addDictApi = (data: DictFormType) =>
   request.post<boolean>('/sys/dict/add', data);
@@ -14,3 +14,6 @@ export const changeDictStatusApi = (data: { id: string; status: boolean }) =>
 
 export const getDictListApi = (data: { code: string }) =>
   request.post<DictItemType[]>('/sys/dict/list', data);
+
+export const getAvailableDictListApi = (data: { code: string }) =>
+  request.post<DictSimpleItemType[]>('/sys/dict/list/code', data);

@@ -48,3 +48,20 @@ export const dictCategoryList: DictCategoryItemType[] = [
   { label: '系统', value: 'system', code: 'SYSTEM' },
   { label: '其他', value: 'other', code: 'OTHER' },
 ];
+
+type DictMapItemType<T> = {
+  label: string;
+  value: T;
+  key: string;
+};
+export const colorList: DictMapItemType<number[]>[] = [
+  { key: 'red', label: '红色', value: [255, 0, 0] },
+  { key: 'blue', label: '蓝色', value: [0, 0, 255] },
+  { key: 'green', label: '绿色', value: [0, 255, 0] },
+  { key: 'purple', label: '紫色', value: [255, 0, 0] },
+  { key: 'yellow', label: '黄色', value: [255, 255, 0] },
+];
+
+export const getLabelByKey = (arr: DictMapItemType<any>[], key: string) => {
+  return arr.find((item) => item.key === key)?.label;
+};

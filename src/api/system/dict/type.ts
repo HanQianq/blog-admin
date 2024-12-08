@@ -12,3 +12,8 @@ export type DictItemType = IdType &
     updateTime: string | Date;
     status: boolean;
   };
+
+export type DictSimpleItemType = IdType & {
+  key: string;
+  value: string;
+};

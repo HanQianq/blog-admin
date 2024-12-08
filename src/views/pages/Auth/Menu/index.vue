@@ -98,6 +98,7 @@ const editDrawerHandler = (row: MenuItemType) => {
 };
 
 const closeHandler = () => {
+  drawerProps.currentMenuItem = null;
   drawerProps.fatherMenuItem.name = '';
   drawerProps.fatherMenuItem.id = null;
   drawerProps.fatherMenuItem.type = '0';

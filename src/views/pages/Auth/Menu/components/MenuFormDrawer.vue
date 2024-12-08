@@ -27,14 +27,24 @@
         </el-form-item>
         <el-form-item prop="type" label="菜单类型">
           <el-radio-group v-model="menuForm.type" disabled>
-            <el-radio value="1">目录</el-radio>
-            <el-radio value="2">菜单</el-radio>
-            <el-radio value="3">TAB</el-radio>
-            <el-radio value="4">按钮</el-radio>
+            <el-radio
+              v-for="item in menuTypeList"
+              :key="item.key"
+              :value="item.key"
+            >
+              {{ item.value }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item prop="color" label="菜单颜色">
-          <el-input v-model="menuForm.color"></el-input>
+          <el-select v-model="menuForm.color" clearable>
+            <el-option
+              v-for="item in menuColorList"
+              :key="item.key"
+              :label="item.value"
+              :value="item.key"
+            ></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item prop="sort" label="菜单排序">
           <el-input-number
@@ -60,9 +70,15 @@ import { MenuFormType } from '@/api/authority/menu/type';
 import { ElMessage } from 'element-plus';
 import { DrawerPropsType } from '../service';
 import { IconItemType } from '@/api/resource/icon/type';
+import { useDict } from '@/hooks/useDict';
 
 const props = defineProps<DrawerPropsType>();
 const emits = defineEmits(['addSuccess', 'close']);
+
+const { dictDataList: menuTypeList, getDictDataList: getMenuTypeList } =
+  useDict('MENU_TYPE');
+const { dictDataList: menuColorList, getDictDataList: getMenuColorList } =
+  useDict('MENU_COLOR');
 
 const formRef = ref();
 const visible = ref(false);
@@ -137,6 +153,11 @@ watch([() => props.optType, () => visible.value], () => {
       props.currentMenuItem;
     menuForm.value = { name, route, color, code, sort, type, father, icon };
   }
+});
+
+onMounted(async () => {
+  await getMenuTypeList();
+  await getMenuColorList();
 });
 
 defineExpose({

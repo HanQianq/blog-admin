@@ -19,15 +19,25 @@
         <el-select v-model="articleForm.tag"></el-select>
       </el-form-item>
       <el-form-item prop="original" label="是否原创">
-        <el-radio-group v-model="articleForm.isOriginal">
-          <el-radio :value="0" border>转载</el-radio>
-          <el-radio :value="1" border>原创</el-radio>
+        <el-radio-group v-model="articleForm.properties">
+          <el-radio
+            v-for="item in propertiesList"
+            :key="item.key"
+            :value="item.key"
+          >
+            {{ item.value }}
+          </el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item prop="status" label="文章状态">
-        <el-radio-group v-model="articleForm.status">
-          <el-radio :value="0" border>私密</el-radio>
-          <el-radio :value="1" border>公开</el-radio>
+      <el-form-item prop="visible" label="文章状态">
+        <el-radio-group v-model="articleForm.visible">
+          <el-radio
+            v-for="item in statusList"
+            :key="item.key"
+            :value="item.key"
+          >
+            {{ item.value }}
+          </el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item prop="cover" label="文章封面">
@@ -57,6 +67,13 @@
   </el-drawer>
 </template>
 <script setup lang="ts">
+import { useDict } from '@/hooks/useDict';
+
+const { dictDataList: statusList, getDictDataList: getArticleStatusList } =
+  useDict('ARTICLE_STATUS');
+const { dictDataList: propertiesList, getDictDataList: getPropertiesList } =
+  useDict('ARTICLE_PROPERTY');
+
 const visible = ref(false);
 const openDrawer = () => {
   visible.value = true;
@@ -71,8 +88,8 @@ const originalForm = {
   cover: '',
   tag: [],
   abstract: '',
-  status: 1,
-  isOriginal: 1,
+  visible: '',
+  properties: '',
 };
 
 const articleForm = ref({
@@ -86,6 +103,21 @@ const articleFormRules = {
   tag: [{ required: true, message: '文章标签不能为空', trigger: 'blur' }],
   abstract: [{ required: true, message: '文章摘要不能为空', trigger: 'blur' }],
 };
+
+const initDrawer = async () => {
+  await getArticleStatusList();
+  await getPropertiesList();
+  if (propertiesList.value.length > 0) {
+    articleForm.value.properties = propertiesList.value[0].key;
+  }
+  if (statusList.value.length > 0) {
+    articleForm.value.visible = statusList.value[0].key;
+  }
+};
+
+onMounted(() => {
+  initDrawer();
+});
 
 defineExpose({
   openDrawer,

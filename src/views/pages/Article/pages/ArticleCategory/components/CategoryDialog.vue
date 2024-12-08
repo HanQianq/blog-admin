@@ -57,6 +57,7 @@ const fatherName = ref<string | null>(null);
 
 const closeHandler = () => {
   form.value = { ...originalForm };
+  fatherName.value = '';
   emits('close');
 };
 

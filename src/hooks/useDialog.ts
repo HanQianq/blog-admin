@@ -10,7 +10,7 @@ export const useDialog = <T>() => {
   const openDialog = (optType: string, row?: UnwrapRef<T> | null) => {
     formDialogProps.visible = true;
     formDialogProps.optType = optType;
-    row && (formDialogProps.row = row);
+    row ? (formDialogProps.row = row) : (formDialogProps.row = null);
   };
   const closeDialog = () => {
     formDialogProps.visible = false;

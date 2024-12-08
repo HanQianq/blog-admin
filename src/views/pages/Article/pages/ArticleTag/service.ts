@@ -16,7 +16,6 @@ export const originalForm: ArticleTagFormType = {
 export const columnList = [
   { title: '名称', prop: 'name' },
   { title: '别名', prop: 'alias' },
-  { title: '颜色', prop: 'color' },
   { title: '排序', prop: 'sort' },
   { title: '创建时间', prop: 'createTime' },
 ];

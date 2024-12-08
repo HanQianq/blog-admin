@@ -31,6 +31,18 @@
             :label="item.title"
             align="center"
           ></el-table-column>
+          <el-table-column prop="color" align="center" label="颜色">
+            <template #default="{ row }">
+              <div class="xy-center">
+                <div
+                  class="w-32px h-32px rounded-full"
+                  :style="{
+                    background: `${row.color}`,
+                  }"
+                ></div>
+              </div>
+            </template>
+          </el-table-column>
 
           <el-table-column
             label="操作"
