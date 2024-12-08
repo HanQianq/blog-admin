@@ -11,7 +11,7 @@
             @change="getDataListHandler"
           ></el-input>
           <el-button type="primary" @click="openDialog('add')"
-            >新增标签</el-button
+            ><MyIcon name="plus" class="mr-1"></MyIcon>新增标签</el-button
           >
         </div>
       </template>

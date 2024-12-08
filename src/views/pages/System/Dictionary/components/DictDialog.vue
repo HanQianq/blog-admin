@@ -25,6 +25,7 @@
           :data="categoryList"
           node-key="code"
           class="w-full"
+          disabled
         ></el-tree-select>
       </el-form-item>
       <el-form-item prop="sort" label="字典排序">
@@ -95,6 +96,8 @@ onMounted(() => {
   if (props.optType === 'edit' && props.row) {
     const { key, value, desc, code, sort } = props.row;
     form.value = { key, value, desc, code, sort };
+  } else {
+    form.value.code = props.currentCode;
   }
 });
 </script>

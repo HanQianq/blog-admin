@@ -90,6 +90,7 @@
         :visible="formDialogProps.visible"
         :opt-type="formDialogProps.optType"
         :row="formDialogProps.row"
+        :current-code="currentDict"
         @close="closeDialog"
         @change-success="getDictList"
       ></DictDialog>

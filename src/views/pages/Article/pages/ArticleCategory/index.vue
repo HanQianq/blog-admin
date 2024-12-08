@@ -8,7 +8,7 @@
       <template #header>
         <div>
           <el-button type="primary" @click="openDialog('add')"
-            >新增分类</el-button
+            ><MyIcon name="plus" class="mr-1"></MyIcon>新增分类</el-button
           >
         </div>
       </template>

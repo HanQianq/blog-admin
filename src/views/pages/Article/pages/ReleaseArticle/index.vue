@@ -8,8 +8,12 @@
         border="none"
         outline="none"
       />
-      <el-button plain>草稿箱</el-button>
-      <el-button type="primary" @click="openDrawerHandler">发布</el-button>
+      <el-button plain>
+        <MyIcon name="box" class="mr-1"></MyIcon>草稿箱</el-button
+      >
+      <el-button type="primary" @click="openDrawerHandler"
+        ><MyIcon name="add-four" class="mr-1"></MyIcon>发布</el-button
+      >
     </div>
     <div class="edit-wrapper flex-1 h-0">
       <my-md-editor ref="mdEditorRef"></my-md-editor>

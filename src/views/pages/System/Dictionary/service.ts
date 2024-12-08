@@ -24,4 +24,6 @@ export const formRules = {
   value: [{ required: true, trigger: 'change', message: '请输入字典值' }],
 };
 
-export type FormDialogPropsType = FormDialogProps<DictItemType | null>;
+export type FormDialogPropsType = FormDialogProps<DictItemType | null> & {
+  currentCode: string;
+};
