@@ -30,14 +30,6 @@ export const useTabListStore = defineStore(
       }
     };
 
-    const setTabItem = (item: TabItem) => {
-      const ind = tabList.value.findIndex((el: TabItem) => el.id === item.id);
-      if (ind >= 0) {
-        tabList.value[ind].name = item.name;
-        tabList.value[ind].icon = item.icon;
-      }
-    };
-
     const closeTag = (item: TabItem) => {
       const ind = tabList.value.findIndex((el: TabItem) => el.id === item.id);
       if (ind === currentTabIndex.value) {
@@ -50,10 +42,16 @@ export const useTabListStore = defineStore(
           (el: TabItem) => el.routeName !== item.routeName
         );
       } else {
-        tabList.value = tabList.value.filter(
-          (el: TabItem) => el.routeName !== item.routeName
-        );
-        setTabItem(tabList.value[ind]);
+        if (ind > currentTabIndex.value) {
+          tabList.value = tabList.value.filter(
+            (el: TabItem) => el.routeName !== item.routeName
+          );
+        } else {
+          tabList.value = tabList.value.filter(
+            (el: TabItem) => el.routeName !== item.routeName
+          );
+          selectTabItem(tabList.value[ind]);
+        }
       }
     };
 
@@ -97,7 +95,6 @@ export const useTabListStore = defineStore(
       closeAfterTag,
       selectTabItem,
       clearTagList,
-      setTabItem,
     };
   },
   {

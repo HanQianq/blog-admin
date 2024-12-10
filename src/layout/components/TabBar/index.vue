@@ -6,7 +6,7 @@
   >
     <div
       v-if="isShowBtn"
-      class="scroll-left mr-3"
+      class="scroll-left mr-3 hover-text border-right"
       title="向左滑动"
       @click="clickLeftHandle"
     >
@@ -25,7 +25,7 @@
     </div>
     <div
       v-if="isShowBtn"
-      class="scroll-right ml-3"
+      class="scroll-right ml-3 hover-text border-left"
       title="向右滑动"
       @click="clickRightHandle"
     >
@@ -44,24 +44,17 @@ const { scrollRef, parentRef, isShowBtn, clickLeftHandle, clickRightHandle } =
   useScroll(200);
 </script>
 <style lang="scss" scoped>
-.nav-bar {
+.tab-bar {
   height: 3rem;
 
   .scroll-left,
   .scroll-right {
-    padding: 0 6px;
-    border-radius: 2px;
+    padding: 0 8px;
     cursor: pointer;
-    height: 28px;
+    height: 47px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all linear 0.2s;
-
-    &:hover {
-      color: #fff;
-      background-color: var(--main-bg-color);
-    }
   }
 
   &-wrapper {

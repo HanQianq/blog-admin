@@ -7,7 +7,7 @@
     >
       <span
         ref="tabItemRef"
-        class="tag-item hover-common-wrapper px-3 border-right"
+        class="tag-item transition-all hover-common-wrapper px-3 border-right"
         :class="{ 'weak-active-item': currentTab.id === item.id }"
         @click="selectTabItem(item)"
       >
@@ -104,8 +104,8 @@ const initDrag = () => {
     element: tabItemRef.value,
     getInitialData: () => props.item,
     canDrag: () => props.item.id !== 'Home',
-    onDragStart: () => {
-      tabItemRef.value.classList.add('dragging');
+    onDragStart: ({ source }) => {
+      selectTabItem(source.data as TabItem);
     },
     onDrop: (_args) => {
       tabItemRef.value.classList.remove('dragging');
