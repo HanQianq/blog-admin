@@ -2,7 +2,7 @@
   <div
     v-if="visible"
     ref="parentRef"
-    class="h-full deep-wrapper-item tab-bar flex flex-nowrap items-center px-4 py-3"
+    class="h-full tab-bar flex flex-nowrap items-center relative border-bottom"
   >
     <div
       v-if="isShowBtn"
@@ -14,19 +14,14 @@
     </div>
     <div
       ref="scrollRef"
-      class="tab-bar-wrapper flex flex-no-wrap items-center overflow-hidden"
+      class="tab-bar-wrapper pr-8 flex flex-no-wrap items-center overflow-hidden relative"
     >
-      <div
+      <TabItem
         v-for="(item, ind) in tabList"
         :key="item.id"
-        class="flex items-center"
-      >
-        <TabItem :item="item" :ind="ind"></TabItem>
-        <el-divider
-          v-if="ind !== tabList.length - 1"
-          direction="vertical"
-        ></el-divider>
-      </div>
+        :item="item"
+        :ind="ind"
+      ></TabItem>
     </div>
     <div
       v-if="isShowBtn"

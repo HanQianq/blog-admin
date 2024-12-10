@@ -7,24 +7,26 @@ export const useTabListStore = defineStore(
     const router = useRouter();
     const visible = ref(true);
     const tabList = ref<TabItem[]>([]);
-    const currentTabIndex = ref<number>(0);
-    const currentTab = computed(() => tabList.value[currentTabIndex.value]);
+
+    const currentTab = ref<TabItem>(tabList.value[0]);
+    const currentTabIndex = computed(() =>
+      tabList.value.findIndex((el) => el.id === currentTab.value.id)
+    );
 
     const toggleVisible = (isShow: boolean) => {
       visible.value = isShow;
     };
-    const selectTabItem = (ind: number) => {
-      router.push({ name: tabList.value[ind].routeName });
-      currentTabIndex.value = ind;
+    const selectTabItem = (item: TabItem) => {
+      currentTab.value = item;
+      router.push({ name: item.routeName });
     };
     const addTabItem = (item: TabItem) => {
       const pathList = tabList.value.map((el: TabItem) => el.routeName);
       if (!pathList.includes(item.routeName)) {
         tabList.value.push(item);
-        currentTabIndex.value = tabList.value.length - 1;
+        currentTab.value = item;
       } else {
-        const ind = pathList.findIndex((el: string) => el === item.routeName);
-        currentTabIndex.value = ind;
+        currentTab.value = item;
       }
     };
 
@@ -38,37 +40,34 @@ export const useTabListStore = defineStore(
 
     const closeTag = (item: TabItem) => {
       const ind = tabList.value.findIndex((el: TabItem) => el.id === item.id);
-      tabList.value = tabList.value.filter(
-        (el: TabItem) => el.routeName !== item.routeName
-      );
-      if (tabList.value.length === 0) {
-        router.push({ name: 'Home' });
-        return;
+      if (ind === currentTabIndex.value) {
+        if (ind === tabList.value.length - 1) {
+          selectTabItem(tabList.value[ind - 1]);
+        } else {
+          selectTabItem(tabList.value[ind + 1]);
+        }
+        tabList.value = tabList.value.filter(
+          (el: TabItem) => el.routeName !== item.routeName
+        );
+      } else {
+        tabList.value = tabList.value.filter(
+          (el: TabItem) => el.routeName !== item.routeName
+        );
+        setTabItem(tabList.value[ind]);
       }
-      if (ind > currentTabIndex.value) return;
-      if (
-        currentTabIndex.value > ind ||
-        currentTabIndex.value === tabList.value.length
-      ) {
-        currentTabIndex.value -= 1;
-      }
-      selectTabItem(currentTabIndex.value);
     };
 
     const closeOtherTag = (item: TabItem) => {
       tabList.value = tabList.value.filter((el) => {
         return el.id === 'Home' || el.id === item.id;
       });
-      const ind = tabList.value.findIndex((el: TabItem) => el.id === item.id);
-      currentTabIndex.value = ind;
-      router.push({ name: item.routeName });
+      selectTabItem(item);
     };
 
     const closeAfterTag = (item: TabItem) => {
       const pathList = tabList.value.map((el: TabItem) => el.routeName);
       const ind = pathList.findIndex((el: string) => el === item.routeName);
       tabList.value = tabList.value.slice(0, ind + 1);
-      currentTabIndex.value = tabList.value.length - 1;
       router.push({ name: item.routeName });
     };
 
@@ -76,14 +75,13 @@ export const useTabListStore = defineStore(
       const pathList = tabList.value.map((el: TabItem) => el.routeName);
       const index = pathList.findIndex((el: string) => el === item.routeName);
       tabList.value = [tabList.value[0], ...tabList.value.slice(index)];
-      const ind = tabList.value.findIndex((el: TabItem) => el.id === item.id);
-      currentTabIndex.value = ind;
+      currentTab.value = item;
       router.push({ name: item.routeName });
     };
 
     const clearTagList = () => {
-      currentTabIndex.value = 0;
-      tabList.value = [tabList.value[0]];
+      tabList.value = tabList.value.filter((el) => el.id === 'Home');
+      currentTab.value = tabList.value[0];
     };
 
     return {

@@ -6,9 +6,10 @@
       :hide-on-click="true"
     >
       <span
-        class="tag-item hover-weak-wrapper rounded-lg pl-2 pr-6px"
+        ref="tabItemRef"
+        class="tag-item hover-common-wrapper px-3 border-right"
         :class="{ 'weak-active-item': currentTab.id === item.id }"
-        @click="selectTabItem(ind)"
+        @click="selectTabItem(item)"
       >
         <MyIcon :name="item.icon" class="mr-2"></MyIcon>
         <span class="flex-1">{{ item.name }}</span>
@@ -16,7 +17,7 @@
           v-if="item.id !== 'Home'"
           name="close"
           size="10"
-          class="hover-wrapper p-2px rounded-sm"
+          class="hover-weak-wrapper p-2px rounded-sm"
           @click.stop="closeTag(item)"
         ></MyIcon>
       </span>
@@ -36,6 +37,11 @@
   </div>
 </template>
 <script lang="ts" setup>
+import {
+  draggable,
+  dropTargetForElements,
+} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+
 import { useTabListStore } from '@/store/tab/tabList';
 import { storeToRefs } from 'pinia';
 import type { TabItem } from '@/types/type';
@@ -44,11 +50,12 @@ type PropsType = {
   item: TabItem;
   ind: number;
 };
-defineProps<PropsType>();
+const props = defineProps<PropsType>();
+
+const tabItemRef = ref();
 
 const {
   closeTag,
-
   selectTabItem,
   closeBeforeTag,
   closeAfterTag,
@@ -91,15 +98,52 @@ const menuList = ref([
     },
   },
 ]);
+
+const initDrag = () => {
+  draggable({
+    element: tabItemRef.value,
+    getInitialData: () => props.item,
+    canDrag: () => props.item.id !== 'Home',
+    onDragStart: () => {
+      tabItemRef.value.classList.add('dragging');
+    },
+    onDrop: (_args) => {
+      tabItemRef.value.classList.remove('dragging');
+    },
+  });
+  dropTargetForElements({
+    getData: () => props.item,
+    element: tabItemRef.value,
+    canDrop() {
+      return props.item.id !== 'Home';
+    },
+    onDragEnter({ self, source }) {
+      if (self.data.id !== 'Home' && source.data.id !== 'Home') {
+        const selfInd = tabList.value.findIndex(
+          (item) => item.id === self.data.id
+        );
+        const sourceInd = tabList.value.findIndex(
+          (item) => item.id === source.data.id
+        );
+        tabList.value.splice(selfInd, 1, source.data as TabItem);
+        tabList.value.splice(sourceInd, 1, self.data as TabItem);
+      }
+    },
+  });
+};
+
+onMounted(() => {
+  initDrag();
+});
 </script>
 <style lang="scss" scoped>
 .tab-item {
   flex-shrink: 0;
 }
 .tag-item {
-  width: 150px;
+  width: 170px;
   font-size: 12px;
-  height: 28px;
+  height: 47px;
   display: flex;
   align-items: center;
   justify-content: start;
