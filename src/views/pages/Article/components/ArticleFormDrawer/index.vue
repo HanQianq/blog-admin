@@ -13,10 +13,24 @@
       :model="articleForm"
     >
       <el-form-item prop="category" label="文章分类">
-        <el-select v-model="articleForm.category"></el-select>
+        <el-tree-select
+          v-model="articleForm.category"
+          :data="categoryList"
+          node-key="id"
+          :props="{ label: 'name' }"
+          class="!w-full"
+        />
       </el-form-item>
-      <el-form-item prop="tag" label="文章标签">
-        <el-select v-model="articleForm.tag"></el-select>
+      <el-form-item prop="tags" label="文章标签">
+        <el-select v-model="articleForm.tags" multiple :multiple-limit="4">
+          <el-option
+            v-for="item in tagList"
+            :key="item.id"
+            :value="item.id"
+            :label="item.name"
+          >
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item prop="original" label="是否原创">
         <el-radio-group v-model="articleForm.properties">
@@ -62,17 +76,23 @@
     </el-form>
     <div class="flex justify-end mt-4">
       <el-button @click="closeDrawer">取消</el-button>
-      <el-button type="primary">确定</el-button>
+      <el-button type="primary" @click="confirmHandler">确定</el-button>
     </div>
   </el-drawer>
 </template>
 <script setup lang="ts">
 import { useDict } from '@/hooks/useDict';
+import { useArticleCategory, useArticleTag } from '../../hooks/useArticle';
+
+const emits = defineEmits(['sendData']);
 
 const { dictDataList: statusList, getDictDataList: getArticleStatusList } =
   useDict('ARTICLE_STATUS');
 const { dictDataList: propertiesList, getDictDataList: getPropertiesList } =
   useDict('ARTICLE_PROPERTY');
+
+const { categoryList, getCategoryTree } = useArticleCategory();
+const { tagList, getTagList } = useArticleTag();
 
 const visible = ref(false);
 const openDrawer = () => {
@@ -83,10 +103,12 @@ const closeDrawer = () => {
   visible.value = false;
 };
 
+const formRef = ref();
+
 const originalForm = {
   category: '',
   cover: '',
-  tag: [],
+  tags: [],
   abstract: '',
   visible: '',
   properties: '',
@@ -96,22 +118,30 @@ const articleForm = ref({
   ...originalForm,
 });
 
-const emits = defineEmits(['addSuccess']);
-
 const articleFormRules = {
   category: [{ required: true, message: '文章分类不能为空', trigger: 'blur' }],
-  tag: [{ required: true, message: '文章标签不能为空', trigger: 'blur' }],
+  tags: [{ required: true, message: '文章标签不能为空', trigger: 'blur' }],
   abstract: [{ required: true, message: '文章摘要不能为空', trigger: 'blur' }],
 };
 
 const initDrawer = async () => {
   await getArticleStatusList();
   await getPropertiesList();
+  await getCategoryTree();
+  await getTagList();
   if (propertiesList.value.length > 0) {
     articleForm.value.properties = propertiesList.value[0].key;
   }
   if (statusList.value.length > 0) {
     articleForm.value.visible = statusList.value[0].key;
+  }
+};
+
+const confirmHandler = async () => {
+  const valid = await formRef.value.validate();
+  if (valid) {
+    closeDrawer();
+    emits('sendData', articleForm.value);
   }
 };
 

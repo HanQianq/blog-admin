@@ -67,30 +67,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { getAllArticleCategoryTreeApi } from '@/api/article/category';
 import { ArticleCategoryItemType } from '@/api/article/category/type';
 import CategoryDialog from './components/CategoryDialog.vue';
-import { columnList, fmtResData } from './service';
+import { columnList } from './service';
 import { useDialog } from '@/hooks/useDialog';
-
-const categoryList = ref<ArticleCategoryItemType[]>([]);
-const loading = ref(true);
+import { useArticleCategory } from '../../hooks/useArticle';
 
 const { formDialogProps, openDialog, closeDialog } =
   useDialog<ArticleCategoryItemType>();
 
-const getCategoryTree = async () => {
-  try {
-    loading.value = true;
-    const res = await getAllArticleCategoryTreeApi();
-    categoryList.value = fmtResData(res.data);
-  } catch (error) {
-    categoryList.value = [];
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-};
+const { categoryList, getCategoryTree, loading } = useArticleCategory();
 
 onBeforeMount(() => {
   getCategoryTree();

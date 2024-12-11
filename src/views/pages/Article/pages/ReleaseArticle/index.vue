@@ -19,9 +19,10 @@
       <my-md-editor ref="mdEditorRef"></my-md-editor>
     </div>
   </div>
-  <ArticleFormDrawer ref="drawerRef" />
+  <ArticleFormDrawer ref="drawerRef" @send-data="releaseArticleHandler" />
 </template>
 <script lang="ts" setup>
+import { pinyin } from 'pinyin-pro';
 import ArticleFormDrawer from '@/views/pages/Article/components/ArticleFormDrawer/index.vue';
 import { ElMessage } from 'element-plus';
 
@@ -48,6 +49,20 @@ const openDrawerHandler = () => {
     return;
   }
   drawerRef.value.openDrawer();
+};
+
+const releaseArticleHandler = (form: any) => {
+  const reqParams = {
+    pinyin: pinyin(title.value, {
+      toneType: 'none',
+      separator: '',
+      nonZh: 'consecutive',
+      v: true,
+    }),
+    content: mdEditorRef.value.getText(),
+    ...form,
+  };
+  console.log('🚀 ~ releaseArticleHandler ~ reqParams:', reqParams);
 };
 </script>
 <style lang="scss" scoped></style>
