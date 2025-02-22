@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col">
     <div v-if="!editable" class="img-wrapper w-full flex-1 h-0">
-      <img v-if="imgUrl" :src="imgUrl" alt="" />
+      <img v-if="imgUrl" :src="imgUrl" alt="" class="wh-full" />
       <div v-else class="w-full h-full">未上传图片</div>
     </div>
     <div
@@ -35,6 +35,7 @@ type PropsType = {
   editable: boolean;
   type: string;
   desc?: string;
+  defaultUrl?: string;
 };
 const props = defineProps<PropsType>();
 const emits = defineEmits(['uploadSuccess']);
@@ -64,6 +65,12 @@ const uploadFileHandler = async (raw: any) => {
     ElMessage.error('上传文件失败');
   }
 };
+
+onMounted(() => {
+  if (props.defaultUrl) {
+    imgUrl.value = props.defaultUrl;
+  }
+});
 </script>
 
 <style scoped lang="scss">

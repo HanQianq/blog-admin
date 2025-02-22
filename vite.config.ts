@@ -43,7 +43,7 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       '/backapi': {
-        target: 'http://127.0.0.1:8888/',
+        target: 'http://127.0.0.1:8000/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/backapi/, ''),
       },

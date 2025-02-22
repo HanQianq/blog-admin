@@ -13,11 +13,11 @@
       label-width="90px"
       :style="{ width: '100%' }"
     >
-      <el-form-item prop="name" label="图标名称">
-        <el-input v-model="form.name" placeholder="请输入图标名称" />
+      <el-form-item prop="name" label="图片名称">
+        <el-input v-model="form.name" placeholder="请输入图片名称" />
       </el-form-item>
-      <el-form-item prop="category" label="图标类型">
-        <el-select v-model="form.category" placeholder="请选择图标类型">
+      <el-form-item prop="category" label="图片类型">
+        <el-select v-model="form.category" placeholder="请选择图片类型">
           <el-option
             v-for="item in props.categoryList"
             :key="item.id"
@@ -26,20 +26,17 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item prop="source" label="图标来源">
-        <el-input v-model="form.source" placeholder="请输入图标来源" />
-      </el-form-item>
-
-      <el-form-item prop="sort" label="图标排序">
+      <el-form-item prop="sort" label="图片排序">
         <el-input-number v-model="form.sort" :min="0" class="!w-full" />
       </el-form-item>
-      <el-form-item prop="desc" label="图标描述">
+      <el-form-item prop="desc" label="图片描述">
         <el-input v-model="form.desc" type="textarea" class="!w-full" />
       </el-form-item>
-      <el-form-item prop="url" label="上传图标">
-        <div class="w-100px h-100px">
+      <el-form-item prop="url" label="上传图片">
+        <div class="w-full h-180px">
           <MyImageAutoUpload
-            type="icon"
+            type="image"
+            :default-url="form.url"
             :editable="optType === 'add'"
             @upload-success="uploadSuccessHandler"
           ></MyImageAutoUpload>
@@ -51,7 +48,7 @@
 <script setup lang="ts">
 import { FormDialogPropsType, formRules, originalForm } from '../service.ts';
 import { ElMessage } from 'element-plus';
-import { addIconApi, editIconApi } from '@/api/resource/icon';
+import { addImageApi, editImageApi } from '@/api/resource/image';
 
 type EmitsType = {
   (e: 'close'): void;
@@ -62,7 +59,7 @@ const props = defineProps<FormDialogPropsType>();
 const emits = defineEmits<EmitsType>();
 
 const dialogTitle = computed(() => {
-  return props.optType === 'add' ? '创建图标' : '编辑图标';
+  return props.optType === 'add' ? '创建图片' : '编辑图片';
 });
 
 const formRef = ref();
@@ -85,8 +82,8 @@ const confirmHandler = () => {
       try {
         const { data, msg } =
           props.optType === 'add'
-            ? await addIconApi(form.value)
-            : await editIconApi({ id: props.row.id, ...form.value });
+            ? await addImageApi(form.value)
+            : await editImageApi({ id: props.row.id, ...form.value });
         if (data) {
           ElMessage.success(msg);
           emits('changeSuccess');
@@ -102,6 +99,7 @@ const confirmHandler = () => {
 onMounted(() => {
   if (props.optType === 'edit') {
     form.value = { ...props.row };
+    console.log('🚀 ~ onMounted ~ form.value:', form.value);
   }
 });
 </script>

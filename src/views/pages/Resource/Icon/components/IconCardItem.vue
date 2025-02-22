@@ -7,7 +7,6 @@
     </div>
     <div v-if="layout === 'list'" class="ml-4 flex flex-col">
       <span class="text-xs">{{ item.name }}</span>
-      <!-- <span class="text-xs truncate">类别：{{ item.category }}</span> -->
     </div>
   </div>
 </template>

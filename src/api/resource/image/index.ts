@@ -20,7 +20,7 @@ export const deleteImageApi = (data: IdsType) =>
   request.post<boolean>('/resource/image/delete', data);
 
 export const getImageListApi = (data: ImageSearchType) =>
-  request.post<ImageItemType[]>('/resource/image/list', data);
+  request.post<ResPageType<ImageItemType>>('/resource/image/list', data);
 
 export const addImageCategoryApi = (data: CategoryFormType) =>
   request.post<boolean>('/resource/image/category/add', data);
@@ -32,7 +32,7 @@ export const deleteImageCategoryApi = (data: IdsType) =>
   request.post<boolean>('/resource/image/category/delete', data);
 
 export const getImageCategoryListApi = () =>
-  request.get<CategoryItemType[]>('/resource/image/list');
+  request.post<CategoryItemType[]>('/resource/image/category/list');
 
 export default {
   addImageApi,

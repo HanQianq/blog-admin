@@ -25,12 +25,12 @@ const router = useRouter();
 const activeTab = computed(() => route.name);
 const tabList = [
   {
-    label: '图标库',
-    key: 'IconLib',
+    label: '图片库',
+    key: 'ImageLib',
   },
   {
-    label: '图标分类',
-    key: 'IconCategory',
+    label: '图片分类',
+    key: 'ImageCategory',
   },
 ];
 
