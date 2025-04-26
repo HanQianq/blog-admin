@@ -6,7 +6,7 @@
   >
     <div
       v-if="isShowBtn"
-      class="scroll-left mr-3 hover-text border-right"
+      class="scroll-left hover-text border-right"
       title="向左滑动"
       @click="clickLeftHandle"
     >

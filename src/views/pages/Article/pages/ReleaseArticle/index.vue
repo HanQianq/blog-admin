@@ -25,6 +25,7 @@
 import { pinyin } from 'pinyin-pro';
 import ArticleFormDrawer from '@/views/pages/Article/components/ArticleFormDrawer/index.vue';
 import { ElMessage } from 'element-plus';
+import { addArticleApi } from '@/api/article';
 
 const mdEditorRef = ref();
 const drawerRef = ref();
@@ -51,7 +52,7 @@ const openDrawerHandler = () => {
   drawerRef.value.openDrawer();
 };
 
-const releaseArticleHandler = (form: any) => {
+const releaseArticleHandler = async (form: any) => {
   const reqParams = {
     pinyin: pinyin(title.value, {
       toneType: 'none',
@@ -59,10 +60,12 @@ const releaseArticleHandler = (form: any) => {
       nonZh: 'consecutive',
       v: true,
     }),
+    title: title.value,
     content: mdEditorRef.value.getText(),
     ...form,
   };
-  console.log('🚀 ~ releaseArticleHandler ~ reqParams:', reqParams);
+  const res = await addArticleApi(reqParams);
+  res && ElMessage.success(res.msg);
 };
 </script>
 <style lang="scss" scoped></style>

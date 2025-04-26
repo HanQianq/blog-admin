@@ -5,9 +5,10 @@
         class="flex items-center overflow-hidden hover-text"
         @click="goBackToIndex"
       >
+        <MyIcon name="application" size="20"></MyIcon>
         <span
           v-show="isSideExpand"
-          class="font-title text-xl ml-2 flex-shrink-0 relative top-2px"
+          class="font-title text-xl ml-4 flex-shrink-0 relative top-2px"
         >
           博客后台管理系统
         </span>
