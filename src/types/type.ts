@@ -9,4 +9,5 @@ export type TabItem = {
   routeName: string;
   id: string;
   icon: string;
+  query?: Record<string, string>;
 };

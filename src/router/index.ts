@@ -37,12 +37,18 @@ router.beforeEach((to, from, next) => {
       next(from.path);
     } else {
       if (!to.meta?.isHideTabBar) {
-        const menuItem = {
+        const baseItem = {
           id: to.name as string,
           routeName: to.name as string,
           name: (to.meta.name as string) || '',
           icon: to.meta.icon as string,
         };
+        const menuItem = to.query
+          ? {
+              ...baseItem,
+              query: to.query,
+            }
+          : baseItem;
         document.title = menuItem.name || '博客后台管理系统';
         addTabItem(menuItem as TabItem);
       } else {

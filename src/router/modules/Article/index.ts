@@ -12,6 +12,16 @@ export const ArticleRouteList: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/article-detail',
+    name: 'ArticleDetail',
+    component: () =>
+      import('@/views/pages/Article/pages/ArticleDetail/index.vue'),
+    meta: {
+      name: '文章详情',
+      icon: 'list',
+    },
+  },
+  {
     path: '/release-article',
     name: 'ReleaseArticle',
     component: () =>

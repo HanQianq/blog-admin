@@ -18,7 +18,11 @@ export const useTabListStore = defineStore(
     };
     const selectTabItem = (item: TabItem) => {
       currentTab.value = item;
-      router.push({ name: item.routeName });
+      if (item.query) {
+        router.push({ name: item.routeName, query: item.query });
+      } else {
+        router.push({ name: item.routeName });
+      }
     };
     const addTabItem = (item: TabItem) => {
       const pathList = tabList.value.map((el: TabItem) => el.routeName);
@@ -27,6 +31,12 @@ export const useTabListStore = defineStore(
         currentTab.value = item;
       } else {
         currentTab.value = item;
+        if (item.query) {
+          const ind = tabList.value.findIndex(
+            (el) => el.routeName === item.routeName
+          );
+          tabList.value[ind] = item;
+        }
       }
     };
 

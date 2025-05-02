@@ -16,3 +16,6 @@ export const deleteArticleApi = (id: string) =>
 
 export const getArticleListApi = (data: ArticleQueryType & PageType) =>
   request.post<ResPageType<ArticleItemType>>('/article/list', data);
+
+export const getArticleDetailApi = (data: { id: string }) =>
+  request.post<any>('/article/detail', data);

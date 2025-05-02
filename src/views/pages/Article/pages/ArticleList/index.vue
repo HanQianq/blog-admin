@@ -47,7 +47,13 @@
           >
             <template #default="{ row }">
               <div flex w-full class="justify-center">
-                <el-button link type="primary"> 查看详情 </el-button>
+                <el-button
+                  link
+                  type="primary"
+                  @click="gotoArticleDetail(row.id)"
+                >
+                  查看详情
+                </el-button>
                 <el-button link type="danger"> 删除 </el-button>
               </div>
             </template>
@@ -71,6 +77,7 @@ import { ArticleItemType, ArticleQueryType } from '@/api/article/type';
 import { useSearch } from '@/hooks/useSearch';
 import { columnList } from './service';
 
+const router = useRouter();
 const currentLayout = ref('list');
 const options = [
   {
@@ -120,6 +127,15 @@ const changeCategory = async (category: string) => {
 const initArticleList = async () => {
   searchParams.value = { ...originalParams };
   await filterArticleList();
+};
+
+const gotoArticleDetail = (id: number) => {
+  router.push({
+    name: 'ArticleDetail',
+    query: {
+      id,
+    },
+  });
 };
 
 onMounted(() => {

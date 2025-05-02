@@ -1,4 +1,5 @@
 import VueMarkdownEditor from '@kangc/v-md-editor';
+import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 
@@ -14,6 +15,12 @@ import createHighlightLinesPlugin from '@kangc/v-md-editor/lib/plugins/highlight
 import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
 import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
 
+VMdPreview.use(vuepressTheme, { Prism })
+  .use(createEmojiPlugin())
+  .use(createTodoListPlugin())
+  .use(createLineNumbertPlugin())
+  .use(createHighlightLinesPlugin())
+  .use(createCopyCodePlugin());
 VueMarkdownEditor.use(vuepressTheme, { Prism })
   .use(createEmojiPlugin())
   .use(createTodoListPlugin())
@@ -23,6 +30,7 @@ VueMarkdownEditor.use(vuepressTheme, { Prism })
 
 export default {
   install(app: App) {
+    app.component('v-md-preview', VMdPreview);
     app.component('v-md-editor', VueMarkdownEditor);
   },
 };
