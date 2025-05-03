@@ -12,6 +12,18 @@
               clearable
               @change="getDataListHandler"
             ></el-input>
+            <el-tag size="large" class="mr-4">文章类别</el-tag>
+            <el-tree-select
+              v-model="searchParams.category"
+              :data="categoryList"
+              node-key="id"
+              clearable
+              check-strictly
+              filterable
+              :props="{ label: 'name' }"
+              class="!w-280px"
+              @change="changeCategory"
+            />
           </div>
           <el-segmented v-model="currentLayout" :options="options">
             <template #default="{ item }">
@@ -38,6 +50,26 @@
             :label="item.title"
             align="center"
           ></el-table-column>
+          <el-table-column label="作者" align="center">
+            <template #default="{ row }">
+              <div>{{ row.author.name }}</div>
+            </template>
+          </el-table-column>
+          <el-table-column label="类别" align="center">
+            <template #default="{ row }">
+              <div>{{ row.category.father + '·' + row.category.name }}</div>
+            </template>
+          </el-table-column>
+          <el-table-column label="发布时间" align="center">
+            <template #default="{ row }">
+              <div>{{ fmtTime(row.createTime) }}</div>
+            </template>
+          </el-table-column>
+          <el-table-column label="最近更新时间" align="center">
+            <template #default="{ row }">
+              <div>{{ fmtTime(row.updateTime) }}</div>
+            </template>
+          </el-table-column>
 
           <el-table-column
             label="操作"
@@ -54,7 +86,13 @@
                 >
                   查看详情
                 </el-button>
-                <el-button link type="danger"> 删除 </el-button>
+                <el-button
+                  link
+                  type="danger"
+                  @click="deleteArticleHandler(row.id)"
+                >
+                  删除
+                </el-button>
               </div>
             </template>
           </el-table-column>
@@ -72,12 +110,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { getArticleListApi } from '@/api/article';
+import { deleteArticleApi, getArticleListApi } from '@/api/article';
 import { ArticleItemType, ArticleQueryType } from '@/api/article/type';
+import { useArticleCategory } from '../../hooks/useArticle';
 import { useSearch } from '@/hooks/useSearch';
 import { columnList } from './service';
+import { fmtTime } from '@/utils/tool';
 
 const router = useRouter();
+const { categoryList, getCategoryTree } = useArticleCategory();
 const currentLayout = ref('list');
 const options = [
   {
@@ -129,6 +170,16 @@ const initArticleList = async () => {
   await filterArticleList();
 };
 
+const deleteArticleHandler = (id: string) => {
+  confirmHandler('您将和删除这篇文章', async () => {
+    const res = await deleteArticleApi(id);
+    if (res) {
+      ElMessage.success('删除成功');
+      await initArticleList();
+    }
+  });
+};
+
 const gotoArticleDetail = (id: number) => {
   router.push({
     name: 'ArticleDetail',
@@ -139,6 +190,7 @@ const gotoArticleDetail = (id: number) => {
 };
 
 onMounted(() => {
+  getCategoryTree();
   initArticleList();
 });
 </script>

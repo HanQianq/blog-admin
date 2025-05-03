@@ -1,20 +1,39 @@
 <template>
-  <div class="w-full h-full flex flex-col pb-4">
-    <h3 class="title-wrapper text-2xl font-bold xy-center py-8">
-      {{ articleDetail?.baseInfo?.title || '' }}
-    </h3>
+  <div class="w-full h-full p-4">
     <div
-      class="content-wrapper max-w-[1080px] min-w-[800px] mx-auto flex-1 h-0 overflow-auto"
+      class="article-wrapper wrapper-item max-w-[1080px] h-full flex flex-col pb-4 mx-auto"
     >
-      <v-md-preview
-        :text="articleDetail?.detailInfo?.content"
-        class="!h-full"
-      ></v-md-preview>
+      <h3 class="title-wrapper text-3xl font-bold py-6 px-8">
+        {{ articleDetail?.baseInfo?.title || '' }}
+      </h3>
+      <div class="info-wrapper flex items-center px-8">
+        <span class="mr-6">{{ articleDetail?.authorInfo?.nickName }}</span>
+        <span class="flex items-center mr-6">
+          <MyIcon name="calendar" class="mr-1 relative top-1px"></MyIcon>
+          <span>{{
+            dayjs(articleDetail?.createTime).format('YYYY-MM-DD')
+          }}</span>
+        </span>
+        <span>
+          {{
+            articleDetail?.categoryInfo?.father +
+            '·' +
+            articleDetail?.categoryInfo?.base?.name
+          }}
+        </span>
+      </div>
+      <div class="content-wrapper flex-1 h-0 overflow-auto">
+        <v-md-preview
+          :text="articleDetail?.detailInfo?.content"
+          class="!h-full"
+        ></v-md-preview>
+      </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { getArticleDetailApi } from '@/api/article';
+import dayjs from 'dayjs';
 
 const route = useRoute();
 const articleDetail = ref<any>({});
