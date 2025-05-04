@@ -17,7 +17,11 @@ const toolbar =
 const getText = () => {
   return text.value;
 };
-defineExpose({ getText });
+
+const setText = (content: string) => {
+  text.value = content;
+};
+defineExpose({ getText, setText });
 </script>
 <style lang="scss" scoped>
 :deep(.v-md-textarea-editor textarea) {

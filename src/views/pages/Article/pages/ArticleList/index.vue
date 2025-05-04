@@ -88,6 +88,13 @@
                 </el-button>
                 <el-button
                   link
+                  type="primary"
+                  @click="gotoUpdateArticle(row.id)"
+                >
+                  编辑
+                </el-button>
+                <el-button
+                  link
                   type="danger"
                   @click="deleteArticleHandler(row.id)"
                 >
@@ -180,12 +187,17 @@ const deleteArticleHandler = (id: string) => {
   });
 };
 
-const gotoArticleDetail = (id: number) => {
+const gotoArticleDetail = (id: string) => {
   router.push({
     name: 'ArticleDetail',
-    query: {
-      id,
-    },
+    query: { id },
+  });
+};
+
+const gotoUpdateArticle = (id: string) => {
+  router.push({
+    name: 'UpdateArticle',
+    query: { id },
   });
 };
 

@@ -83,7 +83,11 @@
 <script setup lang="ts">
 import { useDict } from '@/hooks/useDict';
 import { useArticleCategory, useArticleTag } from '../../hooks/useArticle';
+import { OriginArticleFormTpe } from '../../types';
 
+const props = defineProps<{
+  defaultData: OriginArticleFormTpe | null;
+}>();
 const emits = defineEmits(['sendData']);
 
 const { dictDataList: statusList, getDictDataList: getArticleStatusList } =
@@ -105,7 +109,7 @@ const closeDrawer = () => {
 
 const formRef = ref();
 
-const originalForm = {
+const originalForm: OriginArticleFormTpe = {
   category: '',
   cover: '',
   tags: [],
@@ -114,7 +118,7 @@ const originalForm = {
   properties: '',
 };
 
-const articleForm = ref({
+const articleForm = ref<OriginArticleFormTpe>({
   ...originalForm,
 });
 
@@ -134,6 +138,9 @@ const initDrawer = async () => {
   }
   if (statusList.value.length > 0) {
     articleForm.value.visible = statusList.value[0].key;
+  }
+  if (props.defaultData) {
+    articleForm.value = { ...props.defaultData };
   }
 };
 

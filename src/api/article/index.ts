@@ -6,7 +6,7 @@ import {
 } from './type';
 import request from '@/utils/request';
 export const addArticleApi = (data: ArticleFormType) =>
-  request.post<boolean>('/article/add', data);
+  request.post<string>('/article/add', data);
 
 export const editArticleApi = (data: ArticleFormType & ArticleIdType) =>
   request.post<boolean>('/article/update', data);

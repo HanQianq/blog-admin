@@ -19,17 +19,31 @@
       <my-md-editor ref="mdEditorRef"></my-md-editor>
     </div>
   </div>
-  <ArticleFormDrawer ref="drawerRef" @send-data="releaseArticleHandler" />
+  <ArticleFormDrawer
+    ref="drawerRef"
+    :default-data="originForm"
+    @send-data="releaseArticleHandler"
+  />
 </template>
 <script lang="ts" setup>
 import { pinyin } from 'pinyin-pro';
 import ArticleFormDrawer from '@/views/pages/Article/components/ArticleFormDrawer/index.vue';
 import { ElMessage } from 'element-plus';
-import { addArticleApi } from '@/api/article';
+import {
+  addArticleApi,
+  editArticleApi,
+  getArticleDetailApi,
+} from '@/api/article';
+import { OriginArticleFormTpe } from '../../types';
+
+const route = useRoute();
+const router = useRouter();
 
 const mdEditorRef = ref();
 const drawerRef = ref();
 const title = ref('');
+
+const originForm = ref<OriginArticleFormTpe | null>(null);
 
 const baseValidDate = () => {
   let flag = true;
@@ -64,8 +78,40 @@ const releaseArticleHandler = async (form: any) => {
     content: mdEditorRef.value.getText(),
     ...form,
   };
-  const res = await addArticleApi(reqParams);
-  res && ElMessage.success(res.msg);
+  if (route.name === 'UpdateArticle') {
+    const res = await editArticleApi({
+      ...reqParams,
+      id: route.query.id as string,
+    });
+    res.data && ElMessage.success(res.msg);
+  } else {
+    const res = await addArticleApi(reqParams);
+    res.data && ElMessage.success(res.msg);
+    router.push({ name: 'UpdateArticle', query: { id: res.data } });
+  }
 };
+
+const initArticleDetailHandler = async () => {
+  if (route.name === 'UpdateArticle') {
+    const res = await getArticleDetailApi({ id: route.query.id as string });
+    const { properties, category, visible, cover, abstract } =
+      res.data.baseInfo;
+    const tagList = res.data.tagList.map((item: any) => item.id);
+    originForm.value = {
+      category,
+      cover,
+      properties,
+      tags: tagList,
+      abstract,
+      visible,
+    };
+    title.value = res.data.baseInfo.title;
+    mdEditorRef.value.setText(res.data.detailInfo.content);
+  }
+};
+
+onMounted(() => {
+  initArticleDetailHandler();
+});
 </script>
 <style lang="scss" scoped></style>

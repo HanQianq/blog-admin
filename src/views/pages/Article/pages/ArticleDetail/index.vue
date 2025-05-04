@@ -40,8 +40,6 @@ const articleDetail = ref<any>({});
 const initDataHandler = async () => {
   const res = await getArticleDetailApi({ id: route.query.id });
   articleDetail.value = res.data;
-  console.log('🚀 ~ route:', route.query);
-  console.log('🚀 ~ initDataHandler ~ res:', res);
 };
 
 onMounted(() => {
