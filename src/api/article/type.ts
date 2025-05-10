@@ -21,6 +21,17 @@ export type ArticleItemType = ArticleFormType & {
   updateTime: string;
 };
 
+export type ArticleListItemType = {
+  id: string;
+  title: string;
+  abstract: string;
+  cover: string;
+  author: string;
+  category: string;
+  createTime: string;
+  updateTime: string;
+};
+
 export type ArticleQueryType = {
   title: string;
   category?: string;

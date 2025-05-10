@@ -36,6 +36,7 @@
       </template>
       <div class="p-4">
         <el-table
+          v-if="currentLayout === 'list'"
           :data="dataList"
           style="width: 100%"
           row-key="id"
@@ -57,22 +58,22 @@
           </el-table-column>
           <el-table-column label="作者" align="center">
             <template #default="{ row }">
-              <div>{{ row.author.name }}</div>
+              <div>{{ row.author }}</div>
             </template>
           </el-table-column>
           <el-table-column label="类别" align="center">
             <template #default="{ row }">
-              <div>{{ row.category.father + '·' + row.category.name }}</div>
+              <div>{{ row.category }}</div>
             </template>
           </el-table-column>
           <el-table-column label="发布时间" align="center">
             <template #default="{ row }">
-              <div>{{ fmtTime(row.createTime) }}</div>
+              <div>{{ row.createTime }}</div>
             </template>
           </el-table-column>
           <el-table-column label="最近更新时间" align="center">
             <template #default="{ row }">
-              <div>{{ fmtTime(row.updateTime) }}</div>
+              <div>{{ row.updateTime }}</div>
             </template>
           </el-table-column>
 
@@ -109,6 +110,20 @@
             </template>
           </el-table-column>
         </el-table>
+        <ul v-else class="article-list-wrapper">
+          <li
+            class="article-item-wrapper"
+            v-for="item in dataList"
+            :key="item.id"
+          >
+            <ArticleCard
+              :article="item"
+              @delete="deleteArticleHandler"
+              @edit="gotoUpdateArticle"
+              @view="gotoArticleDetail"
+            ></ArticleCard>
+          </li>
+        </ul>
       </div>
       <template #bottom>
         <MyPagination
@@ -123,11 +138,12 @@
 </template>
 <script lang="ts" setup>
 import { deleteArticleApi, getArticleListApi } from '@/api/article';
-import { ArticleItemType, ArticleQueryType } from '@/api/article/type';
+import { ArticleListItemType, ArticleQueryType } from '@/api/article/type';
 import { useArticleCategory } from '../../hooks/useArticle';
 import { useSearch } from '@/hooks/useSearch';
 import { columnList } from './service';
 import { fmtTime } from '@/utils/tool';
+import ArticleCard from './components/ArticleCard.vue';
 
 const router = useRouter();
 const { categoryList, getCategoryTree } = useArticleCategory();
@@ -155,7 +171,7 @@ const {
   pageConfig,
   getDataListHandler,
   pageChangeHandler,
-} = useSearch<ArticleQueryType, ArticleItemType>(
+} = useSearch<ArticleQueryType, ArticleListItemType>(
   originalParams,
   getArticleList
 );
@@ -164,6 +180,19 @@ async function getArticleList() {
   const { data } = await getArticleListApi({
     ...pageConfig,
     ...searchParams.value,
+  });
+  data.result = data.result.map((item: any) => {
+    const articleItem: ArticleListItemType = {
+      id: item.id,
+      title: item.title,
+      abstract: item.abstract,
+      cover: item.cover,
+      author: item.author.name,
+      category: item.category.father + '·' + item.category.name,
+      createTime: fmtTime(item.createTime, 'YYYY-MM-DD'),
+      updateTime: fmtTime(item.updateTime),
+    };
+    return articleItem;
   });
   return data;
 }
@@ -211,4 +240,11 @@ onMounted(() => {
   initArticleList();
 });
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.article-list-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  align-content: start;
+  gap: 1rem;
+}
+</style>

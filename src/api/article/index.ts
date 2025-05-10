@@ -3,6 +3,7 @@ import {
   ArticleItemType,
   ArticleIdType,
   ArticleQueryType,
+  type ArticleListItemType,
 } from './type';
 import request from '@/utils/request';
 export const addArticleApi = (data: ArticleFormType) =>
@@ -15,7 +16,7 @@ export const deleteArticleApi = (id: string) =>
   request.post<boolean>('/article/delete', { id });
 
 export const getArticleListApi = (data: ArticleQueryType & PageType) =>
-  request.post<ResPageType<ArticleItemType>>('/article/list', data);
+  request.post<ResPageType<ArticleListItemType>>('/article/list', data);
 
 export const getArticleDetailApi = (data: { id: string }) =>
   request.post<any>('/article/detail', data);
