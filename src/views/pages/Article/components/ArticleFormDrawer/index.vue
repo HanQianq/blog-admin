@@ -60,6 +60,8 @@
             type="article-cover"
             desc="上传文章封面"
             editable
+            :default-url="articleForm.cover"
+            @upload-success="uploadSuccessHandler"
           ></MyImageAutoUpload>
         </div>
       </el-form-item>
@@ -128,6 +130,10 @@ const articleFormRules = {
   abstract: [{ required: true, message: '文章摘要不能为空', trigger: 'blur' }],
 };
 
+const uploadSuccessHandler = (url: string) => {
+  articleForm.value.cover = url;
+};
+
 const initDrawer = async () => {
   await getArticleStatusList();
   await getPropertiesList();
@@ -140,6 +146,7 @@ const initDrawer = async () => {
     articleForm.value.visible = statusList.value[0].key;
   }
   if (props.defaultData) {
+    console.log('🚀 ~ initDrawer ~ props.defaultData:', props.defaultData);
     articleForm.value = { ...props.defaultData };
   }
 };
@@ -147,6 +154,8 @@ const initDrawer = async () => {
 const confirmHandler = async () => {
   const valid = await formRef.value.validate();
   if (valid) {
+    console.log('🚀 ~ initDrawer ~ props.defaultData:', props.defaultData);
+    console.log('🚀 ~ initDrawer ~ props.defaultData:', props.defaultData);
     closeDrawer();
     emits('sendData', articleForm.value);
   }

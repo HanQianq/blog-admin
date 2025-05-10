@@ -50,6 +50,11 @@
             :label="item.title"
             align="center"
           ></el-table-column>
+          <el-table-column label="文章封面" align="center">
+            <template #default="{ row }">
+              <img :src="row.cover" class="w-150px h-120px" />
+            </template>
+          </el-table-column>
           <el-table-column label="作者" align="center">
             <template #default="{ row }">
               <div>{{ row.author.name }}</div>

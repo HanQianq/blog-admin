@@ -35,7 +35,7 @@ type PropsType = {
   editable: boolean;
   type: string;
   desc?: string;
-  defaultUrl?: string;
+  defaultUrl?: string | null;
 };
 const props = defineProps<PropsType>();
 const emits = defineEmits(['uploadSuccess']);
