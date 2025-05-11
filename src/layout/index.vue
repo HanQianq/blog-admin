@@ -14,7 +14,16 @@
         </div>
       </div>
       <div class="content-wrapper flex-1 h-0">
-        <RouterView></RouterView>
+        <div v-if="isOpenStore" class="wh-full">
+          <RouterView v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component"></component>
+            </keep-alive>
+          </RouterView>
+        </div>
+        <div v-else class="wh-full">
+          <RouterView></RouterView>
+        </div>
       </div>
     </div>
   </div>
@@ -26,7 +35,7 @@ import TopBar from './components/TopBar/index.vue';
 import TabBar from './components/TabBar/index.vue';
 import { useSystemStore } from '@/store/system';
 
-const { isSideExpand } = storeToRefs(useSystemStore());
+const { isSideExpand, isOpenStore } = storeToRefs(useSystemStore());
 
 const sideWidth = computed(() => {
   return isSideExpand.value ? '14rem' : '4rem';

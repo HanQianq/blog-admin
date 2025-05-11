@@ -7,6 +7,7 @@ export const useSystemStore = defineStore(
     const mode = ref<SysModeType>('dark');
     const theme = ref<SysThemeType>('green');
     const isSideExpand = ref<boolean>(true);
+    const isOpenStore = ref<boolean>(false);
 
     const changeMode = async (newMode: 'light' | 'dark') => {
       document.documentElement.classList.remove(mode.value);
@@ -36,6 +37,7 @@ export const useSystemStore = defineStore(
       changeMode,
       switchMode,
       changeTheme,
+      isOpenStore,
       initModeAndTheme,
     };
   },

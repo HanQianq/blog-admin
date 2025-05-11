@@ -8,6 +8,18 @@
     </div>
     <el-drawer v-model="visible" :size="400" title="系统设置">
       <div>
+        <div class="settings-store setting-item mb-4">
+          <div class="settings-title mb-4 font-title">系统缓存</div>
+          <div class="setting-content font-beauty">
+            <el-switch
+              v-model="isOpenStore"
+              inline-prompt
+              size="large"
+              active-text="开启"
+              inactive-text="关闭"
+            />
+          </div>
+        </div>
         <div class="settings-mode setting-item mb-4">
           <div class="settings-title mb-4 font-title">系统模式</div>
           <div class="setting-content font-beauty">
@@ -24,6 +36,7 @@
             </ul>
           </div>
         </div>
+
         <div class="settings-theme">
           <div class="settings-title font-title text-xl mb-4">系统主题</div>
           <div class="setting-content font-beauty">
@@ -50,7 +63,7 @@ import { storeToRefs } from 'pinia';
 import type { SysModeType, SysThemeType } from '@/store/system/type';
 
 const visible = ref(false);
-const { mode, theme } = storeToRefs(useSystemStore());
+const { mode, theme, isOpenStore } = storeToRefs(useSystemStore());
 const { initModeAndTheme, changeMode, changeTheme } = useSystemStore();
 const modeList: DictType[] = [
   { label: '浅色', value: 'light' },
