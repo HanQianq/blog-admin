@@ -7,7 +7,7 @@ export const ResourceRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/Resource/Icon/index.vue'),
     meta: {
       name: '图标管理',
-      icon: 'picture',
+      icon: 'platte',
     },
   },
   {
@@ -16,7 +16,7 @@ export const ResourceRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/Resource/Image/index.vue'),
     meta: {
       name: '图片管理',
-      icon: 'picture',
+      icon: 'pic-one',
     },
   },
 ];

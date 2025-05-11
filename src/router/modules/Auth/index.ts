@@ -7,7 +7,7 @@ export const AuthRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/Auth/Menu/index.vue'),
     meta: {
       name: '菜单管理',
-      icon: 'application',
+      icon: 'system',
     },
   },
   {
@@ -25,7 +25,7 @@ export const AuthRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/Auth/Role/index.vue'),
     meta: {
       name: '角色管理',
-      icon: 'application-one',
+      icon: 'address-book',
     },
   },
 ];

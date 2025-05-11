@@ -8,7 +8,7 @@ export const ArticleRouteList: RouteRecordRaw[] = [
       import('@/views/pages/Article/pages/ArticleList/index.vue'),
     meta: {
       name: '文章列表',
-      icon: 'list',
+      icon: 'view-list',
     },
   },
   {
@@ -18,7 +18,7 @@ export const ArticleRouteList: RouteRecordRaw[] = [
       import('@/views/pages/Article/pages/ArticleDetail/index.vue'),
     meta: {
       name: '文章详情',
-      icon: 'list',
+      icon: 'doc-detail',
     },
   },
   {
@@ -28,7 +28,7 @@ export const ArticleRouteList: RouteRecordRaw[] = [
       import('@/views/pages/Article/pages/ReleaseArticle/index.vue'),
     meta: {
       name: '发表文章',
-      icon: 'notebook',
+      icon: 'pencil',
     },
   },
   {
@@ -48,7 +48,7 @@ export const ArticleRouteList: RouteRecordRaw[] = [
       import('@/views/pages/Article/pages/ArticleCategory/index.vue'),
     meta: {
       name: '文章类别',
-      icon: 'notebook',
+      icon: 'category-management',
     },
   },
   {
@@ -57,7 +57,7 @@ export const ArticleRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/Article/pages/ArticleTag/index.vue'),
     meta: {
       name: '文章标签',
-      icon: 'notebook',
+      icon: 'tag-one',
     },
   },
 ];

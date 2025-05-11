@@ -7,7 +7,7 @@ export const SystemRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/System/Dictionary/index.vue'),
     meta: {
       name: '字典管理',
-      icon: 'application',
+      icon: 'schedule',
     },
   },
 ];

@@ -62,7 +62,7 @@
         :row="formDialogProps.row"
         :category-list="formDialogProps.categoryList"
         @close="closeDialog"
-        @change-success="getIconList"
+        @change-success="getDataListHandler"
       ></IconFormDialog>
     </div>
   </div>

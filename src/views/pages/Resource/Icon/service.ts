@@ -14,7 +14,7 @@ export const originalForm: IconFormType = {
   url: '',
   sort: 0,
   desc: '',
-  source: '',
+  source: 'iconpark',
   category: '',
 };
 
