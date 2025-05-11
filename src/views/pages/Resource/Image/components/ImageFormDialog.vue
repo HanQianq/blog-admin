@@ -99,7 +99,6 @@ const confirmHandler = () => {
 onMounted(() => {
   if (props.optType === 'edit') {
     form.value = { ...props.row };
-    console.log('🚀 ~ onMounted ~ form.value:', form.value);
   }
 });
 </script>

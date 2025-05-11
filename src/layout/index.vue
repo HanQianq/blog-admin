@@ -15,9 +15,9 @@
       </div>
       <div class="content-wrapper flex-1 h-0">
         <div v-if="isOpenStore" class="wh-full">
-          <RouterView v-slot="{ Component }">
-            <keep-alive>
-              <component :is="Component"></component>
+          <RouterView v-slot="{ Component, route }">
+            <keep-alive :exclude="disabledStoreRoutes">
+              <component :is="Component" :key="route.fullPath"></component>
             </keep-alive>
           </RouterView>
         </div>
@@ -36,7 +36,7 @@ import TabBar from './components/TabBar/index.vue';
 import { useSystemStore } from '@/store/system';
 
 const { isSideExpand, isOpenStore } = storeToRefs(useSystemStore());
-
+const disabledStoreRoutes = ['ArticleDetail', 'UpdateArticle'];
 const sideWidth = computed(() => {
   return isSideExpand.value ? '14rem' : '4rem';
 });

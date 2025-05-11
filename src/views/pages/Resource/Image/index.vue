@@ -12,25 +12,30 @@
       class="wh-full"
       lazy
     >
-      <RouterView></RouterView>
+      <KeepAlive>
+        <component :is="item.component"></component>
+      </KeepAlive>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script setup lang="ts">
 import { TabsPaneContext } from 'element-plus';
+import ImageLib from '@/views/pages/Resource/Image/pages/ImageLib/index.vue';
+import ImageCategory from '@/views/pages/Resource/Image/pages/ImageCategory/index.vue';
 
-const route = useRoute();
 const router = useRouter();
-const activeTab = computed(() => route.name);
+const activeTab = ref('ImageLib');
 const tabList = [
   {
     label: '图片库',
     key: 'ImageLib',
+    component: ImageLib,
   },
   {
     label: '图片分类',
     key: 'ImageCategory',
+    component: ImageCategory,
   },
 ];
 

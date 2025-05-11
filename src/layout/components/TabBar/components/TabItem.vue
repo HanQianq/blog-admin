@@ -91,10 +91,15 @@ const menuList = ref([
     fn: (item: TabItem) => {
       closeOtherTag(item);
     },
-    disabled: (_item: TabItem, index: number) => {
-      const flag =
-        tabList.value.some((item) => item.id === 'Home') && index !== 0;
-      return tabList.value.length === 1 || flag;
+    disabled: (_item: TabItem, _index: number) => {
+      return tabList.value.length === 1;
+    },
+  },
+  {
+    title: '刷新标签页',
+    disabled: (_item: TabItem, _ind: number) => false,
+    fn: () => {
+      window.location.reload();
     },
   },
 ]);
