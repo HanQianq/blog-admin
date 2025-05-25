@@ -48,13 +48,12 @@ import { addArticleTagApi, editArticleTagApi } from '@/api/article/tag';
 import { ElMessage } from 'element-plus';
 import { FormDialogPropsType, formRules, originalForm } from '../service';
 import { ArticleTagItemType } from '@/api/article/tag/type';
-import { useDict } from '@/hooks/useDict';
+import { DictSimpleItemType } from '@/api/system/dict/type';
 
-const props = defineProps<FormDialogPropsType>();
+const props = defineProps<
+  FormDialogPropsType & { colorList: DictSimpleItemType[] }
+>();
 const emits = defineEmits(['close', 'changeSuccess']);
-
-const { dictDataList: colorList, getDictDataList: getColorList } =
-  useDict('ARTICLE_TAG_COLOR');
 
 const formRef = ref();
 const form = ref({
@@ -90,7 +89,6 @@ const confirmHandler = () => {
 };
 
 onMounted(async () => {
-  await getColorList();
   if (props.optType === 'edit' && props.row) {
     form.value = { ...props.row };
   }

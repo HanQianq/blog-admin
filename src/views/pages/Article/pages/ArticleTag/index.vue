@@ -33,14 +33,10 @@
           ></el-table-column>
           <el-table-column prop="color" align="center" label="颜色">
             <template #default="{ row }">
-              <div class="xy-center">
-                <div
-                  class="w-32px h-32px rounded-full"
-                  :style="{
-                    background: `${row.color}`,
-                  }"
-                ></div>
-              </div>
+              <MyTag
+                :name="getValueByKey(colorList, row.color) as string"
+                :color="row.color"
+              ></MyTag>
             </template>
           </el-table-column>
 
@@ -76,6 +72,7 @@
       :visible="formDialogProps.visible"
       :opt-type="formDialogProps.optType"
       :row="formDialogProps.row"
+      :color-list="colorList"
       @change-success="getDataListHandler"
       @close="closeDialog"
     ></TagDialog>
@@ -91,6 +88,12 @@ import TagDialog from './components/TagDialog.vue';
 import { columnList } from './service';
 import { useDialog } from '@/hooks/useDialog';
 import { useSearch } from '@/hooks/useSearch';
+import { useDict } from '@/hooks/useDict';
+const {
+  dictDataList: colorList,
+  getDictDataList: getColorList,
+  getValueByKey,
+} = useDict('ARTICLE_TAG_COLOR');
 
 const { formDialogProps, openDialog, closeDialog } =
   useDialog<ArticleTagItemType>();
@@ -117,8 +120,9 @@ async function getArticleTagList() {
   return data;
 }
 
-onMounted(() => {
-  getDataListHandler();
+onMounted(async () => {
+  await getColorList();
+  await getDataListHandler();
 });
 </script>
 <style lang="scss" scoped></style>

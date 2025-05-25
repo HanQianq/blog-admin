@@ -53,7 +53,7 @@
           ></el-table-column>
           <el-table-column label="文章封面" align="center">
             <template #default="{ row }">
-              <img :src="row.cover" class="w-150px h-120px" />
+              <img v-if="row.cover" :src="row.cover" class="w-50px h-40px" />
             </template>
           </el-table-column>
           <el-table-column label="作者" align="center">
@@ -64,6 +64,14 @@
           <el-table-column label="类别" align="center">
             <template #default="{ row }">
               <div>{{ row.category }}</div>
+            </template>
+          </el-table-column>
+          <el-table-column label="文章状态" align="center">
+            <template #default="{ row }">
+              <MyTag
+                :name="row.status === 'draft' ? '草稿' : '正文'"
+                :color="row.status === 'draft' ? 'gray' : 'green'"
+              ></MyTag>
             </template>
           </el-table-column>
           <el-table-column label="发布时间" align="center">
@@ -86,6 +94,7 @@
             <template #default="{ row }">
               <div flex w-full class="justify-center">
                 <el-button
+                  v-if="row.cover"
                   link
                   type="primary"
                   @click="gotoArticleDetail(row.id)"
@@ -188,7 +197,11 @@ async function getArticleList() {
       abstract: item.abstract,
       cover: item.cover,
       author: item.author.name,
-      category: item.category.father + '·' + item.category.name,
+      status: item.status,
+
+      category: item.category
+        ? item.category.father + '·' + item.category.name
+        : '',
       createTime: fmtTime(item.createTime, 'YYYY-MM-DD'),
       updateTime: fmtTime(item.updateTime),
     };

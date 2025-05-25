@@ -16,7 +16,10 @@
       >
     </div>
     <div class="edit-wrapper flex-1 h-0">
-      <my-md-editor ref="mdEditorRef"></my-md-editor>
+      <my-md-editor
+        ref="mdEditorRef"
+        @save="releaseArticleHandler"
+      ></my-md-editor>
     </div>
   </div>
   <ArticleFormDrawer
@@ -66,7 +69,12 @@ const openDrawerHandler = () => {
   drawerRef.value.openDrawer();
 };
 
-const releaseArticleHandler = async (form: any) => {
+const releaseArticleHandler = async () => {
+  if (!baseValidDate()) {
+    return;
+  }
+  const originArticleForm = await drawerRef.value.getArticleForm();
+  if (!originArticleForm) return;
   const reqParams = {
     pinyin: pinyin(title.value, {
       toneType: 'none',
@@ -76,7 +84,7 @@ const releaseArticleHandler = async (form: any) => {
     }),
     title: title.value,
     content: mdEditorRef.value.getText(),
-    ...form,
+    ...originArticleForm,
   };
   if (route.name === 'UpdateArticle') {
     const res = await editArticleApi({
@@ -94,12 +102,13 @@ const releaseArticleHandler = async (form: any) => {
 const initArticleDetailHandler = async () => {
   if (route.name === 'UpdateArticle') {
     const res = await getArticleDetailApi({ id: route.query.id as string });
-    const { properties, category, visible, cover, abstract } =
+    const { properties, category, visible, cover, abstract, status } =
       res.data.baseInfo;
     const tagList = res.data.tagList.map((item: any) => item.id);
     originForm.value = {
       category,
       cover,
+      status,
       properties,
       tags: tagList,
       abstract,

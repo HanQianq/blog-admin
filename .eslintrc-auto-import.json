@@ -74,6 +74,7 @@
     "confirmHandler": true,
     "getCookie": true,
     "setCookie": true,
-    "ElMessage": true
+    "ElMessage": true,
+    "generateColor": true
   }
 }

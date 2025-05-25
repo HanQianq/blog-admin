@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import chroma from 'chroma-js';
 
 export const getImg = (baseUrl: string, detailUrl: string) => {
   return new URL(`../../assets/image/${baseUrl}/${detailUrl}`, import.meta.url)
@@ -100,6 +101,11 @@ export const setCookie = (key: string, value: string, days = 7) => {
 
   // 设置Cookie
   document.cookie = key + '=' + (value || '') + expires + '; path=/';
+};
+
+export const generateColor = (colorStr: string) => {
+  const color = chroma(colorStr);
+  return color;
 };
 
 export default {

@@ -12,6 +12,7 @@
           :rules="loginRules"
           layout="vertical"
           class="!w-2/3"
+          @keyup.enter="loginHandler"
         >
           <el-form-item prop="username" class="!mb-6">
             <el-input

@@ -17,6 +17,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const effectScope: typeof import('vue')['effectScope']
   const fmtTime: typeof import('./src/utils/tool/index')['fmtTime']
+  const generateColor: typeof import('./src/utils/tool/index')['generateColor']
   const getCookie: typeof import('./src/utils/tool/index')['getCookie']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -93,6 +94,7 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly fmtTime: UnwrapRef<typeof import('./src/utils/tool/index')['fmtTime']>
+    readonly generateColor: UnwrapRef<typeof import('./src/utils/tool/index')['generateColor']>
     readonly getCookie: UnwrapRef<typeof import('./src/utils/tool/index')['getCookie']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -162,6 +164,7 @@ declare module '@vue/runtime-core' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly fmtTime: UnwrapRef<typeof import('./src/utils/tool/index')['fmtTime']>
+    readonly generateColor: UnwrapRef<typeof import('./src/utils/tool/index')['generateColor']>
     readonly getCookie: UnwrapRef<typeof import('./src/utils/tool/index')['getCookie']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>

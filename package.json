@@ -15,6 +15,7 @@
     "@kangc/v-md-editor": "^2.3.18",
     "@vueuse/core": "^10.10.0",
     "axios": "^1.6.8",
+    "chroma-js": "^3.1.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "element-plus": "^2.7.6",

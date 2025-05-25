@@ -7,5 +7,9 @@ export const useDict = (code: string) => {
     const { data } = await getAvailableDictListApi({ code });
     dictDataList.value = data;
   };
-  return { dictDataList, getDictDataList };
+
+  const getValueByKey = (arr: DictSimpleItemType[], key: string) => {
+    return arr.find((item) => item.key === key)?.value;
+  };
+  return { dictDataList, getDictDataList, getValueByKey };
 };

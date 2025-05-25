@@ -17,6 +17,11 @@ export const dictCategoryList: DictCategoryItemType[] = [
         code: 'ARTICLE_STATUS',
       },
       {
+        label: '文章可见性',
+        value: 'article_visible',
+        code: 'ARTICLE_VISIBLE',
+      },
+      {
         label: '文章属性',
         value: 'article_property',
         code: 'ARTICLE_PROPERTY',

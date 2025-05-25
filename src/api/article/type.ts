@@ -7,7 +7,6 @@ export type ArticleFormType = {
   visible: string;
   column?: string;
   cover?: string;
-  // isTop = models.BooleanField(default=False, db_column='is_top')
   abstract: string;
 };
 
@@ -28,6 +27,7 @@ export type ArticleListItemType = {
   cover: string;
   author: string;
   category: string;
+  status: string;
   createTime: string;
   updateTime: string;
 };

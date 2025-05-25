@@ -43,10 +43,10 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item prop="visible" label="文章状态">
+      <el-form-item prop="visible" label="文章可见性">
         <el-radio-group v-model="articleForm.visible">
           <el-radio
-            v-for="item in statusList"
+            v-for="item in visibleList"
             :key="item.key"
             :value="item.key"
           >
@@ -78,7 +78,15 @@
     </el-form>
     <div class="flex justify-end mt-4">
       <el-button @click="closeDrawer">取消</el-button>
-      <el-button type="primary" @click="confirmHandler">确定</el-button>
+      <el-button type="primary" @click="publishArticleHandler"
+        >发布文章</el-button
+      >
+      <el-button
+        v-if="!defaultData?.status || defaultData?.status !== statusList[1].key"
+        type="primary"
+        @click="saveDraftsHandler"
+        >保存草稿</el-button
+      >
     </div>
   </el-drawer>
 </template>
@@ -92,8 +100,10 @@ const props = defineProps<{
 }>();
 const emits = defineEmits(['sendData']);
 
-const { dictDataList: statusList, getDictDataList: getArticleStatusList } =
+const { dictDataList: statusList, getDictDataList: getStatusList } =
   useDict('ARTICLE_STATUS');
+const { dictDataList: visibleList, getDictDataList: getArticleVisibleList } =
+  useDict('ARTICLE_VISIBLE');
 const { dictDataList: propertiesList, getDictDataList: getPropertiesList } =
   useDict('ARTICLE_PROPERTY');
 
@@ -112,12 +122,13 @@ const closeDrawer = () => {
 const formRef = ref();
 
 const originalForm: OriginArticleFormTpe = {
-  category: '',
+  category: null,
   cover: '',
   tags: [],
   abstract: '',
   visible: '',
   properties: '',
+  status: '',
 };
 
 const articleForm = ref<OriginArticleFormTpe>({
@@ -135,30 +146,47 @@ const uploadSuccessHandler = (url: string) => {
 };
 
 const initDrawer = async () => {
-  await getArticleStatusList();
+  await getStatusList();
+  await getArticleVisibleList();
   await getPropertiesList();
   await getCategoryTree();
   await getTagList();
   if (propertiesList.value.length > 0) {
     articleForm.value.properties = propertiesList.value[0].key;
   }
+  if (visibleList.value.length > 0) {
+    articleForm.value.visible = visibleList.value[0].key;
+  }
   if (statusList.value.length > 0) {
-    articleForm.value.visible = statusList.value[0].key;
+    articleForm.value.status = statusList.value[0].key;
   }
   if (props.defaultData) {
-    console.log('🚀 ~ initDrawer ~ props.defaultData:', props.defaultData);
     articleForm.value = { ...props.defaultData };
   }
 };
 
-const confirmHandler = async () => {
+const publishArticleHandler = async () => {
   const valid = await formRef.value.validate();
   if (valid) {
-    console.log('🚀 ~ initDrawer ~ props.defaultData:', props.defaultData);
-    console.log('🚀 ~ initDrawer ~ props.defaultData:', props.defaultData);
     closeDrawer();
-    emits('sendData', articleForm.value);
+    articleForm.value.status = statusList.value[1].key;
+    emits('sendData');
   }
+};
+
+const saveDraftsHandler = async () => {
+  closeDrawer();
+
+  articleForm.value.status = statusList.value[0].key;
+  emits('sendData');
+};
+
+const getArticleForm = async () => {
+  if (articleForm.value.status === statusList.value[1].key) {
+    const valid = await formRef.value.validate();
+    if (!valid) return false;
+  }
+  return articleForm.value;
 };
 
 onMounted(() => {
@@ -167,6 +195,7 @@ onMounted(() => {
 
 defineExpose({
   openDrawer,
+  getArticleForm,
 });
 </script>
 <style lang="scss" scoped></style>

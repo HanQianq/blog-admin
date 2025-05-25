@@ -1,8 +1,9 @@
 export type OriginArticleFormTpe = {
-  category: string;
+  category: string | null;
   cover: string | null;
   tags: string[];
   abstract: string;
+  status: string;
   visible: string;
   properties: string;
 };

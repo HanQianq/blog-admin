@@ -51,6 +51,7 @@ declare module 'vue' {
     MyPagination: typeof import('./src/components/common/MyPagination/index.vue')['default']
     MySearchPanel: typeof import('./src/components/common/MySearchPanel/index.vue')['default']
     MyTable: typeof import('./src/components/common/MyTable/index.vue')['default']
+    MyTag: typeof import('./src/components/common/MyTag/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SelectIcon: typeof import('./src/components/SelectIcon/index.vue')['default']
