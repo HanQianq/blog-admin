@@ -7,6 +7,7 @@
       :disabled-menus="[]"
       :left-toolbar="toolbar"
       @save="saveHandler"
+      @upload-image="uploadImageHandler"
     ></v-md-editor>
   </div>
 </template>
@@ -26,6 +27,24 @@ const getText = () => {
 
 const setText = (content: string) => {
   text.value = content;
+};
+
+const uploadImageHandler = (
+  _event: Event,
+  insertImage: Function,
+  files: File[]
+) => {
+  files.forEach(async (file) => {
+    try {
+      const url = await uploadFile(file, file.name, 'article');
+      insertImage({
+        url,
+        desc: file.name,
+      });
+    } catch {
+      ElMessage.error('上传文件失败');
+    }
+  });
 };
 
 defineExpose({ getText, setText });

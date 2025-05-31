@@ -1,6 +1,9 @@
 import dayjs from 'dayjs';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import chroma from 'chroma-js';
+import { nanoid } from 'nanoid';
+
+import { uploadFileApi } from '@/api';
 
 export const getImg = (baseUrl: string, detailUrl: string) => {
   return new URL(`../../assets/image/${baseUrl}/${detailUrl}`, import.meta.url)
@@ -106,6 +109,26 @@ export const setCookie = (key: string, value: string, days = 7) => {
 export const generateColor = (colorStr: string) => {
   const color = chroma(colorStr);
   return color;
+};
+
+export const uploadFile = async (
+  file: File,
+  filename: string,
+  type: string
+) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('name', nanoid() + filename);
+  formData.append('type', type);
+  let imgUrl = '';
+  try {
+    const { data } = await uploadFileApi(formData);
+    imgUrl = data;
+  } catch {
+    ElMessage.error('上传文件失败');
+  } finally {
+    return imgUrl;
+  }
 };
 
 export default {

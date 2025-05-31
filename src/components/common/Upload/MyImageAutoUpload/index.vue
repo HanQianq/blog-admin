@@ -27,8 +27,6 @@
 </template>
 <script setup lang="ts">
 import { ElMessage, UploadProps } from 'element-plus';
-import { uploadFileApi } from '@/api';
-import { nanoid } from 'nanoid';
 import { MAX_IMAGE_SIZE } from '@/config';
 
 type PropsType = {
@@ -52,14 +50,10 @@ const beforeUploadHandler: UploadProps['beforeUpload'] = (rawFile: any) => {
 };
 
 const uploadFileHandler = async (raw: any) => {
-  const formData = new FormData();
-  formData.append('file', raw.file);
-  formData.append('name', nanoid() + raw.file.name);
-  formData.append('type', props.type);
   try {
-    const { data } = await uploadFileApi(formData);
-    imgUrl.value = data;
-    emits('uploadSuccess', data);
+    const url = await uploadFile(raw.file, raw.file.name, props.type);
+    imgUrl.value = url;
+    emits('uploadSuccess', url);
     ElMessage.success('上传成功');
   } catch {
     ElMessage.error('上传文件失败');

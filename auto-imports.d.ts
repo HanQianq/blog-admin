@@ -60,6 +60,7 @@ declare global {
   const tool: typeof import('./src/utils/tool/index')['default']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const uploadFile: typeof import('./src/utils/tool/index')['uploadFile']
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
@@ -137,6 +138,7 @@ declare module 'vue' {
     readonly tool: UnwrapRef<typeof import('./src/utils/tool/index')['default']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
+    readonly uploadFile: UnwrapRef<typeof import('./src/utils/tool/index')['uploadFile']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
@@ -207,6 +209,7 @@ declare module '@vue/runtime-core' {
     readonly tool: UnwrapRef<typeof import('./src/utils/tool/index')['default']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
+    readonly uploadFile: UnwrapRef<typeof import('./src/utils/tool/index')['uploadFile']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>

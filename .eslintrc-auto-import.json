@@ -75,6 +75,7 @@
     "getCookie": true,
     "setCookie": true,
     "ElMessage": true,
-    "generateColor": true
+    "generateColor": true,
+    "uploadFile": true
   }
 }
