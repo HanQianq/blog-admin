@@ -32,7 +32,13 @@
       <el-form-item prop="desc" label="图片描述">
         <el-input v-model="form.desc" type="textarea" class="!w-full" />
       </el-form-item>
-      <el-form-item prop="url" label="上传图片">
+      <el-form-item label="上传方式">
+        <el-radio-group v-model="uploadType">
+          <el-radio label="upload">上传图片</el-radio>
+          <el-radio label="link">链接上传</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item v-if="uploadType === 'upload'" prop="url" label="上传图片">
         <div class="w-full h-180px">
           <MyImageAutoUpload
             type="image"
@@ -41,6 +47,9 @@
             @upload-success="uploadSuccessHandler"
           ></MyImageAutoUpload>
         </div>
+      </el-form-item>
+      <el-form-item v-else prop="url" label="图片链接">
+        <el-input v-model="form.url" placeholder="请输入图片链接" />
       </el-form-item>
     </el-form>
   </MyDialog>
@@ -58,6 +67,7 @@ type EmitsType = {
 const props = defineProps<FormDialogPropsType>();
 const emits = defineEmits<EmitsType>();
 
+const uploadType = ref('upload');
 const dialogTitle = computed(() => {
   return props.optType === 'add' ? '创建图片' : '编辑图片';
 });

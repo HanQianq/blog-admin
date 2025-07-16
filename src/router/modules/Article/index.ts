@@ -60,4 +60,14 @@ export const ArticleRouteList: RouteRecordRaw[] = [
       icon: 'tag-one',
     },
   },
+  {
+    path: '/article-column',
+    name: 'ArticleColumnManage',
+    component: () =>
+      import('@/views/pages/Article/pages/ArticleColumn/index.vue'),
+    meta: {
+      name: '文章专栏',
+      icon: 'label',
+    },
+  },
 ];

@@ -56,3 +56,14 @@
 .font-title {
   font-family: YouSheBiaoTiHei, serif;
 }
+
+.col-filled {
+  flex: 1;
+  height: 0;
+  overflow: auto;
+}
+
+.row-filled {
+  flex: 1;
+  width: 0;
+}

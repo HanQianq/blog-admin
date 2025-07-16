@@ -8,9 +8,6 @@
         border="none"
         outline="none"
       />
-      <el-button plain>
-        <MyIcon name="box" class="mr-1"></MyIcon>草稿箱</el-button
-      >
       <el-button type="primary" @click="openDrawerHandler"
         ><MyIcon name="add-four" class="mr-1"></MyIcon>发布</el-button
       >
@@ -102,7 +99,7 @@ const releaseArticleHandler = async () => {
 const initArticleDetailHandler = async () => {
   if (route.name === 'UpdateArticle') {
     const res = await getArticleDetailApi({ id: route.query.id as string });
-    const { properties, category, visible, cover, abstract, status } =
+    const { properties, category, visible, cover, abstract, status, column } =
       res.data.baseInfo;
     const tagList = res.data.tagList.map((item: any) => item.id);
     originForm.value = {
@@ -111,6 +108,7 @@ const initArticleDetailHandler = async () => {
       status,
       properties,
       tags: tagList,
+      column,
       abstract,
       visible,
     };

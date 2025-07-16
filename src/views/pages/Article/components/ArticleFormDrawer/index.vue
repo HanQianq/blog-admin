@@ -32,6 +32,17 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item prop="column" label="文章专栏">
+        <el-select v-model="articleForm.column as string">
+          <el-option
+            v-for="item in columnList"
+            :key="item.id"
+            :value="item.id"
+            :label="item.name"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item prop="original" label="是否原创">
         <el-radio-group v-model="articleForm.properties">
           <el-radio
@@ -92,7 +103,11 @@
 </template>
 <script setup lang="ts">
 import { useDict } from '@/hooks/useDict';
-import { useArticleCategory, useArticleTag } from '../../hooks/useArticle';
+import {
+  useArticleCategory,
+  useArticleColumn,
+  useArticleTag,
+} from '../../hooks/useArticle';
 import { OriginArticleFormTpe } from '../../types';
 
 const props = defineProps<{
@@ -109,6 +124,7 @@ const { dictDataList: propertiesList, getDictDataList: getPropertiesList } =
 
 const { categoryList, getCategoryTree } = useArticleCategory();
 const { tagList, getTagList } = useArticleTag();
+const { columnList, getColumnList } = useArticleColumn();
 
 const visible = ref(false);
 const openDrawer = () => {
@@ -123,6 +139,7 @@ const formRef = ref();
 
 const originalForm: OriginArticleFormTpe = {
   category: null,
+  column: null,
   cover: '',
   tags: [],
   abstract: '',
@@ -151,6 +168,7 @@ const initDrawer = async () => {
   await getPropertiesList();
   await getCategoryTree();
   await getTagList();
+  await getColumnList();
   if (propertiesList.value.length > 0) {
     articleForm.value.properties = propertiesList.value[0].key;
   }

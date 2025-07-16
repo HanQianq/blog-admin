@@ -6,4 +6,5 @@ export type OriginArticleFormTpe = {
   status: string;
   visible: string;
   properties: string;
+  column: string | null;
 };

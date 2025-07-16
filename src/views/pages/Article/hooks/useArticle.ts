@@ -1,5 +1,7 @@
 import { getAllArticleCategoryTreeApi } from '@/api/article/category';
 import type { ArticleCategoryItemType } from '@/api/article/category/type';
+import { getArticleColumnListApi } from '@/api/article/column';
+import type { ArticleColumnItemType } from '@/api/article/column/type';
 import { getArticleTagListApi } from '@/api/article/tag';
 import type { ArticleTagItemType } from '@/api/article/tag/type';
 import dayjs from 'dayjs';
@@ -49,4 +51,22 @@ export const useArticleTag = () => {
     }
   };
   return { tagList, getTagList };
+};
+
+export const useArticleColumn = () => {
+  const columnList = ref<ArticleColumnItemType[]>([]);
+  const getColumnList = async () => {
+    try {
+      const res = await getArticleColumnListApi({
+        pageNumber: 1,
+        pageSize: 1000,
+        name: '',
+      });
+      columnList.value = res.data.result;
+    } catch (error) {
+      columnList.value = [];
+      console.log(error);
+    }
+  };
+  return { columnList, getColumnList };
 };
