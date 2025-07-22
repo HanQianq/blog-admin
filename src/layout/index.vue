@@ -1,28 +1,27 @@
 <template>
-  <div class="app-layout-wrapper">
-    <div class="side-bar-wrapper" :style="{ width: sideWidth }">
-      <SideBar></SideBar>
+  <div class="app-layout-wrapper flex flex-col wh-full">
+    <div class="top-bar-wrapper">
+      <TopBar></TopBar>
     </div>
-    <div class="main-wrapper flex-1 w-0 flex flex-col">
-      <div class="flex flex-col">
+    <div class="main-wrapper flex-1 h-0 flex">
+      <div class="side-bar-wrapper" :style="{ width: sideWidth }">
+        <SideBar></SideBar>
+      </div>
+      <div class="flex flex-col flex-1 w-0">
         <div class="h-12">
           <TabBar></TabBar>
         </div>
-
-        <div class="top-bar-wrapper">
-          <TopBar></TopBar>
-        </div>
-      </div>
-      <div class="content-wrapper flex-1 h-0">
-        <div v-if="isOpenStore" class="wh-full">
-          <RouterView v-slot="{ Component, route }">
-            <keep-alive :exclude="disabledStoreRoutes">
-              <component :is="Component" :key="route.fullPath"></component>
-            </keep-alive>
-          </RouterView>
-        </div>
-        <div v-else class="wh-full">
-          <RouterView></RouterView>
+        <div class="content-wrapper flex-1 h-0">
+          <div v-if="isOpenStore" class="wh-full">
+            <RouterView v-slot="{ Component, route }">
+              <keep-alive :exclude="disabledStoreRoutes">
+                <component :is="Component" :key="route.fullPath"></component>
+              </keep-alive>
+            </RouterView>
+          </div>
+          <div v-else class="wh-full">
+            <RouterView></RouterView>
+          </div>
         </div>
       </div>
     </div>
@@ -43,10 +42,6 @@ const sideWidth = computed(() => {
 </script>
 <style lang="scss" scoped>
 .app-layout-wrapper {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-
   .side-bar-wrapper {
     transition: all ease 0.2s;
   }

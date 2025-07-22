@@ -1,19 +1,5 @@
 <template>
   <div class="side-bar w-full h-full flex flex-col">
-    <div class="xy-center h-16">
-      <span
-        class="flex items-center overflow-hidden hover-text"
-        @click="goBackToIndex"
-      >
-        <MyIcon name="application" size="20"></MyIcon>
-        <span
-          v-show="isSideExpand"
-          class="font-title text-xl ml-4 flex-shrink-0 relative top-2px"
-        >
-          博客后台管理系统
-        </span>
-      </span>
-    </div>
     <div class="flex-1 h-0" :class="{ 'is-collapse': !isSideExpand }">
       <el-menu :collapse="!isSideExpand">
         <div v-for="item in menuTreeList" :key="item.id">
@@ -65,11 +51,6 @@ const { isSideExpand } = storeToRefs(useSystemStore());
 const { menuTreeList } = storeToRefs(useMenuStore());
 
 const router = useRouter();
-
-const goBackToIndex = () => {
-  router.push({ name: 'Home' });
-};
-
 const gotoRelatedPage = (item: MenuItemType) => {
   try {
     if (item.route) {

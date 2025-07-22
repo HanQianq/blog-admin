@@ -1,16 +1,12 @@
 <template>
   <div class="shortcut-icon flex items-center gap-4">
     <div
-      class="flex flex-col items-center hover-text"
+      title="发表文章"
+      class="flex items-center trigger-btn py-10px px-4 rounded-lg cursor-pointer"
       @click="gotoReleaseArticle"
     >
-      <MyIcon
-        name="file-editing"
-        :size="18"
-        class="mb-1"
-        title="发表文章"
-      ></MyIcon>
-      <span class="text-xs">发表文章</span>
+      <MyIcon name="add-three" color="#fff" :size="18"></MyIcon>
+      <span class="text-sm ml-2 text-[#fff] relative bottom-1px">写文章</span>
     </div>
   </div>
 </template>
@@ -22,4 +18,13 @@ const gotoReleaseArticle = () => {
   });
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.trigger-btn {
+  background-color: var(--sys-main-color);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+</style>
