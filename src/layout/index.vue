@@ -5,11 +5,11 @@
     </div>
     <div class="main-wrapper flex-1 h-0 flex">
       <div class="side-bar-wrapper" :style="{ width: sideWidth }">
-        <SideBar></SideBar>
+        <SideBar v-if="!route.meta.hideSide"></SideBar>
       </div>
       <div class="flex flex-col flex-1 w-0">
         <div class="h-12">
-          <TabBar></TabBar>
+          <TabBar v-if="!route.meta.hideTab"></TabBar>
         </div>
         <div class="content-wrapper flex-1 h-0">
           <div v-if="isOpenStore" class="wh-full">
@@ -34,6 +34,7 @@ import TopBar from './components/TopBar/index.vue';
 import TabBar from './components/TabBar/index.vue';
 import { useSystemStore } from '@/store/system';
 
+const route = useRoute();
 const { isSideExpand, isOpenStore } = storeToRefs(useSystemStore());
 const disabledStoreRoutes = ['ArticleDetail', 'UpdateArticle'];
 const sideWidth = computed(() => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="userinfo-container">
+  <div>
     <el-popover
       trigger="hover"
       :width="200"
@@ -15,7 +15,10 @@
 
       <div class="w-full h-full">
         <div class="entrance-wrapper">
-          <div class="entrance-item hover-weak-wrapper justify-between">
+          <div
+            class="entrance-item hover-weak-wrapper justify-between"
+            @click="gotoRelatedPage('UserCenter')"
+          >
             <div class="flex items-center">
               <MyIcon name="user" :size="18"></MyIcon>
               <span class="ml-4">个人中心</span>
@@ -52,9 +55,13 @@ const logoutHandler = () => {
     router.push({ name: 'Login' });
   });
 };
+
+const gotoRelatedPage = (name: string) => {
+  router.push({ name });
+};
 </script>
 <style lang="scss" scoped>
 .entrance-item {
-  @apply flex items-center px-4 py-3 rounded;
+  @apply flex items-center px-4 py-3 rounded-lg;
 }
 </style>
