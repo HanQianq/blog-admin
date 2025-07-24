@@ -4,4 +4,4 @@ export const getUserProfileApi = (data = {}) =>
   request.post<UserInfoType>('/user/get/self', data);
 
 export const updateUserProfileApi = (data: UserFormType) =>
-  request.post<boolean>('/user/valid/code', data);
+  request.post<boolean>('/user/update/self', data);
