@@ -88,8 +88,8 @@ onMounted(() => {
 <style lang="scss" scoped>
 .system-settings {
   position: absolute;
-  bottom: 7px;
-  left: 7px;
+  bottom: 1rem;
+  left: 1rem;
   .trigger-btn {
     cursor: pointer;
     transition: all 0.3s ease-in-out;

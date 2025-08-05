@@ -1,12 +1,16 @@
 <template>
-  <div class="wrapper-item overflow-hidden relative">
+  <div class="wrapper-item overflow-hidden relative shadow-lg">
     <img
       :src="article.cover || ArticleDraftImg"
       :alt="article.title"
-      class="w-full h-48 object-cover"
+      class="w-full h-52 object-cover"
     />
-    <div class="px-4 py-2">
-      <!-- 标题 -->
+    <div class="p-4 pt-6 relative">
+      <img
+        v-if="article.authorAvatar"
+        class="absolute -top-6 left -4 z-5 w-10 h-10 rounded-full"
+        :src="article.authorAvatar"
+      />
       <h2
         class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center"
       >
@@ -19,7 +23,6 @@
           article.title
         }}</span>
       </h2>
-      <!-- 摘要 -->
       <p v-if="article.abstract" class="mb-2 line-clamp-2">
         {{ article.abstract }}
       </p>

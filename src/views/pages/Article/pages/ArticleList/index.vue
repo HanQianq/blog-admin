@@ -58,7 +58,16 @@
           </el-table-column>
           <el-table-column label="作者" align="center">
             <template #default="{ row }">
-              <div>{{ row.author }}</div>
+              <div class="xy-center">
+                <img
+                  v-if="row.authorAvatar"
+                  :src="row.authorAvatar"
+                  class="w-8 h-8 rounded-full mr-4"
+                />
+                <span class="">
+                  {{ row.author }}
+                </span>
+              </div>
             </template>
           </el-table-column>
           <el-table-column label="类别" align="center">
@@ -197,6 +206,7 @@ async function getArticleList() {
       abstract: item.abstract,
       cover: item.cover,
       author: item.author.name,
+      authorAvatar: item.author.avatar,
       status: item.status,
 
       category: item.category

@@ -10,4 +10,13 @@ export const SystemRouteList: RouteRecordRaw[] = [
       icon: 'schedule',
     },
   },
+  {
+    path: '/user-manage',
+    name: 'UserManage',
+    component: () => import('@/views/pages/System/Users/index.vue'),
+    meta: {
+      name: '用户管理',
+      icon: 'data-user',
+    },
+  },
 ];

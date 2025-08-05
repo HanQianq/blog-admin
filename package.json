@@ -19,6 +19,7 @@
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "element-plus": "^2.7.6",
+    "es-toolkit": "^1.39.8",
     "nanoid": "^5.0.7",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",

@@ -26,6 +26,7 @@ export type ArticleListItemType = {
   abstract: string;
   cover: string;
   author: string;
+  authorAvatar: string | null;
   category: string;
   status: string;
   createTime: string;
