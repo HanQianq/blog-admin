@@ -8,6 +8,7 @@ export type UserFormType = {
 export type UserItemType = IdType &
   UserFormType & {
     createTime: string | Date;
+    profile: any;
   };
 
 export type UserListQueryType = {

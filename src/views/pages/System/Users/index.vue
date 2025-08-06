@@ -27,6 +27,10 @@
                 :value="item.id"
               ></el-option>
             </el-select>
+            <my-button class="ml-4" @click="openDialog">
+              <my-icon name="add" class="mr-2"></my-icon>
+              新增用户
+            </my-button>
           </div>
         </div>
       </template>
@@ -58,9 +62,14 @@
               </div>
             </template>
           </el-table-column>
+          <el-table-column label="邮箱" align="center">
+            <template #default="{ row }">
+              <div>{{ row.profile.email }}</div>
+            </template>
+          </el-table-column>
           <el-table-column label="创建时间" align="center">
             <template #default="{ row }">
-              <div>{{ row.createTime }}</div>
+              <div>{{ fmtTime(row.createTime) }}</div>
             </template>
           </el-table-column>
 
@@ -78,6 +87,7 @@
           </el-table-column>
         </el-table>
       </div>
+
       <template #bottom>
         <MyPagination
           :total="total"
@@ -87,6 +97,14 @@
         ></MyPagination>
       </template>
     </MySearchPanel>
+    <div v-if="visible">
+      <AddUserDialog
+        :visible="visible"
+        :role-list="roleList"
+        @close="closeDialog"
+        @change-success="filterUserList"
+      ></AddUserDialog>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -94,11 +112,22 @@ import { getUserListApi } from '@/api/system/user';
 import { UserItemType, UserListQueryType } from '@/api/system/user/type';
 import { useSearch } from '@/hooks/useSearch';
 // import { columnList } from './service';
-// import { fmtTime } from '@/utils/tool';
+import { fmtTime } from '@/utils/tool';
 import { RoleItemType } from '@/api/authority/role/type';
 import { getRoleListApi } from '@/api/authority/role';
+import AddUserDialog from './components/AddUserDialog.vue';
 
 const roleList = ref<RoleItemType[]>([]);
+
+const visible = ref(false);
+
+const openDialog = () => {
+  visible.value = true;
+};
+
+const closeDialog = () => {
+  visible.value = false;
+};
 
 const getRoleList = async () => {
   try {
