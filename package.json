@@ -18,7 +18,7 @@
     "chroma-js": "^3.1.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
-    "element-plus": "^2.7.6",
+    "element-plus": "^2.10.6",
     "es-toolkit": "^1.39.8",
     "nanoid": "^5.0.7",
     "pinia": "^2.1.7",

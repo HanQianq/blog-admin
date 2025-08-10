@@ -5,11 +5,14 @@ export type UserFormType = {
   roleIds: string[];
 };
 
-export type UserItemType = IdType &
-  UserFormType & {
-    createTime: string | Date;
-    profile: any;
-  };
+export type UserItemType = IdType & {
+  username: string;
+  nickName: string;
+  email: string;
+  roles: { id: string; name: string }[];
+  createTime: string | Date;
+  profile: any;
+};
 
 export type UserListQueryType = {
   keyword: string;

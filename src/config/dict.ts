@@ -50,8 +50,35 @@ export const dictCategoryList: DictCategoryItemType[] = [
       },
     ],
   },
-  { label: '系统', value: 'system', code: 'SYSTEM' },
-  { label: '其他', value: 'other', code: 'OTHER' },
+  {
+    label: '系统',
+    value: 'system',
+    code: 'SYSTEM',
+    children: [
+      {
+        label: '日志状态',
+        value: 'update_log_status',
+        code: 'UPDATE_LOG_STATUS',
+      },
+      {
+        label: '日志类型',
+        value: 'update_log_release_type',
+        code: 'UPDATE_LOG_RELEASE_TYPE',
+      },
+    ],
+  },
+  {
+    label: '其他',
+    value: 'other',
+    code: 'OTHER',
+    children: [
+      {
+        label: '人员性别',
+        value: 'person_gender',
+        code: 'PERSON_GENDER',
+      },
+    ],
+  },
 ];
 
 type DictMapItemType<T> = {

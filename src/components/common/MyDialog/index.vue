@@ -16,13 +16,11 @@
         <slot></slot>
       </div>
       <template v-if="!hideFooter" #footer>
-        <div>
-          <el-button size="small" type="info" @click="cancelHandler"
-            >取消</el-button
+        <div class="flex items-center">
+          <my-button type="plain" class="mr-4" @click="cancelHandler"
+            >取消</my-button
           >
-          <el-button size="small" type="primary" @click="confirmHandler"
-            >确定</el-button
-          >
+          <my-button type="default" @click="confirmHandler">确定</my-button>
         </div>
       </template>
     </el-dialog>

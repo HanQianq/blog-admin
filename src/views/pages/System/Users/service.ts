@@ -1,4 +1,4 @@
-import type { UserFormType } from '@/api/system/user/type.ts';
+import type { UserFormType, UserItemType } from '@/api/system/user/type.ts';
 import type { FormDialogProps } from '@/types/type.ts';
 
 export const originalForm: UserFormType = {
@@ -17,4 +17,4 @@ export const formRules = {
   roleIds: [{ required: true, trigger: 'change', message: '请选择用户角色' }],
 };
 
-export type FormDialogPropsType = FormDialogProps<null>;
+export type FormDialogPropsType = FormDialogProps<UserItemType | null>;

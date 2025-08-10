@@ -5,16 +5,19 @@
       height="100%"
       placeholder="请输入内容……"
       :disabled-menus="[]"
-      :left-toolbar="toolbar"
+      :left-toolbar="toolbar || defaultToolBar"
       @save="saveHandler"
       @upload-image="uploadImageHandler"
     ></v-md-editor>
   </div>
 </template>
 <script lang="ts" setup>
+defineProps<{
+  toolbar?: string;
+}>();
 const emit = defineEmits(['save']);
 const text = ref('');
-const toolbar =
+const defaultToolBar =
   'undo redo clear | h bold italic strikethrough quote | ul ol table hr  | link image code | emoji tip todo-list  | save ';
 
 const saveHandler = () => {

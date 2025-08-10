@@ -2,7 +2,7 @@
   <MyDialog
     :visible="visible"
     width="450px"
-    title="创建用户"
+    :title="optType === 'add' ? '创建用户' : '分配角色'"
     @close="closeHandler"
     @confirm="confirmHandler"
   >
@@ -14,13 +14,26 @@
       :style="{ width: '100%' }"
     >
       <el-form-item prop="username" label="用户名">
-        <el-input v-model="form.username" placeholder="请输入用户名" />
+        <el-input
+          v-model="form.username"
+          :disabled="optType === 'edit'"
+          placeholder="请输入用户名"
+        />
       </el-form-item>
       <el-form-item prop="nickName" label="用户昵称">
-        <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
+        <el-input
+          v-model="form.nickName"
+          :disabled="optType === 'edit'"
+          placeholder="请输入用户昵称"
+        />
       </el-form-item>
       <el-form-item prop="email" label="用户邮箱">
-        <el-input v-model="form.email" :min="1" class="!w-full" />
+        <el-input
+          v-model="form.email"
+          :disabled="optType === 'edit'"
+          :min="1"
+          class="!w-full"
+        />
       </el-form-item>
       <el-form-item prop="roleIds" label="用户角色">
         <el-select
@@ -43,11 +56,12 @@
 </template>
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
-import { formRules, originalForm } from '../service';
+import { formRules, originalForm, FormDialogPropsType } from '../service';
 import { RoleItemType } from '@/api/authority/role/type.ts';
-import { addUserApi } from '@/api/system/user';
+import { addUserApi, setUserRoleApi } from '@/api/system/user';
+import { UserItemType } from '@/api/system/user/type';
 
-defineProps<{ visible: boolean; roleList: RoleItemType[] }>();
+const props = defineProps<FormDialogPropsType & { roleList: RoleItemType[] }>();
 const emits = defineEmits(['close', 'changeSuccess']);
 
 const formRef = ref();
@@ -64,7 +78,13 @@ const confirmHandler = () => {
   formRef.value.validate(async (valid: boolean) => {
     if (valid) {
       try {
-        const { data, msg } = await addUserApi(form.value);
+        const { data, msg } =
+          props.optType === 'add'
+            ? await addUserApi(form.value)
+            : await setUserRoleApi({
+                userId: (props.row as UserItemType).id,
+                roleIds: form.value.roleIds,
+              });
         if (data) {
           ElMessage.success(msg);
           emits('changeSuccess');
@@ -76,6 +96,17 @@ const confirmHandler = () => {
     }
   });
 };
+
+onMounted(() => {
+  if (props.optType === 'edit' && props.row) {
+    form.value = {
+      username: props.row.username,
+      nickName: props.row.nickName,
+      email: props.row.profile.email,
+      roleIds: props.row.roles.map((el) => el.id),
+    };
+  }
+});
 </script>
 
 <style scoped lang="scss"></style>

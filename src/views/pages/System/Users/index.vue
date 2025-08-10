@@ -10,7 +10,7 @@
               class="!w-280px mr-4"
               placeholder="请输入关键词搜索"
               clearable
-              @change="getDataListHandler"
+              @change="filterUserList"
             ></el-input>
             <el-tag size="large" class="mr-4">用户角色</el-tag>
             <el-select
@@ -18,7 +18,7 @@
               clearable
               filterable
               class="!w-280px"
-              @change="changeRole"
+              @change="filterUserList"
             >
               <el-option
                 v-for="item in roleList"
@@ -27,7 +27,7 @@
                 :value="item.id"
               ></el-option>
             </el-select>
-            <my-button class="ml-4" @click="openDialog">
+            <my-button class="ml-4" @click="openDialog('add')">
               <my-icon name="add" class="mr-2"></my-icon>
               新增用户
             </my-button>
@@ -67,6 +67,18 @@
               <div>{{ row.profile.email }}</div>
             </template>
           </el-table-column>
+          <el-table-column label="角色" align="center">
+            <template #default="{ row }">
+              <div class="xy-center gap-2">
+                <MyTag
+                  color="#999"
+                  v-for="item in row.roles"
+                  :key="item.id"
+                  :name="item.name"
+                ></MyTag>
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column label="创建时间" align="center">
             <template #default="{ row }">
               <div>{{ fmtTime(row.createTime) }}</div>
@@ -79,9 +91,12 @@
             width="250"
             align="center"
           >
-            <template #default>
+            <template #default="{ row }">
               <div flex w-full class="justify-center">
-                <el-button link type="primary"> 分配角色 </el-button>
+                <el-button link type="primary" @click="openDialog('edit', row)"
+                  >分配角色
+                </el-button>
+                <el-button link type="primary"> 重置密码 </el-button>
               </div>
             </template>
           </el-table-column>
@@ -97,9 +112,11 @@
         ></MyPagination>
       </template>
     </MySearchPanel>
-    <div v-if="visible">
+    <div v-if="formDialogProps.visible">
       <AddUserDialog
-        :visible="visible"
+        :opt-type="formDialogProps.optType"
+        :visible="formDialogProps.visible"
+        :row="formDialogProps.row"
         :role-list="roleList"
         @close="closeDialog"
         @change-success="filterUserList"
@@ -116,18 +133,10 @@ import { fmtTime } from '@/utils/tool';
 import { RoleItemType } from '@/api/authority/role/type';
 import { getRoleListApi } from '@/api/authority/role';
 import AddUserDialog from './components/AddUserDialog.vue';
+import { useDialog } from '@/hooks/useDialog';
 
 const roleList = ref<RoleItemType[]>([]);
-
-const visible = ref(false);
-
-const openDialog = () => {
-  visible.value = true;
-};
-
-const closeDialog = () => {
-  visible.value = false;
-};
+const { formDialogProps, openDialog, closeDialog } = useDialog<UserItemType>();
 
 const getRoleList = async () => {
   try {
@@ -164,11 +173,6 @@ async function getUserList() {
 const filterUserList = async () => {
   pageConfig.pageNumber = 1;
   await getDataListHandler();
-};
-
-const changeRole = async (role: string) => {
-  searchParams.value.roleId = role;
-  await filterUserList();
 };
 
 const initUserList = async () => {

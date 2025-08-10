@@ -1,6 +1,6 @@
 <template>
   <div
-    class="inline-block text-center text-xs rounded min-w-50px h-6 leading-6"
+    class="inline-block text-center text-xs rounded min-w-50px px-2 h-6 leading-6"
     :style="{
       'background-color': `${chroma(color)
         .alpha(opacity || 0.1)
