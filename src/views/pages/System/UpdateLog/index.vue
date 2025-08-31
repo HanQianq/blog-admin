@@ -36,6 +36,18 @@
             :label="item.title"
             align="center"
           ></el-table-column>
+          <el-table-column label="状态" align="center">
+            <template #default="{ row }">
+              <span>{{ getValueByKey(statusList, row.status) }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="日志类型" align="center">
+            <template #default="{ row }">
+              <span>{{
+                getValueByKey(releaseTypeList, row.releasedType)
+              }}</span>
+            </template>
+          </el-table-column>
           <el-table-column label="创建时间" align="center">
             <template #default="{ row }">
               <div>{{ fmtTime(row.createTime) }}</div>
@@ -51,10 +63,10 @@
             <template #default="{ row }">
               <div flex w-full class="justify-center">
                 <el-button link type="primary" @click="openDialog('edit', row)"
-                  >编辑日志
+                  >编辑
                 </el-button>
                 <el-button link type="primary" @click="openDialog('view', row)">
-                  查看详情
+                  查看
                 </el-button>
               </div>
             </template>
@@ -93,18 +105,19 @@ import {
 import { useSearch } from '@/hooks/useSearch';
 import { columnList } from './service';
 import { fmtTime } from '@/utils/tool';
-import { RoleItemType } from '@/api/authority/role/type';
 import UpdateLogFormDialog from './components/UpdateLogFormDialog.vue';
 import { useDialog } from '@/hooks/useDialog';
 import { useDict } from '@/hooks/useDict';
 
-const roleList = ref<RoleItemType[]>([]);
 const { formDialogProps, openDialog, closeDialog } =
   useDialog<UpdateLogItemType>();
 
 const originalParams: UpdateLogListQueryType = { keyword: '' };
-const { dictDataList: statusList, getDictDataList: getStatusList } =
-  useDict('UPDATE_LOG_STATUS');
+const {
+  dictDataList: statusList,
+  getDictDataList: getStatusList,
+  getValueByKey,
+} = useDict('UPDATE_LOG_STATUS');
 const { dictDataList: releaseTypeList, getDictDataList: getReleaseTypList } =
   useDict('UPDATE_LOG_RELEASE_TYPE');
 const {

@@ -14,15 +14,21 @@
       </div>
     </div>
     <div class="flex items-center">
+      <TodoListBtn class="mr-6"></TodoListBtn>
+      <TrendBtn class="mr-6"></TrendBtn>
+      <MessageBtn class="mr-6"></MessageBtn>
       <UserInfo></UserInfo>
-      <ShortcutEntrance class="ml-6"></ShortcutEntrance>
+      <ArticleBtn class="ml-6"></ArticleBtn>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import FoldBtn from './components/FoldBtn/index.vue';
-import ShortcutEntrance from './components/ShortcutEntrance/index.vue';
+import ArticleBtn from './components/ArticleBtn/index.vue';
 import UserInfo from './components/UserInfo/index.vue';
+import TodoListBtn from './components/TodoListBtn/index.vue';
+import TrendBtn from './components/TrendBtn/index.vue';
+import MessageBtn from './components/MessageBtn/index.vue';
 
 const router = useRouter();
 

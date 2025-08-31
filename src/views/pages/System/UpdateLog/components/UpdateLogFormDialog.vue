@@ -2,7 +2,7 @@
   <MyDialog
     :visible="visible"
     width="1000px"
-    :title="optType === 'add' ? '创建日志' : '修改日志'"
+    :title="titleMap.get(optType) as string"
     :hide-footer="optType === 'view'"
     @close="closeHandler"
     @confirm="confirmHandler"
@@ -118,6 +118,12 @@ import { UpdateLogItemType } from '@/api/system/updateLog/type.ts';
 
 const props = defineProps<FormDialogPropsType>();
 const emits = defineEmits(['close', 'changeSuccess']);
+
+const titleMap = new Map([
+  ['add', '创建日志'],
+  ['edit', '修改日志'],
+  ['view', '查看日志'],
+]);
 
 const mdEditorRef = ref();
 const formRef = ref();
