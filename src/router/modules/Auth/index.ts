@@ -16,7 +16,7 @@ export const AuthRouteList: RouteRecordRaw[] = [
     component: () => import('@/views/pages/Auth/Interface/index.vue'),
     meta: {
       name: '接口管理',
-      icon: 'application',
+      icon: 'api',
     },
   },
   {

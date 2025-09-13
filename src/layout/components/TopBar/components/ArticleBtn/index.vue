@@ -6,7 +6,6 @@
       @click="gotoReleaseArticle"
     >
       <MyIcon name="pencil" color="#fff" :size="14"></MyIcon>
-      <!-- <span class="text-xs ml-2 text-[#fff] relative bottom-1px">发文</span> -->
     </div>
   </div>
 </template>

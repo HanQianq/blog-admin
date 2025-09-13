@@ -1,13 +1,13 @@
 <template>
-  <div class="role-manage">
+  <div class="role-manage wh-full">
     <MySearchPanel
       :data-exist="roleList.length > 0"
       :loading="loading"
       hide-bottom
     >
       <template #header>
-        <el-button @click="openDialog('add')" type="primary"
-          ><MyIcon name="plus"></MyIcon>创建角色</el-button
+        <el-button @click="openDialog('add')" type="primary">
+          <my-icon name="add" class="mr-2"></my-icon> 创建角色</el-button
         >
       </template>
       <div class="p-4">

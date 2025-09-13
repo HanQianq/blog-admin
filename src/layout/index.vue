@@ -11,15 +11,15 @@
         <div class="h-12">
           <TabBar v-if="!route.meta.hideTab"></TabBar>
         </div>
-        <div class="content-wrapper flex-1 h-0">
-          <div v-if="isOpenStore" class="wh-full">
+        <div class="content-wrapper flex-1 h-0 overflow-auto">
+          <div v-if="isOpenStore" class="wh-full overflow-auto">
             <RouterView v-slot="{ Component, route }">
               <keep-alive :exclude="disabledStoreRoutes">
                 <component :is="Component" :key="route.fullPath"></component>
               </keep-alive>
             </RouterView>
           </div>
-          <div v-else class="wh-full">
+          <div v-else class="wh-full overflow-auto">
             <RouterView></RouterView>
           </div>
         </div>

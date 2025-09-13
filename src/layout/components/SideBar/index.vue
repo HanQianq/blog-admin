@@ -1,6 +1,9 @@
 <template>
   <div class="side-bar w-full h-full flex flex-col">
-    <div class="flex-1 h-0" :class="{ 'is-collapse': !isSideExpand }">
+    <div
+      class="flex-1 h-0 overflow-auto pb-16"
+      :class="{ 'is-collapse': !isSideExpand }"
+    >
       <el-menu :collapse="!isSideExpand">
         <div v-for="item in menuTreeList" :key="item.id">
           <template v-if="item.type === '1'">

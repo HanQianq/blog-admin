@@ -1,6 +1,7 @@
 export const useSearch = <T, K>(
   originalParams: T,
-  cb: () => Promise<ResPageType<K>>
+  cb: () => Promise<ResPageType<K>>,
+  pageSize = 10
 ) => {
   const searchParams = ref<T>({
     ...originalParams,
@@ -11,7 +12,7 @@ export const useSearch = <T, K>(
   const dataList = ref<K[]>([]);
   const pageConfig = reactive({
     pageNumber: 1,
-    pageSize: 10,
+    pageSize,
   });
   const loading = ref(true);
   const total = ref(0);

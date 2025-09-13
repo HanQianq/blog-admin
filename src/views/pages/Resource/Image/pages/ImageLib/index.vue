@@ -12,7 +12,7 @@
           @change="filterImageList"
         ></el-input>
         <el-button type="primary" @click="openDialog('add')">
-          <MyIcon name="plus" size="14"></MyIcon>
+          <my-icon name="add" class="mr-2"></my-icon>
           <span class="ml-1">新建图片</span></el-button
         >
       </div>

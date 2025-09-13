@@ -1,9 +1,10 @@
 <template>
-  <div class="menu-manage">
+  <div class="menu-manage wh-full">
     <MySearchPanel :data-exist="menuTreeList.length > 0" :loading="loading">
       <template #header>
         <el-button type="primary" @click="addDrawerHandler()">
-          <MyIcon name="plus"></MyIcon>新增菜单
+          <my-icon name="add" class="mr-2"></my-icon>
+          新增菜单
         </el-button>
       </template>
       <div class="p-4">

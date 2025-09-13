@@ -12,7 +12,8 @@
           @change="filterIconList"
         ></el-input>
         <el-button type="primary" @click="openDialog('add')">
-          <MyIcon name="plus" size="14"></MyIcon>
+          <my-icon name="add" class="mr-2"></my-icon>
+
           <span class="ml-1">新建图标</span></el-button
         >
       </div>
@@ -20,7 +21,7 @@
       <el-segmented v-model="currentLayout" :options="options">
         <template #default="{ item }">
           <div class="xy-center">
-            <my-icon :name="item.icon" size="16"> </my-icon>
+            <my-icon :name="(item as any).icon" size="16"> </my-icon>
           </div>
         </template>
       </el-segmented>
@@ -104,7 +105,7 @@ const {
   pageConfig,
   getDataListHandler,
   pageChangeHandler,
-} = useSearch<IconSearchType, IconItemType>(originalParams, getIconList);
+} = useSearch<IconSearchType, IconItemType>(originalParams, getIconList, 50);
 
 async function getIconList() {
   const { data } = await getIconListApi({
