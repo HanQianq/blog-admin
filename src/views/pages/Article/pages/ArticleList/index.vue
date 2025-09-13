@@ -28,7 +28,7 @@
           <el-segmented v-model="currentLayout" :options="options">
             <template #default="{ item }">
               <div class="xy-center">
-                <my-icon :name="item.icon" size="16"> </my-icon>
+                <my-icon :name="(item as any).icon" size="16"> </my-icon>
               </div>
             </template>
           </el-segmented>
@@ -143,13 +143,15 @@
           </li>
         </ul>
       </div>
-      <template #bottom>
-        <MyPagination
-          :total="total"
-          :page-number="pageConfig.pageNumber"
-          :page-size="pageConfig.pageSize"
-          @page-change="pageChangeHandler"
-        ></MyPagination>
+      <template #footer>
+        <div class="p-4">
+          <MyPagination
+            :total="total"
+            :page-number="pageConfig.pageNumber"
+            :page-size="pageConfig.pageSize"
+            @page-change="pageChangeHandler"
+          ></MyPagination>
+        </div>
       </template>
     </MySearchPanel>
   </div>

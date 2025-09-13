@@ -1,0 +1,61 @@
+<template>
+  <div class="user-task wh-full flex flex-col">
+    <div
+      class="header-wrapper px-4 pb-4 border-bottom flex items-center justify-between"
+    >
+      <el-segmented v-model="pageStatus" :options="tabList" size="default">
+        <template #default="{ item }">
+          <span>{{ (item as any).label }}</span>
+        </template>
+      </el-segmented>
+      <my-button @click="openDialog('add')">新增事项</my-button>
+    </div>
+    <div class="content-wrapper p-4 flex-1 h-0">
+      <component :is="currentComponent"></component>
+    </div>
+  </div>
+  <div v-if="formDialogProps.visible">
+    <UserTaskFormDialog
+      :visible="formDialogProps.visible"
+      :opt-type="formDialogProps.optType"
+      :row="formDialogProps.row"
+      :status-list="statusList"
+      :priority-list="priorityList"
+      @close="closeDialog"
+      @change-success="closeDialog"
+    >
+    </UserTaskFormDialog>
+  </div>
+</template>
+<script lang="ts" setup>
+import { useDict } from '@/hooks/useDict';
+import UserTaskFormDialog from './components/UserTaskFormDialog.vue';
+import { UserTaskItemType } from '@/api/user/task/type';
+import { useDialog } from '@/hooks/useDialog';
+import TaskList from './pages/TaskList.vue';
+import TaskDashboard from './pages/TaskDashboard.vue';
+
+const { formDialogProps, openDialog, closeDialog } =
+  useDialog<UserTaskItemType>();
+const { dictDataList: statusList, getDictDataList: getStatusList } =
+  useDict('USER_TASK_STATUS');
+const { dictDataList: priorityList, getDictDataList: getPriorityList } =
+  useDict('USER_TASK_PRIORITY');
+
+const pageStatus = ref<'dashboard' | 'list'>('dashboard');
+const tabList = [
+  { value: 'dashboard', label: '面板', component: shallowRef(TaskDashboard) },
+  { value: 'list', label: '列表', component: shallowRef(TaskList) },
+];
+
+const currentComponent = computed(() => {
+  return tabList.find((item) => item.value === pageStatus.value)?.component
+    .value;
+});
+
+onMounted(() => {
+  getStatusList();
+  getPriorityList();
+});
+</script>
+<style lang="scss" scoped></style>

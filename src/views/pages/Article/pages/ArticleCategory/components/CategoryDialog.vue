@@ -29,7 +29,7 @@
         <el-input
           v-model="form.description"
           type="textarea"
-          rows="3"
+          :rows="3"
           placeholder="请输入文章分类描述"
         />
       </el-form-item>

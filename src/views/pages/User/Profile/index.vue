@@ -44,17 +44,22 @@
         >
       </div>
     </div>
-    <div class="main-wrapper flex-1 h-0 overflow-auto wrapper-item">
-      <div class="tab-wrapper flex mb-4 h-12 px-4 border-bottom">
+    <div
+      class="main-wrapper w-full flex-1 h-0 overflow-auto wrapper-item flex flex-col"
+    >
+      <div class="tab-wrapper w-full flex mb-4 h-12 px-4 border-bottom">
         <span
           v-for="item in tabList"
           :key="item.key"
           class="tag-item transition-all xy-center hover-text px-2 mr-4"
-          :class="{ 'line-active-item': activeTab === item.key }"
-          @click="activeTab = item.key"
+          :class="{ 'line-active-item': activeItem?.key === item.key }"
+          @click="setActiveTabItem(item)"
         >
           {{ item.name }}
         </span>
+      </div>
+      <div v-if="activeItem" class="flex-1 h-0 overflow-auto">
+        <component :is="activeItem.component"></component>
       </div>
     </div>
   </div>
@@ -68,7 +73,15 @@
 import { getUserProfileApi, updateUserProfileApi } from '@/api/user';
 import { UserInfoType, UserFormType } from '@/api/user/type';
 import UserProfileForm from './components/UserProFileForm.vue';
+import UserDynamic from '../Dynamic/index.vue';
+import UserTask from '../Task/index.vue';
+import type { Component } from 'vue';
 
+interface TabItem {
+  name: string;
+  key: string;
+  component: Component;
+}
 const baseUserInfo = ref<UserInfoType | null>(null);
 
 const drawerRef = ref();
@@ -90,25 +103,27 @@ const updateUserProfileHandler = async (form: UserFormType) => {
   }
 };
 
-const activeTab = ref('dynamic');
-
 const tabList = [
   {
     name: '动态',
     key: 'dynamic',
+    component: shallowRef(UserDynamic),
   },
   {
-    name: '文章',
-    key: 'article',
-  },
-  {
-    name: '专栏',
-    key: 'column',
+    name: '个人事项',
+    key: 'task',
+    component: shallowRef(UserTask),
   },
 ];
+const activeItem = ref<TabItem>(tabList[0]);
+
+const setActiveTabItem = (item: TabItem) => {
+  activeItem.value = item;
+};
 
 onMounted(() => {
   getUserInfoHandler();
+  setActiveTabItem(tabList[0]);
 });
 </script>
 <style lang="scss" scoped></style>

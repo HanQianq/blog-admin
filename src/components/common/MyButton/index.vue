@@ -1,6 +1,6 @@
 <template>
   <div
-    class="my-button xy-center"
+    class="my-button text-sm xy-center"
     :class="`my-button-${type} my-button-${size}`"
   >
     <slot></slot>
@@ -22,9 +22,12 @@ withDefaults(defineProps<PropsType>(), {
 <style lang="scss" scoped>
 .my-button {
   cursor: pointer;
+  &-middle {
+    height: 32px;
+  }
   transition: all 0.3s ease;
   &-default {
-    border-radius: 0.25rem;
+    border-radius: 0.125rem;
     background-color: var(--sys-main-color);
     color: #fff;
     &.my-button-middle {

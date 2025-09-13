@@ -68,6 +68,23 @@ export const dictCategoryList: DictCategoryItemType[] = [
     ],
   },
   {
+    label: '用户',
+    value: 'user',
+    code: 'USER',
+    children: [
+      {
+        label: '任务状态',
+        value: 'user_task_status',
+        code: 'USER_TASK_STATUS',
+      },
+      {
+        label: '任务优先级',
+        value: 'user_task_priority',
+        code: 'USER_TASK_PRIORITY',
+      },
+    ],
+  },
+  {
     label: '其他',
     value: 'other',
     code: 'OTHER',
