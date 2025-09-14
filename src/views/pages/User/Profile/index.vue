@@ -1,5 +1,5 @@
 <template>
-  <div class="wh-full flex flex-col max-w-1080px mx-auto py-4">
+  <div class="wh-full flex flex-col max-w-1200px mx-auto py-4">
     <div
       v-if="baseUserInfo"
       class="header-wrapper h-200px px-12 wrapper-item mb-4 flex items-center"

@@ -40,6 +40,7 @@ const statusBgMap: any = {
   todo: 'rgba(138, 138, 138, .1)',
   pending: 'rgba(19, 109, 220, .1)',
   done: 'rgba(19, 220, 109, .1)',
+  aborted: 'rgba(220, 19, 19, .1)',
 };
 
 const taskList = ref<UserTaskItemType[]>([]);

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full p-4">
     <div
-      class="article-wrapper wrapper-item max-w-[1080px] h-full flex flex-col pb-4 mx-auto"
+      class="article-wrapper wrapper-item max-w-[1200px] h-full flex flex-col pb-4 mx-auto"
     >
       <h3 class="title-wrapper text-3xl font-bold py-6 px-8">
         {{ articleDetail?.baseInfo?.title || '' }}
