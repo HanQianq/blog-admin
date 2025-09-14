@@ -11,7 +11,10 @@
       <my-button @click="openDialog('add')">新增事项</my-button>
     </div>
     <div class="content-wrapper p-4 flex-1 h-0">
-      <component :is="currentComponent"></component>
+      <component
+        :is="currentComponent"
+        @edit="(task: UserTaskItemType) => openDialog('edit', task)"
+      ></component>
     </div>
   </div>
   <div v-if="formDialogProps.visible">
@@ -22,7 +25,7 @@
       :status-list="statusList"
       :priority-list="priorityList"
       @close="closeDialog"
-      @change-success="closeDialog"
+      @change-success="changeSuccessHandler"
     >
     </UserTaskFormDialog>
   </div>
@@ -34,6 +37,7 @@ import { UserTaskItemType } from '@/api/user/task/type';
 import { useDialog } from '@/hooks/useDialog';
 import TaskList from './pages/TaskList.vue';
 import TaskDashboard from './pages/TaskDashboard.vue';
+import emitter from '@/utils/eventBus';
 
 const { formDialogProps, openDialog, closeDialog } =
   useDialog<UserTaskItemType>();
@@ -41,6 +45,14 @@ const { dictDataList: statusList, getDictDataList: getStatusList } =
   useDict('USER_TASK_STATUS');
 const { dictDataList: priorityList, getDictDataList: getPriorityList } =
   useDict('USER_TASK_PRIORITY');
+
+provide('statusList', statusList);
+provide('priorityList', priorityList);
+
+const changeSuccessHandler = () => {
+  emitter.emit('task:refresh', true);
+  closeDialog();
+};
 
 const pageStatus = ref<'dashboard' | 'list'>('dashboard');
 const tabList = [

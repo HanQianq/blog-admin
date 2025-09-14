@@ -21,6 +21,7 @@ declare global {
   const getCookie: typeof import('./src/utils/tool/index')['getCookie']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getDictLabelByKey: typeof import('./src/utils/tool/index')['getDictLabelByKey']
   const getImg: typeof import('./src/utils/tool/index')['getImg']
   const getSvg: typeof import('./src/utils/tool/index')['getSvg']
   const h: typeof import('vue')['h']
@@ -99,6 +100,7 @@ declare module 'vue' {
     readonly getCookie: UnwrapRef<typeof import('./src/utils/tool/index')['getCookie']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDictLabelByKey: UnwrapRef<typeof import('./src/utils/tool/index')['getDictLabelByKey']>
     readonly getImg: UnwrapRef<typeof import('./src/utils/tool/index')['getImg']>
     readonly getSvg: UnwrapRef<typeof import('./src/utils/tool/index')['getSvg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -170,6 +172,7 @@ declare module '@vue/runtime-core' {
     readonly getCookie: UnwrapRef<typeof import('./src/utils/tool/index')['getCookie']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDictLabelByKey: UnwrapRef<typeof import('./src/utils/tool/index')['getDictLabelByKey']>
     readonly getImg: UnwrapRef<typeof import('./src/utils/tool/index')['getImg']>
     readonly getSvg: UnwrapRef<typeof import('./src/utils/tool/index')['getSvg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>

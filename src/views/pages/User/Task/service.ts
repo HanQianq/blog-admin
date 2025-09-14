@@ -27,6 +27,7 @@ export const formRules = {
     { required: true, trigger: 'change', message: '请选择事项优先级' },
   ],
   status: [{ required: true, trigger: 'change', message: '请选择事项状态' }],
+  deadline: [{ required: true, trigger: 'change', message: '请选择截止时间' }],
 };
 
 export const fmtResData = (arr: UserTaskItemType[]) => {

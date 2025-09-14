@@ -4,6 +4,7 @@ import chroma from 'chroma-js';
 import { nanoid } from 'nanoid';
 
 import { uploadFileApi } from '@/api';
+import type { DictSimpleItemType } from '@/api/system/dict/type';
 
 export const getImg = (baseUrl: string, detailUrl: string) => {
   return new URL(`../../assets/image/${baseUrl}/${detailUrl}`, import.meta.url)
@@ -129,6 +130,10 @@ export const uploadFile = async (
   } finally {
     return imgUrl;
   }
+};
+
+export const getDictLabelByKey = (arr: DictSimpleItemType[], key: string) => {
+  return arr.find((item) => item.key === key)?.value;
 };
 
 export default {

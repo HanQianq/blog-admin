@@ -13,11 +13,15 @@ export type UserTaskFormType = {
 };
 
 export type UserTaskSearchType = {
-  title: string;
+  status: string;
+  priority: string;
+  startTime: string;
+  endTime: string;
 };
 
-export type UserTaskItemType = {
-  createTime: string;
-  updateTime: string;
-} & UserTaskFormType &
-  IdType;
+export type UserTaskItemType = UserTaskFormType &
+  IdType & {
+    createTime: string;
+    updateTime: string;
+    score: number;
+  };

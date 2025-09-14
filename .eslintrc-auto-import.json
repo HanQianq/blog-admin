@@ -76,6 +76,7 @@
     "setCookie": true,
     "ElMessage": true,
     "generateColor": true,
-    "uploadFile": true
+    "uploadFile": true,
+    "getDictLabelByKey": true
   }
 }

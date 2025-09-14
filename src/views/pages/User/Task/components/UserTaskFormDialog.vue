@@ -159,7 +159,7 @@ const confirmHandler = () => {
           props.optType === 'add'
             ? await addUserTaskApi(form.value)
             : await editUserTaskApi({
-                ...(props.row as UserTaskItemType),
+                id: (props.row as UserTaskItemType).id,
                 ...form.value,
               });
         if (data) {
@@ -176,7 +176,8 @@ const confirmHandler = () => {
 
 onMounted(() => {
   if (props.optType === 'edit' && props.row) {
-    form.value = { ...props.row };
+    const { score, createTime, updateTime, ...rest } = props.row;
+    form.value = { ...rest };
   }
 });
 </script>

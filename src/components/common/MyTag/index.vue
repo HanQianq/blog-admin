@@ -1,6 +1,12 @@
 <template>
   <div
-    class="inline-block text-center text-xs rounded min-w-50px px-2 h-6 leading-6"
+    class="inline-block text-center text-xs rounded min-w-50px"
+    :class="{
+      'rounded-full': round,
+      'h-32px leading-32px px-3': size === 'large',
+      'h-24px leading-24px px-2': size === 'normal',
+      'h-16px leading-16px px-1': size === 'small',
+    }"
     :style="{
       'background-color': `${chroma(color)
         .alpha(opacity || 0.1)
@@ -8,11 +14,24 @@
       color,
     }"
   >
-    <span v-if="name"></span> {{ name }}
+    <span v-if="name">{{ name }}</span>
+    <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>
 import chroma from 'chroma-js';
-defineProps<{ name?: string; color: string; opacity?: number }>();
+interface PropsType {
+  name?: string;
+  color: string;
+  opacity?: number;
+  round?: boolean;
+  size?: 'small' | 'normal' | 'large';
+}
+
+withDefaults(defineProps<PropsType>(), {
+  type: 'default',
+  size: 'normal',
+  round: false,
+});
 </script>
 <style lang="scss" scoped></style>
