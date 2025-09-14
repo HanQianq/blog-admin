@@ -63,7 +63,7 @@
           <UserTaskCard
             :task="item"
             @edit="emits('edit', item)"
-            @delete="deleteUserTaskHandler"
+            @delete="filterUserTaskList"
           />
         </li>
       </ul>
@@ -71,7 +71,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { deleteUserTaskApi, getUserTaskListApi } from '@/api/user/task';
+import { getUserTaskListApi } from '@/api/user/task';
 import { UserTaskItemType, UserTaskSearchType } from '@/api/user/task/type';
 import { useSearch } from '@/hooks/useSearch';
 import UserTaskCard from '../components/UserTaskCard.vue';
@@ -130,18 +130,6 @@ const filterUserTaskList = async () => {
   }
   pageConfig.pageNumber = 1;
   await getDataListHandler();
-};
-
-const deleteUserTaskHandler = async (id: string) => {
-  confirmHandler('您将删除这个任务', async () => {
-    const { data } = await deleteUserTaskApi({
-      ids: [id],
-    });
-    if (data) {
-      ElMessage.success('删除成功');
-      filterUserTaskList();
-    }
-  });
 };
 
 defineExpose({

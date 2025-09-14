@@ -48,14 +48,15 @@
 
 <script setup lang="ts">
 import { DictSimpleItemType } from '@/api/system/dict/type';
+import { deleteUserTaskApi } from '@/api/user/task';
 import { UserTaskItemType } from '@/api/user/task/type';
 import { More } from '@element-plus/icons-vue';
+import emitter from '@/utils/eventBus';
 
 const props = defineProps<{ task: UserTaskItemType }>();
 
 const emits = defineEmits<{
-  (e: 'edit', task: UserTaskItemType): void;
-  (e: 'delete', id: string): void;
+  (e: 'delete'): void;
 }>();
 
 const statusList = inject<Ref<DictSimpleItemType[]>>('statusList');
@@ -69,10 +70,22 @@ const statusColorMap: Record<UserTaskItemType['status'], string> = {
 
 const handleCommand = (command: string) => {
   if (command === 'edit') {
-    emits('edit', props.task);
+    emitter.emit('task:update', props.task);
   } else if (command === 'delete') {
-    emits('delete', props.task.id);
+    deleteUserTaskHandler();
   }
+};
+
+const deleteUserTaskHandler = async () => {
+  confirmHandler('您将删除这个任务', async () => {
+    const { data } = await deleteUserTaskApi({
+      ids: [props.task.id],
+    });
+    if (data) {
+      ElMessage.success('删除成功');
+      emits('delete');
+    }
+  });
 };
 </script>
 

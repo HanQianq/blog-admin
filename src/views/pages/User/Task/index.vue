@@ -8,13 +8,16 @@
           <span>{{ (item as any).label }}</span>
         </template>
       </el-segmented>
-      <my-button @click="openDialog('add')">新增事项</my-button>
+      <el-text v-if="pageStatus === 'dashboard'">
+        面板默认展示最近一周的任务事项，可点击切换至列表模式查看所有事项。
+      </el-text>
+      <my-button @click="openDialog('add')">
+        <my-icon name="add" class="mr-1"></my-icon>
+        新增事项</my-button
+      >
     </div>
     <div class="content-wrapper p-4 flex-1 h-0">
-      <component
-        :is="currentComponent"
-        @edit="(task: UserTaskItemType) => openDialog('edit', task)"
-      ></component>
+      <component :is="currentComponent"></component>
     </div>
   </div>
   <div v-if="formDialogProps.visible">
@@ -68,6 +71,13 @@ const currentComponent = computed(() => {
 onMounted(() => {
   getStatusList();
   getPriorityList();
+  emitter.on('task:update', (task: UserTaskItemType) => {
+    openDialog('edit', task);
+  });
+});
+
+onUnmounted(() => {
+  emitter.off('task:update');
 });
 </script>
 <style lang="scss" scoped></style>
