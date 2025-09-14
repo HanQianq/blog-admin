@@ -1,7 +1,7 @@
 <template>
   <el-card class="task-card" shadow="hover">
     <div class="task-header">
-      <div class="task-title truncate">
+      <div class="task-title truncate mr-4" :title="task.title">
         {{ task.title }}
       </div>
 
@@ -20,11 +20,18 @@
     </div>
 
     <div class="task-content">
-      <div class="flex items-center justify-between mb-2 text-xs">
-        <span v-if="priorityList"
-          >优先级：{{ getDictLabelByKey(priorityList, task.priority) }}
-        </span>
-        <span>截止时间：{{ fmtTime(task.deadline, 'YYYY/MM/DD') }}</span>
+      <div class="flex items-center gap-4 mb-2 text-xs">
+        <span class="flex items-center"
+          ><my-icon name="calendar" class="mr-2"></my-icon
+          >{{ fmtTime(task.deadline, 'YYYY/MM/DD') }}</span
+        >
+        <span
+          v-if="priorityList"
+          class="flex items-center"
+          :style="{ color: priorityColorMap[task.priority] }"
+          ><my-icon name="level" class="mr-2"></my-icon
+          >{{ getDictLabelByKey(priorityList, task.priority) }}</span
+        >
       </div>
       <p class="line-clamp-2 text-sm h-40px mb-4">{{ task.description }}</p>
       <div class="task-meta text-xs flex items-center justify-between">
@@ -35,6 +42,7 @@
             round
           ></my-tag
         ></span>
+
         <span
           class="font-beauty text-lg"
           :class="task.score > 0 ? 'text-red-500' : 'text-green-500'"
@@ -66,6 +74,13 @@ const statusColorMap: Record<UserTaskItemType['status'], string> = {
   todo: 'gray',
   pending: '#165dff',
   done: 'green',
+};
+
+const priorityColorMap: Record<UserTaskItemType['priority'], string> = {
+  low: 'green',
+  medium: '#165dff',
+  high: 'orange',
+  urgency: '#fb5050',
 };
 
 const handleCommand = (command: string) => {

@@ -9,14 +9,14 @@
         </template>
       </el-segmented>
       <el-text v-if="pageStatus === 'dashboard'">
-        面板默认展示最近一周的任务事项，可点击切换至列表模式查看所有事项。
+        面板默认展示最近一周的已完成任务事项以及所有的待办和进行中的事项。
       </el-text>
       <my-button @click="openDialog('add')">
         <my-icon name="add" class="mr-1"></my-icon>
         新增事项</my-button
       >
     </div>
-    <div class="content-wrapper p-4 flex-1 h-0">
+    <div class="content-wrapper flex-1 h-0 overflow-auto">
       <component :is="currentComponent"></component>
     </div>
   </div>

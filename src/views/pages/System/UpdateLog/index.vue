@@ -75,14 +75,12 @@
       </div>
 
       <template #footer>
-        <div class="p-4">
-          <MyPagination
-            :total="total"
-            :page-number="pageConfig.pageNumber"
-            :page-size="pageConfig.pageSize"
-            @page-change="pageChangeHandler"
-          ></MyPagination>
-        </div>
+        <MyPagination
+          :total="total"
+          :page-number="pageConfig.pageNumber"
+          :page-size="pageConfig.pageSize"
+          @page-change="pageChangeHandler"
+        ></MyPagination>
       </template>
     </MySearchPanel>
     <div v-if="formDialogProps.visible">

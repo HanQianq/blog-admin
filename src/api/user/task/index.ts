@@ -11,3 +11,8 @@ export const deleteUserTaskApi = (data: IdsType) =>
 
 export const getUserTaskListApi = (data: PageType & UserTaskSearchType) =>
   request.post<ResPageType<UserTaskItemType>>('/user/task/list', data);
+
+export const getUserTaskPanelListApi = (data: {
+  startTime: string;
+  endTime: string;
+}) => request.post<UserTaskItemType[]>('/user/task/panel/list', data);

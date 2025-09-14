@@ -16,7 +16,7 @@
         <my-empty-data></my-empty-data>
       </div>
     </div>
-    <div v-if="!hideBottom" class="my-search-panel-footer">
+    <div v-if="!hideBottom" class="my-search-panel-footer p-4">
       <slot name="footer"></slot>
     </div>
   </div>

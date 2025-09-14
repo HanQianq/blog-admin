@@ -44,6 +44,7 @@
               type="daterange"
               class="!w-320px"
               value-format="YYYY-MM-DD HH:mm:ss"
+              range-separator="至"
               clearable
               @change="filterUserTaskList"
             ></el-date-picker>

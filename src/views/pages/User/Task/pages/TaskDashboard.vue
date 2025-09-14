@@ -1,9 +1,9 @@
 <template>
-  <div class="flex gap-6 items-start p-2">
+  <div class="flex gap-6 items-start p-6">
     <div
       v-for="panelItem in statusList"
       :key="panelItem.key"
-      class="task-panel flex-1 p-6 pb-2 rounded-2xl"
+      class="task-panel flex-1 w-0 p-6 pb-2 rounded-2xl"
       :style="{ background: statusBgMap[panelItem.key] }"
     >
       <div class="task-panel-header flex items-center justify-between mb-4">
@@ -28,7 +28,7 @@
 </template>
 <script lang="ts" setup>
 import { DictSimpleItemType } from '@/api/system/dict/type';
-import { getUserTaskListApi } from '@/api/user/task';
+import { getUserTaskPanelListApi } from '@/api/user/task';
 import { UserTaskItemType } from '@/api/user/task/type';
 import dayjs from 'dayjs';
 import UserTaskCard from '../components/UserTaskCard.vue';
@@ -45,15 +45,11 @@ const statusBgMap: any = {
 const taskList = ref<UserTaskItemType[]>([]);
 
 async function getUserTaskList() {
-  const { data } = await getUserTaskListApi({
-    pageSize: 1000,
-    pageNumber: 1,
-    status: '',
-    priority: '',
+  const { data } = await getUserTaskPanelListApi({
     startTime: fmtTime(dayjs().subtract(3, 'day').valueOf()),
-    endTime: fmtTime(dayjs().add(3, 'day').valueOf()),
+    endTime: fmtTime(dayjs().add(4, 'day').valueOf()),
   });
-  taskList.value = data.result.map((item: UserTaskItemType) => {
+  taskList.value = data.map((item: UserTaskItemType) => {
     const taskItem: UserTaskItemType = {
       ...item,
       createTime: fmtTime(item.createTime, 'YYYY-MM-DD'),
