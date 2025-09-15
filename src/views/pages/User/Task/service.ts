@@ -9,6 +9,8 @@ export const originalForm: UserTaskFormType = {
   priority: '',
   status: '',
   deadline: '',
+  startTime: '',
+  endTime: '',
   importance: 0,
   urgency: 0,
   growth: 0,

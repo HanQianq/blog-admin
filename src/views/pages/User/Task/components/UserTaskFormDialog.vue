@@ -67,6 +67,28 @@
             ></el-date-picker>
           </el-form-item>
         </el-col>
+        <el-col :span="12">
+          <el-form-item prop="startTime" label="开始时间">
+            <el-date-picker
+              v-model="form.startTime"
+              format="YYYY-MM-DD HH:mm:ss"
+              value-format="YYYY-MM-DD HH:mm:ss"
+              type="datetime"
+              class="!w-full"
+            ></el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item prop="endTime" label="结束时间">
+            <el-date-picker
+              v-model="form.endTime"
+              format="YYYY-MM-DD HH:mm:ss"
+              value-format="YYYY-MM-DD HH:mm:ss"
+              type="datetime"
+              class="!w-full"
+            ></el-date-picker>
+          </el-form-item>
+        </el-col>
       </el-row>
 
       <el-form-item prop="description" label="描述">
@@ -154,6 +176,13 @@ const closeHandler = () => {
 const confirmHandler = () => {
   formRef.value.validate(async (valid: boolean) => {
     if (valid) {
+      if (form.value.status === 'done') {
+        if (!form.value.startTime || !form.value.endTime) {
+          return ElMessage.warning(
+            '事项已完成必须选择事项开始时间和结束时间！'
+          );
+        }
+      }
       try {
         const { data, msg } =
           props.optType === 'add'

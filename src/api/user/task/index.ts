@@ -16,3 +16,6 @@ export const getUserTaskPanelListApi = (data: {
   startTime: string;
   endTime: string;
 }) => request.post<UserTaskItemType[]>('/user/task/panel/list', data);
+
+export const getUserRecentTaskListApi = () =>
+  request.post<UserTaskItemType[]>('/user/task/recent/list');

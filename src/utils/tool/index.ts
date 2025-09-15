@@ -51,6 +51,22 @@ export const dateDiff = (
   return result;
 };
 
+export function randomColor() {
+  // hue 色相 0-360 随机，保证多彩
+  const h = Math.floor(Math.random() * 360);
+  // saturation 饱和度 70-100%，保证鲜艳
+  const s = Math.floor(Math.random() * 31) + 70;
+  // lightness 30-70%，避免太黑或太白
+  const l = Math.floor(Math.random() * 41) + 30;
+
+  // 主颜色
+  const color = `hsl(${h}, ${s}%, ${l}%)`;
+  // 边框颜色，加透明度（比如 0.6）
+  const borderColor = `hsla(${h}, ${s}%, ${l}%, 0.3)`;
+
+  return { color, borderColor };
+}
+
 export const copyClick = (content: string) => {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(content);

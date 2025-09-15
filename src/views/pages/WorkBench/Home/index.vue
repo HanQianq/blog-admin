@@ -19,13 +19,15 @@
     </el-row>
     <el-row :gutter="20" class="!w-full mt-5">
       <el-col :span="8">
-        <el-card class="h-400px"></el-card>
+        <el-card class="h-600px">
+          <RecentUserTask></RecentUserTask>
+        </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card class="h-400px"></el-card>
+        <el-card class="h-600px"></el-card>
       </el-col>
       <el-col :span="8">
-        <el-card class="h-400px"></el-card>
+        <el-card class="h-600px"></el-card>
       </el-col>
     </el-row>
     <el-row :gutter="20" class="!w-full mt-5">
@@ -38,5 +40,7 @@
     </el-row>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import RecentUserTask from './components/RecentUserTask.vue';
+</script>
 <style lang="scss" scoped></style>

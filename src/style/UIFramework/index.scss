@@ -35,3 +35,8 @@
 .el-tabs__nav-wrap:after {
   height: 1px !important;
 }
+
+.el-card__body {
+  height: 100%;
+  padding: 0 !important;
+}
