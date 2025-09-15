@@ -2,7 +2,7 @@
   <div
     v-if="visible"
     ref="parentRef"
-    class="h-full tab-bar flex flex-nowrap items-center relative border-bottom"
+    class="h-full tab-bar deep-wrapper-item flex flex-nowrap items-center relative border-bottom py-2"
   >
     <div
       v-if="isShowBtn"
@@ -14,15 +14,22 @@
     </div>
     <div
       ref="scrollRef"
-      class="tab-bar-wrapper pr-8 flex flex-no-wrap items-center overflow-hidden relative"
+      class="tab-bar-wrapper pl-5 pr-8 overflow-hidden relative"
     >
-      <TabItem
-        v-for="(item, ind) in tabList"
-        :key="item.id"
-        :item="item"
-        :ind="ind"
-      ></TabItem>
+      <TransitionGroup
+        name="list"
+        tag="ul"
+        class="flex flex-no-wrap items-center gap-2"
+      >
+        <TabItem
+          v-for="(item, ind) in tabList"
+          :key="item.id"
+          :item="item"
+          :ind="ind"
+        ></TabItem>
+      </TransitionGroup>
     </div>
+
     <div
       v-if="isShowBtn"
       class="scroll-right ml-3 hover-text border-left"
@@ -45,7 +52,9 @@ const { scrollRef, parentRef, isShowBtn, clickLeftHandle, clickRightHandle } =
 </script>
 <style lang="scss" scoped>
 .tab-bar {
-  height: 3rem;
+  height: 4rem;
+  z-index: 10;
+  position: relative;
 
   .scroll-left,
   .scroll-right {
@@ -64,5 +73,22 @@ const { scrollRef, parentRef, isShowBtn, clickLeftHandle, clickRightHandle } =
 :deep(.el-divider--vertical) {
   width: 2px;
   border-left-width: 2px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* 关键：顺序变化时的过渡 */
+.list-move {
+  transition: transform 0.5s ease;
 }
 </style>

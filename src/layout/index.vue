@@ -8,7 +8,7 @@
         <SideBar v-if="!route.meta.hideSide"></SideBar>
       </div>
       <div class="flex flex-col flex-1 w-0">
-        <div class="h-12">
+        <div class="h-16">
           <TabBar v-if="!route.meta.hideTab"></TabBar>
         </div>
         <div class="content-wrapper flex-1 h-0 overflow-auto">

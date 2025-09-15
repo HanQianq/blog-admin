@@ -7,8 +7,8 @@
     >
       <span
         ref="tabItemRef"
-        class="tag-item transition-all hover-common-wrapper px-3 border-right"
-        :class="{ 'weak-active-item': currentTab.id === item.id }"
+        class="tag-item rounded-xl transition-all deep-wrapper-item hover-weak-wrapper px-3 border-border"
+        :class="{ 'active-item': currentTab.id === item.id }"
         @click="selectTabItem(item)"
       >
         <MyIcon :name="item.icon" class="mr-2"></MyIcon>
@@ -148,7 +148,7 @@ onMounted(() => {
 .tag-item {
   width: 170px;
   font-size: 12px;
-  height: 47px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: start;
