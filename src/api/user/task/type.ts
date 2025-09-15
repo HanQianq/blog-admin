@@ -5,8 +5,8 @@ export type UserTaskFormType = {
   priority: string;
   status: string;
   deadline: string;
-  startTime?: string;
-  endTime?: string;
+  startTime?: string | null;
+  endTime?: string | null;
   importance: number;
   urgency: number;
   growth: number;

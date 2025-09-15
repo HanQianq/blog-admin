@@ -37,7 +37,7 @@
         >
       </div>
       <div v-else class="flex items-center gap-4 mb-2 text-xs">
-        <span class="flex items-center"
+        <span v-if="task.startTime && task.endTime" class="flex items-center"
           ><my-icon name="calendar" class="mr-2"></my-icon
           >{{ fmtTime(task.startTime, 'MM-DD HH:mm') }}&nbsp;至&nbsp;{{
             fmtTime(task.endTime, 'MM-DD HH:mm')

@@ -186,7 +186,11 @@ const confirmHandler = () => {
       try {
         const { data, msg } =
           props.optType === 'add'
-            ? await addUserTaskApi(form.value)
+            ? await addUserTaskApi({
+                ...form.value,
+                startTime: form.value.startTime || null,
+                endTime: form.value.endTime || null,
+              })
             : await editUserTaskApi({
                 id: (props.row as UserTaskItemType).id,
                 ...form.value,
