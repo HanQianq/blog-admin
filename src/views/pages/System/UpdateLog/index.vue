@@ -4,7 +4,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <el-tag size="large" class="mr-4">关键字</el-tag>
+            <my-tag size="large" class="mr-4">关键字</my-tag>
             <el-input
               v-model="searchParams.keyword"
               class="!w-280px mr-4"

@@ -4,7 +4,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <el-tag size="large" class="mr-4">文章标题</el-tag>
+            <my-tag size="large" class="mr-4">文章标题</my-tag>
             <el-input
               v-model="searchParams.title"
               class="!w-280px mr-4"
@@ -12,7 +12,7 @@
               clearable
               @change="getDataListHandler"
             ></el-input>
-            <el-tag size="large" class="mr-4">文章类别</el-tag>
+            <my-tag size="large" class="mr-4">文章类别</my-tag>
             <el-tree-select
               v-model="searchParams.category"
               :data="categoryList"

@@ -4,7 +4,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <el-tag size="large" class="mr-4">用户昵称</el-tag>
+            <my-tag size="large" class="mr-4">用户昵称</my-tag>
             <el-input
               v-model="searchParams.keyword"
               class="!w-280px mr-4"
@@ -12,7 +12,7 @@
               clearable
               @change="filterUserList"
             ></el-input>
-            <el-tag size="large" class="mr-4">用户角色</el-tag>
+            <my-tag size="large" class="mr-4">用户角色</my-tag>
             <el-select
               v-model="searchParams.roleId"
               clearable

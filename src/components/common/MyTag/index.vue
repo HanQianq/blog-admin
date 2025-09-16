@@ -8,10 +8,10 @@
       'h-16px leading-16px px-1': size === 'small',
     }"
     :style="{
-      'background-color': `${chroma(color)
+      'background-color': `${chroma(realColor)
         .alpha(opacity || 0.1)
         .css()}`,
-      color,
+      color: realColor,
     }"
   >
     <span v-if="name">{{ name }}</span>
@@ -19,19 +19,33 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useSystemStore } from '@/store/system';
 import chroma from 'chroma-js';
-interface PropsType {
+import { storeToRefs } from 'pinia';
+interface Props {
   name?: string;
-  color: string;
+  color?: string;
   opacity?: number;
   round?: boolean;
   size?: 'small' | 'normal' | 'large';
 }
 
-withDefaults(defineProps<PropsType>(), {
+const props = withDefaults(defineProps<Props>(), {
   type: 'default',
   size: 'normal',
   round: false,
+  color: '',
 });
+
+const { theme } = storeToRefs(useSystemStore());
+const colorMap: any = {
+  blue: '#1e88e5',
+  purple: '#5e35b1',
+  green: '#43a047',
+  red: '#f0ad4e',
+  pink: '#e53935',
+};
+
+const realColor = computed(() => props.color || colorMap[theme.value]);
 </script>
 <style lang="scss" scoped></style>

@@ -34,12 +34,12 @@
                 placeholder="请输入验证码..."
                 class="flex-1"
               />
-              <el-tag
+              <my-tag
                 class="w-120px ml-4 xy-center font-beauty cursor-pointer"
                 size="large"
                 @click="getValidCode"
                 >{{ currentCode }}
-              </el-tag>
+              </my-tag>
             </div>
           </el-form-item>
           <el-form-item>

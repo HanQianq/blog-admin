@@ -19,14 +19,11 @@
       <div class="text-gray-600">
         本周：<span class="font-bold">{{ weekly }}{{ unit }}</span>
       </div>
-      <span class="text-gray-500">与上周相比</span>
-      <span
-        :class="[
-          change >= 0 ? 'text-green-500' : 'text-red-500',
-          'font-medium',
-        ]"
-      >
-        {{ change >= 0 ? '+' : '' }}{{ change }}{{ unit }}
+
+      <span :class="[change > 0 ? 'text-red-500' : 'text-green-500']">
+        <span class="text-gray-500 mr-2">与上周相比</span>
+        <span class="font-bold">{{ change >= 0 ? '+' : '' }}{{ change }}</span>
+        {{ unit }}
       </span>
     </div>
   </div>
