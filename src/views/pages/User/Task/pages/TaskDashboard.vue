@@ -47,8 +47,8 @@ const taskList = ref<UserTaskItemType[]>([]);
 
 async function getUserTaskList() {
   const { data } = await getUserTaskPanelListApi({
-    startTime: fmtTime(dayjs().subtract(3, 'day').valueOf()),
-    endTime: fmtTime(dayjs().add(4, 'day').valueOf()),
+    startTime: fmtTime(dayjs().subtract(2, 'day').valueOf()),
+    endTime: fmtTime(dayjs().add(2, 'day').valueOf()),
   });
   taskList.value = data.map((item: UserTaskItemType) => {
     const taskItem: UserTaskItemType = {

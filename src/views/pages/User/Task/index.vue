@@ -9,7 +9,7 @@
         </template>
       </el-segmented>
       <el-text v-if="pageStatus === 'dashboard'">
-        面板默认展示最近一周的已完成任务事项以及所有的待办和进行中的事项。
+        面板默认展示最近三天的已完成任务事项以及所有的待办和进行中的事项。
       </el-text>
       <my-button @click="openDialog('add')">
         <my-icon name="add" class="mr-1"></my-icon>
