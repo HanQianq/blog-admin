@@ -28,7 +28,7 @@
           ></my-icon>
           <span class="text-sm ml-2">
             加入于<span class="text-gray-500">
-              {{ dateDiff(baseUserInfo.createTime) }}</span
+              {{ dateDiff(baseUserInfo.createTime) }}前</span
             >
           </span>
         </div>

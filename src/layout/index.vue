@@ -36,7 +36,7 @@ import { useSystemStore } from '@/store/system';
 
 const route = useRoute();
 const { isSideExpand, isOpenStore } = storeToRefs(useSystemStore());
-const disabledStoreRoutes = ['ArticleDetail', 'UpdateArticle'];
+const disabledStoreRoutes = ['ArticleDetail', 'UpdateArticle', 'Home'];
 const sideWidth = computed(() => {
   return isSideExpand.value ? '14rem' : '4rem';
 });

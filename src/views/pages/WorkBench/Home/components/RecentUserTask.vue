@@ -20,7 +20,7 @@
           ></div>
           <div class="flex-1 w-0">
             <div class="font-bold text-xs text-gray-500 mb-2 flex items-center">
-              <span>{{ dateDiff(item.endTime as string) }}</span>
+              <span>{{ dateDiff(item.endTime as string) }}前</span>
             </div>
             <div class="mb-2 truncate text-sm font-bold">
               {{ item.title }}
@@ -54,8 +54,8 @@ const getRecentTask = async () => {
       style: { color: string; borderColor: string };
     } = {
       ...item,
-      endTime: fmtTime(item.endTime, 'YYYY-MM-DD HH:mm:ss'),
-      startTime: fmtTime(item.startTime, 'YYYY-MM-DD HH:mm:ss'),
+      endTime: fmtTime(item.endTime as string, 'YYYY-MM-DD HH:mm:ss'),
+      startTime: fmtTime(item.startTime as string, 'YYYY-MM-DD HH:mm:ss'),
       style: randomColor(),
     };
     return taskItem;

@@ -1,0 +1,50 @@
+<template>
+  <div class="wh-full p-4 flex flex-col justify-between">
+    <div class="flex items-center">
+      <div class="font-title flex items-center">
+        <my-icon :name="icon" :size="16" class="mr-2" />
+        <span class="text-xl">{{ title }}统计</span>
+      </div>
+    </div>
+
+    <!-- 中间：总数 -->
+    <div class="flex-1 flex items-center justify-center">
+      <span class="text-4xl">
+        {{ total }} <span class="ml-2">{{ unit }}</span>
+      </span>
+    </div>
+
+    <!-- 下部分：变化趋势 -->
+    <div class="flex items-center justify-between text-sm">
+      <div class="text-gray-600">
+        本周：<span class="font-bold">{{ weekly }}{{ unit }}</span>
+      </div>
+      <span class="text-gray-500">与上周相比</span>
+      <span
+        :class="[
+          change >= 0 ? 'text-green-500' : 'text-red-500',
+          'font-medium',
+        ]"
+      >
+        {{ change >= 0 ? '+' : '' }}{{ change }}{{ unit }}
+      </span>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { defineProps } from 'vue';
+
+defineProps<{
+  title: string;
+  total: number | string;
+  change: number;
+  icon: string;
+  unit: string;
+  weekly: number;
+}>();
+</script>
+
+<style scoped>
+/* 可选，卡片 hover 效果柔和 */
+</style>

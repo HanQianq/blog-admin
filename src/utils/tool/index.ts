@@ -41,12 +41,13 @@ export const dateDiff = (
   const _day = diffValue / day;
   const _hour = diffValue / hour;
   const _min = diffValue / minute;
-  if (_year >= 1) result = fmtTime(hisTime, 'YYYY年MM月DD日');
-  else if (_month >= 1) result = Math.floor(_month) + '个月前';
-  else if (_week >= 1) result = Math.floor(_week) + '周前';
-  else if (_day >= 1) result = Math.floor(_day) + '天前';
-  else if (_hour >= 1) result = Math.floor(_hour) + '个小时前';
-  else if (_min >= 1) result = Math.floor(_min) + '分钟前';
+  if (_year >= 1)
+    result = Math.floor(_year) + '年' + Math.floor(_month % 12) + '个月';
+  else if (_month >= 1) result = Math.floor(_month) + '个月';
+  else if (_week >= 1) result = Math.floor(_week) + '周';
+  else if (_day >= 1) result = Math.floor(_day) + '天';
+  else if (_hour >= 1) result = Math.floor(_hour) + '个小时';
+  else if (_min >= 1) result = Math.floor(_min) + '分钟';
   else result = '刚刚';
   return result;
 };
