@@ -12,14 +12,11 @@
     >
       <icon-left theme="outline" size="16" class="flex items-center" />
     </div>
-    <div
-      ref="scrollRef"
-      class="tab-bar-wrapper pl-5 pr-8 overflow-hidden relative"
-    >
+    <div ref="scrollRef" class="tab-bar-wrapper overflow-hidden relative">
       <TransitionGroup
         name="list"
         tag="ul"
-        class="flex flex-no-wrap items-center gap-2"
+        class="flex flex-no-wrap items-center"
       >
         <TabItem
           v-for="(item, ind) in tabList"

@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-item">
+  <div class="tab-item mx-2">
     <el-dropdown
       trigger="contextmenu"
       placement="bottom-start"
@@ -7,7 +7,7 @@
     >
       <span
         ref="tabItemRef"
-        class="tag-item rounded-xl transition-all deep-wrapper-item hover-weak-wrapper px-3 border-border"
+        class="tag-item rounded-lg transition-all deep-wrapper-item hover-weak-wrapper px-3 border-border"
         :class="{ 'active-item': currentTab.id === item.id }"
         @click="selectTabItem(item)"
       >
