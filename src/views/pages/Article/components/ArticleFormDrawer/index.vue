@@ -88,10 +88,8 @@
       </el-form-item>
     </el-form>
     <div class="flex justify-end mt-4">
-      <el-button @click="closeDrawer">取消</el-button>
-      <el-button type="primary" @click="publishArticleHandler"
-        >发布文章</el-button
-      >
+      <my-button type="plain" class="mr-4" @click="closeDrawer">取消</my-button>
+      <my-button @click="publishArticleHandler">发布文章</my-button>
       <el-button
         v-if="!defaultData?.status || defaultData?.status !== statusList[1].key"
         type="primary"

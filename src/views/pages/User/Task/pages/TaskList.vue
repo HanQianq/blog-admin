@@ -4,7 +4,7 @@
       <template #header>
         <div class="w-full flex items-center gap-6">
           <span class="flex items-center gap-3 flex-shrink-0">
-            <my-tag color="#165dff" size="large">任务状态</my-tag>
+            <my-tag size="large">任务状态</my-tag>
             <el-select
               v-model="searchParams.status"
               placeholder="请选择"
@@ -21,7 +21,7 @@
             </el-select>
           </span>
           <span class="flex items-center gap-3">
-            <my-tag color="#165dff" size="large">任务优先级</my-tag>
+            <my-tag size="large">任务优先级</my-tag>
             <el-select
               v-model="searchParams.priority"
               placeholder="请选择"
@@ -38,7 +38,7 @@
             </el-select>
           </span>
           <span class="flex items-center gap-3">
-            <my-tag color="#165dff" size="large">截止日期</my-tag>
+            <my-tag size="large">截止日期</my-tag>
             <el-date-picker
               v-model="deadlineDateRange"
               type="daterange"

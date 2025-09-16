@@ -6,9 +6,9 @@
       hide-bottom
     >
       <template #header>
-        <div>
-          <el-button type="primary" @click="openDialog('add')"
-            ><MyIcon name="plus" class="mr-1"></MyIcon>新增分类</el-button
+        <div class="flex">
+          <my-button @click="openDialog('add')"
+            ><MyIcon name="add" class="mr-2"></MyIcon>新增分类</my-button
           >
         </div>
       </template>

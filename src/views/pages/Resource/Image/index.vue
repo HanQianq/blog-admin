@@ -1,9 +1,5 @@
 <template>
-  <el-tabs
-    v-model="activeTab"
-    class="wh-full flex flex-col"
-    @tab-click="gotoRelatedPage"
-  >
+  <el-tabs v-model="activeTab" class="wh-full flex flex-col">
     <el-tab-pane
       v-for="item in tabList"
       :key="item.key"
@@ -20,11 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { TabsPaneContext } from 'element-plus';
 import ImageLib from '@/views/pages/Resource/Image/pages/ImageLib/index.vue';
 import ImageCategory from '@/views/pages/Resource/Image/pages/ImageCategory/index.vue';
 
-const router = useRouter();
 const activeTab = ref('ImageLib');
 const tabList = [
   {
@@ -38,11 +32,6 @@ const tabList = [
     component: ImageCategory,
   },
 ];
-
-const gotoRelatedPage = (tab: TabsPaneContext) => {
-  const routerName = tabList.find((el) => el.label === tab.props.label);
-  router.push({ name: routerName?.key });
-};
 </script>
 <style scoped lang="scss">
 :deep(.el-tabs__content) {

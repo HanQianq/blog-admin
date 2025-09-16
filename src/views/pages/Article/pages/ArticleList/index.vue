@@ -79,7 +79,7 @@
             <template #default="{ row }">
               <MyTag
                 :name="row.status === 'draft' ? '草稿' : '正文'"
-                :color="row.status === 'draft' ? 'gray' : 'green'"
+                :color="row.status === 'draft' ? 'gray' : ''"
               ></MyTag>
             </template>
           </el-table-column>

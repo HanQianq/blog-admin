@@ -2,10 +2,12 @@
   <div class="menu-manage wh-full">
     <MySearchPanel :data-exist="menuTreeList.length > 0" :loading="loading">
       <template #header>
-        <el-button type="primary" @click="addDrawerHandler()">
-          <my-icon name="add" class="mr-2"></my-icon>
-          新增菜单
-        </el-button>
+        <div class="flex">
+          <my-button @click="addDrawerHandler()">
+            <my-icon name="add" class="mr-2"></my-icon>
+            新增菜单
+          </my-button>
+        </div>
       </template>
       <div class="p-4">
         <el-table

@@ -8,8 +8,8 @@
         border="none"
         outline="none"
       />
-      <el-button type="primary" @click="openDrawerHandler"
-        ><MyIcon name="add-four" class="mr-1"></MyIcon>发布</el-button
+      <my-button @click="openDrawerHandler"
+        ><MyIcon name="add-four" class="mr-2"></MyIcon>发布</my-button
       >
     </div>
     <div class="edit-wrapper flex-1 h-0">

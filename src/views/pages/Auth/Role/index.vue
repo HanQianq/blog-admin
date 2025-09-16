@@ -6,9 +6,11 @@
       hide-bottom
     >
       <template #header>
-        <el-button @click="openDialog('add')" type="primary">
-          <my-icon name="add" class="mr-2"></my-icon> 创建角色</el-button
-        >
+        <div class="flex">
+          <my-button @click="openDialog('add')">
+            <my-icon name="add" class="mr-2"></my-icon> 创建角色</my-button
+          >
+        </div>
       </template>
       <div class="p-4">
         <el-table :data="roleList" size="large" stripe border>

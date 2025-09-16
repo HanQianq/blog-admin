@@ -16,7 +16,7 @@
       >
         <MyTag
           :name="article.status === 'draft' ? '草稿' : '正文'"
-          :color="article.status === 'draft' ? 'gray' : 'green'"
+          :color="article.status === 'draft' ? 'gray' : ''"
         >
         </MyTag>
         <span class="ml-2 truncate" :title="article.title">{{

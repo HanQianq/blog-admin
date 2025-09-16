@@ -10,8 +10,8 @@
             clearable
             @change="getDataListHandler"
           ></el-input>
-          <el-button type="primary" @click="openDialog('add')"
-            ><MyIcon name="plus" class="mr-1"></MyIcon>新增专栏</el-button
+          <my-button @click="openDialog('add')"
+            ><MyIcon name="add" class="mr-2"></MyIcon>新增专栏</my-button
           >
         </div>
       </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 h-full">
-    <el-table :data="categoryList" height="100%" size="large">
+    <el-table :data="categoryList" height="100%" size="large" border stripe>
       <el-table-column
         v-for="item in categoryColumnList"
         :key="item.prop"

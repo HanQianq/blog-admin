@@ -11,9 +11,9 @@
           clearable
           @change="filterImageList"
         ></el-input>
-        <el-button type="primary" @click="openDialog('add')">
+        <my-button @click="openDialog('add')">
           <my-icon name="add" class="mr-2"></my-icon>
-          <span class="ml-1">新建图片</span></el-button
+          <span>新建图片</span></my-button
         >
       </div>
     </div>
