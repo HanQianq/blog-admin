@@ -6,6 +6,16 @@ export const useSystemStore = defineStore(
   () => {
     const mode = ref<SysModeType>('dark');
     const theme = ref<SysThemeType>('green');
+    const colorMap: any = {
+      blue: '#1e88e5',
+      purple: '#5e35b1',
+      green: '#43a047',
+      red: '#f0ad4e',
+      pink: '#e53935',
+    };
+    const systemColor = computed(() => colorMap[theme.value]);
+
+    const isDark = computed(() => mode.value === 'dark');
     const isSideExpand = ref<boolean>(true);
     const isOpenStore = ref<boolean>(false);
 
@@ -31,7 +41,9 @@ export const useSystemStore = defineStore(
     };
 
     return {
+      systemColor,
       mode,
+      isDark,
       theme,
       isSideExpand,
       changeMode,

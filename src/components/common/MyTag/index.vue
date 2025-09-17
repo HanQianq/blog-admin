@@ -37,15 +37,8 @@ const props = withDefaults(defineProps<Props>(), {
   color: '',
 });
 
-const { theme } = storeToRefs(useSystemStore());
-const colorMap: any = {
-  blue: '#1e88e5',
-  purple: '#5e35b1',
-  green: '#43a047',
-  red: '#f0ad4e',
-  pink: '#e53935',
-};
+const { systemColor } = storeToRefs(useSystemStore());
 
-const realColor = computed(() => props.color || colorMap[theme.value]);
+const realColor = computed(() => props.color || systemColor.value);
 </script>
 <style lang="scss" scoped></style>

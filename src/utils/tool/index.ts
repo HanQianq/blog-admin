@@ -153,6 +153,41 @@ export const getDictLabelByKey = (arr: DictSimpleItemType[], key: string) => {
   return arr.find((item) => item.key === key)?.value;
 };
 
+export /**
+ * 将颜色转换为 rgba 字符串
+ * @param color - 支持 '#RRGGBB' 或 '#RGB' 或 'rgb(r,g,b)' 格式
+ * @param alpha - 透明度 0~1
+ * @returns rgba 字符串
+ */
+function toRgba(color: string, alpha: number = 1): string {
+  let r: number, g: number, b: number;
+
+  if (color.startsWith('#')) {
+    const hex = color.slice(1);
+    if (hex.length === 3) {
+      r = parseInt(hex[0] + hex[0], 16);
+      g = parseInt(hex[1] + hex[1], 16);
+      b = parseInt(hex[2] + hex[2], 16);
+    } else if (hex.length === 6) {
+      r = parseInt(hex.slice(0, 2), 16);
+      g = parseInt(hex.slice(2, 4), 16);
+      b = parseInt(hex.slice(4, 6), 16);
+    } else {
+      throw new Error('Invalid hex color');
+    }
+  } else if (color.startsWith('rgb')) {
+    const match = color.match(/(\d+),\s*(\d+),\s*(\d+)/);
+    if (!match) throw new Error('Invalid rgb color');
+    r = parseInt(match[1]);
+    g = parseInt(match[2]);
+    b = parseInt(match[3]);
+  } else {
+    throw new Error('Unsupported color format');
+  }
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 export default {
   getImg,
   dateDiff,

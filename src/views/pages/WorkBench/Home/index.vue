@@ -5,7 +5,9 @@
         <el-card class="h-200px mb-5">
           <HomeOverview></HomeOverview>
         </el-card>
-        <el-card class="h-420px"></el-card>
+        <el-card class="h-420px">
+          <UserTaskScoreStat></UserTaskScoreStat>
+        </el-card>
       </el-col>
       <el-col :span="8">
         <div class="h-200px flex mb-5">
@@ -14,7 +16,7 @@
               title="文章"
               :total="articleStat?.count"
               :change="articleStat?.diff"
-              :weekly="articleStat?.thisWeek"
+              :monthly="articleStat?.thisMonth"
               icon="view-list"
               unit="篇"
             ></StatCard>
@@ -24,7 +26,7 @@
               title="用户"
               :total="userStat?.count"
               :change="userStat?.diff"
-              :weekly="userStat?.thisWeek"
+              :monthly="userStat?.thisMonth"
               icon="user"
               unit="个"
             ></StatCard>
@@ -64,6 +66,7 @@
 import RecentUserTask from './components/RecentUserTask.vue';
 import HomeOverview from './components/HomeOverview.vue';
 import StatCard from './components/StatCard.vue';
+import UserTaskScoreStat from './components/UserTaskScoreStat.vue';
 import { getSysStatApi } from '@/api/system/sys';
 
 const articleStat = ref<StatItemType>({} as StatItemType);

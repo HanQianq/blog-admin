@@ -8,20 +8,19 @@
     </div>
 
     <!-- 中间：总数 -->
-    <div class="flex-1 flex items-center justify-center">
-      <span class="text-4xl">
+    <div class="flex-1 flex flex-col items-center justify-center">
+      <div class="text-3xl mb-2">
         {{ total }} <span class="ml-2">{{ unit }}</span>
-      </span>
+      </div>
+      <div class="text-gray-600 text-sm">
+        本月：<span>{{ monthly }}{{ unit }}</span>
+      </div>
     </div>
 
     <!-- 下部分：变化趋势 -->
     <div class="flex items-center justify-between text-sm">
-      <div class="text-gray-600">
-        本周：<span class="font-bold">{{ weekly }}{{ unit }}</span>
-      </div>
-
+      <span class="text-gray-500 mr-2">与上个月相比</span>
       <span :class="[change > 0 ? 'text-red-500' : 'text-green-500']">
-        <span class="text-gray-500 mr-2">与上周相比</span>
         <span class="font-bold">{{ change >= 0 ? '+' : '' }}{{ change }}</span>
         {{ unit }}
       </span>
@@ -38,7 +37,7 @@ defineProps<{
   change: number;
   icon: string;
   unit: string;
-  weekly: number;
+  monthly: number;
 }>();
 </script>
 

@@ -18,6 +18,7 @@
     "chroma-js": "^3.1.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
+    "echarts": "^6.0.0",
     "element-plus": "^2.10.6",
     "es-toolkit": "^1.39.8",
     "mitt": "^3.0.1",
