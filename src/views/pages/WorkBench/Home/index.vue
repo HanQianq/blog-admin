@@ -5,9 +5,7 @@
         <el-card class="h-200px mb-5">
           <HomeOverview></HomeOverview>
         </el-card>
-        <el-card class="h-420px">
-          <UserTaskScoreStat></UserTaskScoreStat>
-        </el-card>
+        <el-card class="h-420px"> </el-card>
       </el-col>
       <el-col :span="8">
         <div class="h-200px flex mb-5">
@@ -54,7 +52,9 @@
     </el-row>
     <el-row :gutter="20" class="!w-full mt-5">
       <el-col :span="12">
-        <el-card class="h-400px"></el-card>
+        <el-card class="h-400px">
+          <UserTaskScoreStat></UserTaskScoreStat>
+        </el-card>
       </el-col>
       <el-col :span="12">
         <el-card class="h-400px"></el-card>
