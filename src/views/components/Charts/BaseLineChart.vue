@@ -34,11 +34,7 @@
     </div>
 
     <!-- 图表 -->
-    <MyEcharts
-      v-if="chartXData.length > 0"
-      :option="option as EChartsOption"
-      class="flex-1 h-0 w-full"
-    />
+    <MyEcharts :option="option as EChartsOption" class="flex-1 h-0 w-full" />
   </div>
 </template>
 
@@ -55,6 +51,7 @@ const props = defineProps<{
   getDataFn: (params: any) => Promise<any[]>;
   xDataKey: string;
   yDataKey: string;
+  unit: string;
 }>();
 // 快捷选择模式
 const rangeMode = ref<'week' | 'month' | 'year' | 'custom'>('week');
@@ -103,7 +100,7 @@ const option = computed(() => {
       formatter: (params: any) => {
         if (!params || !params.length) return '';
         return params
-          .map((p: any) => `${p.axisValue}<br/> ${p.data ?? 0}分`)
+          .map((p: any) => `${p.axisValue}<br/> ${p.data ?? 0}${props.unit}`)
           .join('<br/>');
       },
     },

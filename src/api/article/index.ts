@@ -20,3 +20,9 @@ export const getArticleListApi = (data: ArticleQueryType & PageType) =>
 
 export const getArticleDetailApi = (data: { id: string }) =>
   request.post<any>('/article/detail', data);
+
+export const getArticlePublishStatApi = (data: {
+  rangeType: string;
+  startDate?: string;
+  endDate?: string;
+}) => request.post<any[]>('/article/publish/trend', data);

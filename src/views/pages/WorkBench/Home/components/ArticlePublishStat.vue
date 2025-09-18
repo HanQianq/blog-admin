@@ -1,21 +1,21 @@
 <template>
   <BaseLineChart
-    title="个人表现趋势"
+    title="文章发表趋势"
     x-data-key="date"
-    y-data-key="score"
+    y-data-key="count"
+    unit="篇"
     :get-data-fn="getDataFn"
-    unit="分"
   ></BaseLineChart>
 </template>
 
 <script setup lang="ts">
-import { getUserTaskScoreStatApi } from '@/api/user/task';
+import { getArticlePublishStatApi } from '@/api/article';
 const getDataFn = async (params: {
   rangeType: string;
   startDate?: string;
   endDate?: string;
 }) => {
-  const { data } = await getUserTaskScoreStatApi(params);
+  const { data } = await getArticlePublishStatApi(params);
   return data;
 };
 </script>

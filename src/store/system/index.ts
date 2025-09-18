@@ -10,8 +10,8 @@ export const useSystemStore = defineStore(
       blue: '#1e88e5',
       purple: '#5e35b1',
       green: '#43a047',
-      red: '#f0ad4e',
-      pink: '#e53935',
+      red: '#fb5050',
+      pink: '#ec77d8',
     };
     const systemColor = computed(() => colorMap[theme.value]);
 
