@@ -40,3 +40,32 @@
   height: 100%;
   padding: 0 !important;
 }
+
+.el-menu {
+  background: transparent !important;
+}
+
+.el-menu-item:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+/* ========= 按钮悬浮 ========= */
+.el-button:hover {
+  color: var(--sys-main-color-secondary) !important;
+}
+
+/* ========= 表单控件悬浮 ========= */
+.el-input:hover,
+.el-select:hover,
+.el-dropdown-menu__item:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+/* ========= 可选：半透明渐变效果 ========= */
+/* 适用于侧边栏或导航栏菜单 */
+.el-menu-item:hover {
+  background: var(--sys-main-color-secondary) !important;
+}
+.el-sub-menu__title:hover {
+  background: var(--sys-main-color-secondary) !important;
+}

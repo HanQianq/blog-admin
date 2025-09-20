@@ -65,12 +65,15 @@ const confirmHandler = () => {
   formRef.value.validate(async (valid: boolean) => {
     if (valid) {
       try {
+        const { fatherName, ...rest } = {
+          ...(props.row as ArticleCategoryItemType),
+          ...form.value,
+        };
         const { data, msg } =
           props.optType === 'add'
             ? await addArticleCategoryApi(form.value)
             : await editArticleCategoryApi({
-                ...(props.row as ArticleCategoryItemType),
-                ...form.value,
+                ...rest,
               });
         if (data) {
           ElMessage.success(msg);

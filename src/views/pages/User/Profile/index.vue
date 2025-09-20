@@ -103,7 +103,7 @@ const updateUserProfileHandler = async (form: UserFormType) => {
   }
 };
 
-const tabList = [
+const tabList: TabItem[] = [
   {
     name: '动态',
     key: 'dynamic',

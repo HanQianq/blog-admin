@@ -1,10 +1,11 @@
 html.light {
-  --sys-bg-color: #f8f8fd;
+  --sys-bg-color: #f8f9fa;
   --sys-box-bg-color: #fff;
   --sys-wrapper-bg-color: #fff;
   --sys-deep-wrapper-bg-color: #fff;
-  --sys-text-color: #333;
+  --sys-text-color: #212529;
+  --sys-text-secondary-color: #6c757d;
   --sys-deep-text-color: #86909c;
   --sys-text-contrast-color: #fff;
-  --sys-border-color: #dcdfe6;
+  --sys-border-color: #dee2e6;
 }

@@ -17,9 +17,9 @@
         size="default"
         class="ml-8"
       >
-        <el-radio-button label="week">本周</el-radio-button>
-        <el-radio-button label="month">本月</el-radio-button>
-        <el-radio-button label="year">本年</el-radio-button>
+        <el-radio-button label="week">近一周</el-radio-button>
+        <el-radio-button label="month">近一月</el-radio-button>
+        <el-radio-button label="year">近一年</el-radio-button>
         <el-radio-button label="custom">自定义</el-radio-button>
       </el-radio-group>
 
@@ -110,7 +110,7 @@ const option = computed(() => {
         type: 'line',
         data: chartYData?.value || [],
         smooth: true,
-        symbolSize: 10, // 拐点大小
+        symbolSize: 0, // 拐点大小
         areaStyle: {
           color: {
             type: 'linear',

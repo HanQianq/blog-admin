@@ -104,3 +104,21 @@
 .border-top {
   border-top: solid 1px var(--sys-border-color);
 }
+
+.side-bar {
+  background: linear-gradient(
+    180deg,
+    var(--sys-main-color-secondary),
+    transparent
+  );
+  backdrop-filter: blur(12px);
+}
+
+.tab-bar {
+  background: linear-gradient(
+    90deg,
+    var(--sys-main-color-secondary),
+    transparent
+  );
+  backdrop-filter: blur(12px);
+}

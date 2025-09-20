@@ -5,3 +5,7 @@
 @import url('./theme/red.css');
 @import url('./theme/pink.css');
 @import url('./theme/purple.css');
+
+:root {
+  --hover-bg: var(--sys-main-color-secondary) !important;
+}

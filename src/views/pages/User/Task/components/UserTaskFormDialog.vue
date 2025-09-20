@@ -64,6 +64,7 @@
               value-format="YYYY-MM-DD HH:mm:ss"
               type="datetime"
               class="!w-full"
+              @change="deadlineCHangeHandler"
             ></el-date-picker>
           </el-form-item>
         </el-col>
@@ -171,6 +172,12 @@ const form = ref({
 const closeHandler = () => {
   form.value = { ...originalForm };
   emits('close');
+};
+
+const deadlineCHangeHandler = () => {
+  if (form.value.deadline && form.value.status === 'done') {
+    form.value.endTime = form.value.deadline;
+  }
 };
 
 const confirmHandler = () => {

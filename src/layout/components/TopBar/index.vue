@@ -39,10 +39,15 @@ const goBackToIndex = () => {
 <style lang="scss" scoped>
 .top-bar {
   border-bottom: solid 1px var(--sys-border-color);
-  background-color: var(--sys-box-bg-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: var(--sys-text-color);
+  background: linear-gradient(
+    90deg,
+    var(--sys-main-color-secondary),
+    transparent
+  );
+  backdrop-filter: blur(10px);
 }
 </style>
