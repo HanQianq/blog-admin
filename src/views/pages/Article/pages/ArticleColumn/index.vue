@@ -22,6 +22,7 @@
           row-key="id"
           size="large"
           border
+          stripe
           default-expand-all
         >
           <el-table-column label="专栏封面" align="center">

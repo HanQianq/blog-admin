@@ -22,7 +22,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 .app {
   color: var(--sys-text-color);
-  background-color: var(--sys-bg-color);
   width: 100vw;
   height: 100vh;
 }

@@ -2,16 +2,16 @@
   <div class="p-5 pr-0 wh-full flex flex-col overflow-auto">
     <el-row class="!w-full" :gutter="20">
       <el-col :span="16">
-        <el-card class="h-200px mb-5">
+        <div class="wrapper-filter-item h-200px mb-5">
           <HomeOverview></HomeOverview>
-        </el-card>
+        </div>
         <el-card class="h-420px">
           <ArticlePublishStat></ArticlePublishStat>
         </el-card>
       </el-col>
       <el-col :span="8">
         <div class="h-200px flex mb-5">
-          <el-card class="flex-1 w-0 mr-5">
+          <div class="wrapper-filter-item flex-1 w-0 mr-5">
             <StatCard
               title="文章"
               :total="articleStat?.count"
@@ -20,8 +20,8 @@
               icon="view-list"
               unit="篇"
             ></StatCard>
-          </el-card>
-          <el-card class="flex-1 w-0">
+          </div>
+          <div class="wrapper-filter-item flex-1 w-0">
             <StatCard
               title="用户"
               :total="userStat?.count"
@@ -30,7 +30,7 @@
               icon="user"
               unit="个"
             ></StatCard>
-          </el-card>
+          </div>
         </div>
         <div class="h-200px flex mb-5">
           <el-card class="flex-1 w-0 mr-5"></el-card>

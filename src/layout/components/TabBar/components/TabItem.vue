@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-item mx-2">
+  <div class="tab-item ml-4">
     <el-dropdown
       trigger="contextmenu"
       placement="bottom-start"

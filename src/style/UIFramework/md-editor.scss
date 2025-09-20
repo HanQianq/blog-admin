@@ -1,11 +1,14 @@
 /* ========= 编辑器整体背景与文字 ========= */
 html.dark {
+  .v-md-editor__preview-wrapper {
+    background-color: #333339 !important;
+  }
   .line-numbers-mode {
     overflow-y: hidden;
     margin: 16px 0;
   }
   .vuepress-markdown-body {
-    background-color: var(--sys-bg-color);
+    background-color: #333339;
     color: var(--sys-text-color);
     transition: all 0.3s ease;
     padding: 16px 32px;

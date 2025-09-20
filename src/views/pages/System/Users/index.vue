@@ -41,15 +41,9 @@
           row-key="id"
           size="large"
           border
+          stripe
           default-expand-all
         >
-          <!-- <el-table-column
-            v-for="item in columnList"
-            :key="item.prop"
-            :prop="item.prop"
-            :label="item.title"
-            align="center"
-          ></el-table-column> -->
           <el-table-column label="基本信息" align="center">
             <template #default="{ row }">
               <div class="xy-center">

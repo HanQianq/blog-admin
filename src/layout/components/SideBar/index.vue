@@ -16,6 +16,7 @@
               <el-menu-item
                 v-for="subItem in item.children"
                 :key="subItem.id"
+                :class="{ 'weak-active-item': subItem.route === route.name }"
                 @click="gotoRelatedPage(subItem)"
               >
                 <template #title>
@@ -54,6 +55,7 @@ const { isSideExpand } = storeToRefs(useSystemStore());
 const { menuTreeList } = storeToRefs(useMenuStore());
 
 const router = useRouter();
+const route = useRoute();
 const gotoRelatedPage = (item: MenuItemType) => {
   try {
     if (item.route) {

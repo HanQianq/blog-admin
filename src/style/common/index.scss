@@ -39,6 +39,21 @@
   }
 }
 
+.wrapper-filter-item {
+  background: linear-gradient(135deg, var(--theme-hover), transparent);
+  backdrop-filter: blur(12px);
+  border-radius: var(--sys-border-size);
+  border: solid 1px var(--theme-color);
+  color: var(--sys-text-color);
+}
+
+.wrapper-solid-item {
+  background: var(--theme-color);
+  border-radius: var(--sys-border-size);
+  border: solid 1px var(--theme-color);
+  color: #fff;
+}
+
 .wrapper-item {
   background-color: var(--sys-wrapper-bg-color);
   border-radius: var(--sys-border-size);

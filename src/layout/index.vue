@@ -46,6 +46,9 @@ const sideWidth = computed(() => {
   .side-bar-wrapper {
     transition: all ease 0.2s;
   }
+  .content-wrapper {
+    background-color: var(--sys-bg-color);
+  }
 
   .top-bar-wrapper {
     height: 4rem;
