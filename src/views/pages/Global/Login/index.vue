@@ -164,7 +164,7 @@ onBeforeMount(() => {
   }
 
   .login-intro {
-    background-color: var(--sys-main-color);
+    background-color: var(--theme-color);
   }
 }
 </style>

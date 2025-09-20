@@ -7,5 +7,5 @@
 @import url('./theme/purple.css');
 
 :root {
-  --hover-bg: var(--sys-main-color-secondary) !important;
+  --hover-bg: var(--theme-hover) !important;
 }

@@ -1,4 +1,11 @@
 html.blue {
-  --sys-main-color: #1e88e5;
-  --sys-main-color-secondary: rgba(30, 136, 229, 0.15);
+  --theme-color: #3b82f6;
+  --theme-hover: rgba(59, 130, 246, 0.15);
+}
+
+html.blue.light {
+  --theme-bg: #f0f5ff;
+}
+html.blue.dark {
+  --theme-bg: #1e293b;
 }

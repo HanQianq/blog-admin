@@ -19,7 +19,7 @@ const gotoReleaseArticle = () => {
 </script>
 <style lang="scss" scoped>
 .trigger-btn {
-  background-color: var(--sys-main-color);
+  background-color: var(--theme-color);
   transition: all 0.3s ease-in-out;
 
   &:hover {

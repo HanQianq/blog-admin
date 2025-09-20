@@ -1,6 +1,6 @@
 :root {
   --el-border-radius-base: 2px !important;
-  --el-color-primary: var(--sys-main-color) !important;
+  --el-color-primary: var(--theme-color) !important;
 }
 
 .el-drawer__header {
@@ -29,7 +29,7 @@
   font-size: 16px !important;
 }
 .el-segmented__group {
-  border: solid 1px var(--sys-main-color);
+  border: solid 1px var(--theme-color);
 }
 
 .el-tabs__nav-wrap:after {
@@ -51,7 +51,7 @@
 
 /* ========= 按钮悬浮 ========= */
 .el-button:hover {
-  color: var(--sys-main-color-secondary) !important;
+  color: var(--theme-hover) !important;
 }
 
 /* ========= 表单控件悬浮 ========= */
@@ -64,8 +64,8 @@
 /* ========= 可选：半透明渐变效果 ========= */
 /* 适用于侧边栏或导航栏菜单 */
 .el-menu-item:hover {
-  background: var(--sys-main-color-secondary) !important;
+  background: var(--theme-hover) !important;
 }
 .el-sub-menu__title:hover {
-  background: var(--sys-main-color-secondary) !important;
+  background: var(--theme-hover) !important;
 }

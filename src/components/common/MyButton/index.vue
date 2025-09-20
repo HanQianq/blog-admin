@@ -28,7 +28,7 @@ withDefaults(defineProps<PropsType>(), {
   transition: all 0.3s ease;
   &-default {
     border-radius: 0.125rem;
-    background-color: var(--sys-main-color);
+    background-color: var(--theme-color);
     color: #fff;
     &.my-button-middle {
       padding: 0.5rem 0.75rem;
@@ -49,15 +49,15 @@ withDefaults(defineProps<PropsType>(), {
     }
     border-radius: 0.25rem;
     background-color: var(--sys-box-bg-color);
-    border: solid 1px var(--sys-main-color);
-    color: var(--sys-main-color);
+    border: solid 1px var(--theme-color);
+    color: var(--theme-color);
     &:hover {
-      background-color: var(--sys-main-color);
+      background-color: var(--theme-color);
       color: #fff;
     }
   }
   &-text {
-    color: var(--sys-main-color);
+    color: var(--theme-color);
     &:hover {
       opacity: 0.8;
     }

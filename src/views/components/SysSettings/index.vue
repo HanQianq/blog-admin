@@ -93,7 +93,7 @@ onMounted(() => {
   .trigger-btn {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    background-color: var(--sys-main-color);
+    background-color: var(--theme-color);
     &:hover {
       opacity: 0.7;
     }

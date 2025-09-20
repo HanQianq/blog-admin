@@ -43,11 +43,7 @@ const goBackToIndex = () => {
   align-items: center;
   justify-content: space-between;
   color: var(--sys-text-color);
-  background: linear-gradient(
-    90deg,
-    var(--sys-main-color-secondary),
-    transparent
-  );
+  background: linear-gradient(90deg, var(--theme-hover), transparent);
   backdrop-filter: blur(10px);
 }
 </style>

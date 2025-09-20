@@ -13,7 +13,7 @@
       label-width="96px"
       :style="{ width: '100%' }"
     >
-      <div class="font-title text-xl text-black pl-2 mb-4">基础信息</div>
+      <div class="font-title text-xl pl-2 mb-4">基础信息</div>
       <el-form-item prop="title" label="事项标题">
         <el-input v-model="form.title" placeholder="请输入事项标题" />
       </el-form-item>
@@ -100,7 +100,7 @@
           placeholder="请输入个人事项描述"
         />
       </el-form-item>
-      <div class="font-title text-xl text-black pl-2 mb-4">任务评分</div>
+      <div class="font-title text-xl pl-2 mb-4">任务评分</div>
       <el-form-item prop="importance" label="重要性">
         <el-rate
           v-model="form.importance"
