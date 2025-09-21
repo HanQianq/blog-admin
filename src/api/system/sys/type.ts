@@ -1,6 +1,6 @@
 interface StatItemType {
   count: number;
-  thisMonth: number;
-  lastMonth: number;
+  this: number;
+  last: number;
   diff: number;
 }
