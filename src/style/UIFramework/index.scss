@@ -69,3 +69,8 @@
 .el-sub-menu__title:hover {
   background: var(--theme-hover) !important;
 }
+
+.el-dropdown,
+.el-dropdown * {
+  outline: none !important;
+}

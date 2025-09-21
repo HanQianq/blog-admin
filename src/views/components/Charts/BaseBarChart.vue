@@ -41,6 +41,7 @@ import { storeToRefs } from 'pinia';
 import { useSystemStore } from '@/store/system';
 import { toRgba } from '@/utils/tool';
 import { EChartsOption } from 'echarts';
+import * as echarts from 'echarts'; // 引入配置文件
 
 const props = defineProps<{
   title: string;
@@ -103,36 +104,20 @@ const option = computed(() => {
 
     series: [
       {
-        type: 'line',
+        type: 'bar',
         data: chartYData?.value || [],
-        smooth: true,
-        symbolSize: 0, // 拐点大小
-        areaStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              {
-                offset: 0,
-                color: toRgba(systemColor.value, 0.8),
-              },
-              {
-                offset: 0.5,
-                color: toRgba(systemColor.value, 0.5),
-              },
-              {
-                offset: 1,
-                color: toRgba(systemColor.value, 0.2),
-              },
-            ],
-          },
-        },
         itemStyle: {
-          color: systemColor.value,
-          borderWidth: 2,
+          color: new echarts.graphic.LinearGradient(
+            0,
+            0,
+            0,
+            1, // 渐变方向：0,0 到 1,0 表示水平方向
+            [
+              { offset: 0, color: toRgba(systemColor.value, 0.8) }, // 起始颜色
+              { offset: 0.5, color: toRgba(systemColor.value, 0.5) }, // 中间过渡色
+              { offset: 1, color: toRgba(systemColor.value, 0.2) }, // 结束颜色
+            ]
+          ),
         },
         lineStyle: { color: systemColor.value },
       },

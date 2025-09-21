@@ -1,8 +1,21 @@
 <template>
   <div class="recent-task flex flex-col wh-full">
-    <div class="font-title text-xl p-4 flex items-center">
-      <my-icon name="calendar" class="mr-2" size="16"></my-icon>
-      最近事项
+    <div class="font-title text-xl p-4 flex items-center justify-between">
+      <span class="flex items-center text-lg">
+        <my-icon name="calendar" class="mr-2" size="16"></my-icon>
+        最近事项
+      </span>
+      <el-dropdown trigger="hover" @command="handleCommand">
+        <span class="hover-text">
+          <el-icon><More /></el-icon>
+        </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="refresh">刷新</el-dropdown-item>
+            <el-dropdown-item command="more">查看更多</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
     <el-scrollbar class="flex-1 h-0 overflow-auto">
       <div
@@ -39,6 +52,7 @@
 import { getUserRecentTaskListApi } from '@/api/user/task';
 import { UserTaskItemType } from '@/api/user/task/type';
 
+const router = useRouter();
 const taskList = ref<
   Array<
     UserTaskItemType & {
@@ -60,6 +74,17 @@ const getRecentTask = async () => {
     };
     return taskItem;
   });
+};
+
+const handleCommand = (command: string) => {
+  switch (command) {
+    case 'refresh':
+      getRecentTask();
+      break;
+    case 'more':
+      router.push('/user-profile');
+      break;
+  }
 };
 
 onMounted(() => {

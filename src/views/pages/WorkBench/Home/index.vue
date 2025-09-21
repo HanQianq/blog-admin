@@ -11,7 +11,7 @@
       </el-col>
       <el-col :span="8">
         <div class="h-200px flex mb-5">
-          <div class="wrapper-filter-item flex-1 w-0 mr-5">
+          <div class="wrapper-solid-item flex-1 w-0 mr-5">
             <StatCard
               title="文章"
               :total="articleStat?.count"
@@ -21,7 +21,7 @@
               unit="篇"
             ></StatCard>
           </div>
-          <div class="wrapper-filter-item flex-1 w-0">
+          <div class="wrapper-solid-item flex-1 w-0">
             <StatCard
               title="用户"
               :total="userStat?.count"

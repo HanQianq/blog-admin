@@ -53,7 +53,7 @@
             </el-button>
           </el-form-item>
         </el-form>
-        <div class="flex mt-6">
+        <div class="flex mt-6 items-center">
           游客账号
           <MyButton type="text">一键登录</MyButton>
         </div>

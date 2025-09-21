@@ -1,6 +1,7 @@
 html.green {
   --theme-color: #22c55e;
   --theme-hover: rgba(34, 197, 94, 0.15);
+  --theme-card-bg: linear-gradient(135deg, #166534, #22c55e);
 }
 
 html.light.green {

@@ -1,6 +1,7 @@
 html.red {
   --theme-color: #ef4444;
   --theme-hover: rgba(239, 68, 68, 0.15);
+  --theme-card-bg: linear-gradient(135deg, #7f1d1d, #ef4444);
 }
 html.light.red {
   --theme-bg: #fff5f5;

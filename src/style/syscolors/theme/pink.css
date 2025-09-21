@@ -1,6 +1,7 @@
 html.pink {
   --theme-color: #ec4899;
   --theme-hover: rgba(236, 72, 153, 0.15);
+  --theme-card-bg: linear-gradient(135deg, #831843, #ec4899);
 }
 
 html.light.pink {

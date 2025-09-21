@@ -48,10 +48,12 @@
 }
 
 .wrapper-solid-item {
-  background: var(--theme-color);
+  background: var(--theme-card-bg);
   border-radius: var(--sys-border-size);
-  border: solid 1px var(--theme-color);
-  color: #fff;
+  border: solid 1px var(--theme-card-bg);
+  color: var(--sys-card-text-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
 }
 
 .wrapper-item {

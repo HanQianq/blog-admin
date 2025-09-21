@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BaseBarChart: typeof import('./src/views/components/Charts/BaseBarChart.vue')['default']
     BaseLineChart: typeof import('./src/views/components/Charts/BaseLineChart.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']

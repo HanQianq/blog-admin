@@ -1,11 +1,11 @@
 <template>
-  <BaseLineChart
-    title="文章发表趋势"
+  <BaseBarChart
+    title="文章发表数量统计"
     x-data-key="date"
     y-data-key="count"
     unit="篇"
     :get-data-fn="getDataFn"
-  ></BaseLineChart>
+  ></BaseBarChart>
 </template>
 
 <script setup lang="ts">
