@@ -73,7 +73,7 @@ const { scrollRef, parentRef, isShowBtn, clickLeftHandle, clickRightHandle } =
 }
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s linear;
 }
 .list-enter-from {
   opacity: 0;
@@ -86,6 +86,6 @@ const { scrollRef, parentRef, isShowBtn, clickLeftHandle, clickRightHandle } =
 
 /* 关键：顺序变化时的过渡 */
 .list-move {
-  transition: transform 0.5s ease;
+  transition: transform 0.3s linear;
 }
 </style>

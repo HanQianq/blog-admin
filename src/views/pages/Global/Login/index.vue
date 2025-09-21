@@ -1,6 +1,6 @@
 <template>
   <div class="login-page xy-center h-full w-full">
-    <div class="login-box rounded-xl flex">
+    <div class="wrapper-item login-box rounded-xl flex">
       <div
         class="login-content flex-1"
         :style="{ background: `url(${loginBg}) 100% 100% no-repeat` }"
@@ -43,14 +43,14 @@
             </div>
           </el-form-item>
           <el-form-item>
-            <el-button
-              :loading="loading"
-              type="primary"
+            <my-button
+              v-loading="loading"
+              type="default"
               class="w-full"
               size="large"
               @click="loginHandler"
               >登&nbsp;录
-            </el-button>
+            </my-button>
           </el-form-item>
         </el-form>
         <div class="flex mt-6 items-center">
