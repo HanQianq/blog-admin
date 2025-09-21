@@ -26,7 +26,7 @@
             <StatCard :type="StatEnum.UserTask"></StatCard>
           </div>
         </div>
-        <el-card class="h-200px"></el-card>
+        <div class="wrapper-solid-item h-200px"></div>
       </el-col>
     </el-row>
     <el-row :gutter="20" class="!w-full mt-5">

@@ -2,7 +2,11 @@
   <div class="wh-full p-4 flex flex-col justify-between">
     <div class="flex items-center justify-between">
       <div class="flex items-center">
-        <my-icon :name="currentType.icon" :size="16" class="mr-2" />
+        <my-icon
+          :name="currentType.icon"
+          :size="16"
+          class="mr-2 relative top-1px"
+        />
         <span class="text-sm">{{ currentType.title }}统计</span>
       </div>
       <el-dropdown trigger="hover" @command="handleCommand">
@@ -21,8 +25,9 @@
 
     <!-- 中间：总数 -->
     <div class="flex-1 flex flex-col items-center justify-center">
-      <div class="text-3xl mb-2">
-        {{ statInfo.count }} <span class="ml-2">{{ currentType.unit }}</span>
+      <div class="text-4xl">
+        <span class="mx-2">{{ statInfo.count }}</span
+        >{{ currentType.unit }}
       </div>
     </div>
 
@@ -77,11 +82,11 @@ const typeMap: Record<
     unit: '篇',
     timeUnit: 'month',
   },
-  user_task: {
-    title: '个人事项',
-    icon: 'list',
-    unit: '件',
-    timeUnit: 'week',
+  column: {
+    title: '博客专栏',
+    icon: 'tag',
+    unit: '个',
+    timeUnit: 'month',
   },
 };
 

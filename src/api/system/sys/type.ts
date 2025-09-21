@@ -8,4 +8,5 @@ interface StatItemType {
 interface StatSelfType {
   year: number;
   month: number;
+  week: number;
 }

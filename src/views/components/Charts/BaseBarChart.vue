@@ -51,7 +51,7 @@ const props = defineProps<{
   unit: string;
 }>();
 // 快捷选择模式
-const rangeMode = ref<'week' | 'month' | 'year' | 'custom'>('week');
+const rangeMode = ref<'week' | 'month' | 'year' | 'custom'>('year');
 const customRange = ref<string[] | string>('');
 
 const chartXData = ref<string[]>([]);

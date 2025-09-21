@@ -2,7 +2,7 @@
   <div
     v-if="visible"
     ref="parentRef"
-    class="h-full tab-bar deep-wrapper-item flex flex-nowrap items-center relative border-bottom py-2"
+    class="h-full tab-bar flex flex-nowrap items-center relative border-bottom py-2"
   >
     <div
       v-if="isShowBtn"
