@@ -12,22 +12,19 @@
       今年已度过<span class="font-beauty mx-2">{{ yearProgress }}%</span
       >，您发表了<span class="font-beauty mx-2">{{ articleStats.year }}</span
       >篇文章，创建了<span class="font-beauty mx-2">{{ draftStats.year }}</span
-      >篇草稿，完成了<span class="font-beauty mx-2">{{ taskStats.year }}</span
-      >个任务。
+      >篇草稿。
     </p>
     <p class="text-base mb-2">
       本月已度过<span class="font-beauty mx-2">{{ monthProgress }}%</span
       >，您发表了<span class="font-beauty mx-2">{{ articleStats.month }}</span
       >篇文章，创建了<span class="font-beauty mx-2">{{ draftStats.month }}</span
-      >篇草稿，完成了<span class="font-beauty mx-2">{{ taskStats.month }}</span
-      >个任务。
+      >篇草稿。
     </p>
     <p class="text-base">
       本周已度过<span class="font-beauty mx-2">{{ weekProgress }}%</span
       >，您发表了<span class="font-beauty mx-2">{{ articleStats.week }}</span
       >篇文章，创建了<span class="font-beauty mx-2">{{ draftStats.week }}</span
-      >篇草稿，完成了<span class="font-beauty mx-2">{{ taskStats.week }}</span
-      >个任务。
+      >篇草稿。
     </p>
   </div>
 </template>
@@ -93,14 +90,12 @@ const weekProgress = computed(() => {
 });
 const articleStats = ref<StatSelfType>({ year: 0, month: 0, week: 0 });
 const draftStats = ref<StatSelfType>({ year: 0, month: 0, week: 0 });
-const taskStats = ref<StatSelfType>({ year: 0, month: 0, week: 0 });
 
 const getSelfStat = async () => {
   try {
     const { data } = await getSelfStatApi();
     articleStats.value = data.article;
     draftStats.value = data.draft;
-    taskStats.value = data.task;
   } catch (err) {
     console.error(err);
   }

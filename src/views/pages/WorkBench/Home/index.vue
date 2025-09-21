@@ -36,10 +36,14 @@
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card class="h-600px"></el-card>
+        <el-card class="h-600px">
+          <HotArticle></HotArticle>
+        </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card class="h-600px"></el-card>
+        <el-card class="h-600px">
+          <ActiveUser></ActiveUser>
+        </el-card>
       </el-col>
     </el-row>
     <el-row :gutter="20" class="!w-full mt-5">
@@ -60,6 +64,8 @@ import HomeOverview from './components/HomeOverview.vue';
 import StatCard from './components/StatCard.vue';
 import UserTaskScoreStat from './components/UserTaskScoreStat.vue';
 import ArticlePublishStat from './components/ArticlePublishStat.vue';
+import HotArticle from './components/HotArticle.vue';
+import ActiveUser from './components/ActiveUser.vue';
 import { StatEnum } from '@/types/sys/enum.ts';
 </script>
 <style lang="scss" scoped></style>

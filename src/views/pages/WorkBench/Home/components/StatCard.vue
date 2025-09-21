@@ -7,7 +7,7 @@
           :size="16"
           class="mr-2 relative top-1px"
         />
-        <span class="text-sm">{{ currentType.title }}统计</span>
+        <span class="text-base">{{ currentType.title }}</span>
       </div>
       <el-dropdown trigger="hover" @command="handleCommand">
         <span class="hover-text wrapper-solid-text">
@@ -26,7 +26,7 @@
     <!-- 中间：总数 -->
     <div class="flex-1 flex flex-col items-center justify-center">
       <div class="text-4xl">
-        <span class="mx-2">{{ statInfo.count }}</span
+        <span class="mx-2 font-beauty">{{ statInfo.count }}</span
         >{{ currentType.unit }}
       </div>
     </div>
@@ -39,11 +39,12 @@
         >
       </div>
       <div class="flex items-center">
-        <span class="mr-2">与上{{ currentRangeName }}相比</span>
+        <my-icon
+          :name="statInfo.diff >= 0 ? 'up' : 'down'"
+          class="mr-2"
+        ></my-icon>
         <span>
-          <span class="font-bold"
-            >{{ statInfo.diff >= 0 ? '+' : '' }}{{ statInfo.diff }}</span
-          >
+          <span class="font-bold">{{ Math.abs(statInfo.diff) }}</span>
           {{ currentType.unit }}
         </span>
       </div>
@@ -65,25 +66,25 @@ const typeMap: Record<
   { title: string; icon: string; unit: string; timeUnit: 'month' | 'week' }
 > = {
   article: {
-    title: '博客文章',
+    title: '文章',
     icon: 'view-list',
     unit: '篇',
     timeUnit: 'month',
   },
   user: {
-    title: '博客用户',
+    title: '用户',
     icon: 'user',
     unit: '个',
     timeUnit: 'month',
   },
   drafts: {
-    title: '博客草稿',
+    title: '草稿',
     icon: 'pencil',
     unit: '篇',
     timeUnit: 'month',
   },
   column: {
-    title: '博客专栏',
+    title: '专栏',
     icon: 'tag',
     unit: '个',
     timeUnit: 'month',

@@ -1,6 +1,5 @@
 import {
   ArticleFormType,
-  ArticleItemType,
   ArticleIdType,
   ArticleQueryType,
   type ArticleListItemType,
@@ -17,6 +16,9 @@ export const deleteArticleApi = (id: string) =>
 
 export const getArticleListApi = (data: ArticleQueryType & PageType) =>
   request.post<ResPageType<ArticleListItemType>>('/article/list', data);
+
+export const getArticleHotListApi = () =>
+  request.post<ArticleListItemType[]>('/article/hot');
 
 export const getArticleDetailApi = (data: { id: string }) =>
   request.post<any>('/article/detail', data);
