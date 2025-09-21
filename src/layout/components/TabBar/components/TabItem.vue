@@ -7,8 +7,8 @@
     >
       <span
         ref="tabItemRef"
-        class="tag-item rounded-lg transition-all deep-wrapper-item hover-weak-wrapper px-3 border-border"
-        :class="{ 'active-item': currentTab.id === item.id }"
+        class="tag-item wrapper-item rounded-lg transition-all hover-weak-wrapper px-3 border-border"
+        :class="{ 'strong-active-item': currentTab.id === item.id }"
         @click="selectTabItem(item)"
       >
         <MyIcon :name="item.icon" class="mr-2"></MyIcon>

@@ -1,7 +1,7 @@
 html.purple {
   --theme-color: #8b5cf6;
   --theme-hover: rgba(139, 92, 246, 0.15);
-  --theme-card-bg: linear-gradient(135deg, #581c87, #a855f7);
+  --theme-card-bg: #581c87;
 }
 
 html.light.purple {

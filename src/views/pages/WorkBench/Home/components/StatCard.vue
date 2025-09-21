@@ -6,8 +6,8 @@
         <span class="text-sm">{{ currentType.title }}统计</span>
       </div>
       <el-dropdown trigger="hover" @command="handleCommand">
-        <span class="hover-text">
-          <el-icon><More /></el-icon>
+        <span class="hover-text wrapper-solid-text">
+          <el-icon class=""><More /></el-icon>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -60,19 +60,19 @@ const typeMap: Record<
   { title: string; icon: string; unit: string; timeUnit: 'month' | 'week' }
 > = {
   article: {
-    title: '文章',
+    title: '博客文章',
     icon: 'view-list',
     unit: '篇',
     timeUnit: 'month',
   },
   user: {
-    title: '用户',
+    title: '博客用户',
     icon: 'user',
     unit: '个',
     timeUnit: 'month',
   },
   drafts: {
-    title: '文章草稿',
+    title: '博客草稿',
     icon: 'pencil',
     unit: '篇',
     timeUnit: 'month',

@@ -1,7 +1,7 @@
 <template>
   <div class="system-settings">
     <div
-      class="trigger-btn xy-center rounded-full w-12 h-12"
+      class="trigger-btn wrapper-solid-item xy-center rounded-full w-12 h-12"
       @click="openDrawer"
     >
       <MyIcon name="setting-one" color="#fff" :size="20"></MyIcon>
@@ -93,7 +93,6 @@ onMounted(() => {
   .trigger-btn {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    background-color: var(--theme-color);
     &:hover {
       opacity: 0.7;
     }

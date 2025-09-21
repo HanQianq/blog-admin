@@ -4,3 +4,8 @@ interface StatItemType {
   last: number;
   diff: number;
 }
+
+interface StatSelfType {
+  year: number;
+  month: number;
+}

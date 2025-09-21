@@ -2,7 +2,7 @@
   <div class="shortcut-icon flex items-center gap-4">
     <div
       title="发表文章"
-      class="flex items-center trigger-btn p-2 rounded-lg cursor-pointer"
+      class="flex items-center wrapper-solid-item trigger-btn p-2 rounded-lg cursor-pointer"
       @click="gotoReleaseArticle"
     >
       <MyIcon name="pencil" color="#fff" :size="14"></MyIcon>
@@ -19,7 +19,6 @@ const gotoReleaseArticle = () => {
 </script>
 <style lang="scss" scoped>
 .trigger-btn {
-  background-color: var(--theme-color);
   transition: all 0.3s ease-in-out;
 
   &:hover {
