@@ -1,11 +1,7 @@
 <template>
   <div class="wh-full p-6">
     <h3 class="text-2xl mb-6 flex items-center justify-between">
-      <span
-        >欢迎你， {{ userInfo.nickName }}， 这是我们相逢的第{{
-          dateDiff(userInfo.createTime)
-        }}
-      </span>
+      <span>欢迎你， {{ userInfo.nickName }} </span>
       <span class="font-beauty">{{ fmtTime(nowTime) }}</span>
     </h3>
     <p class="text-base mb-2">

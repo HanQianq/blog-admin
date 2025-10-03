@@ -11,8 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
-components.d.ts
-auto-imports.d.ts
+components.d.ts*
+auto-imports.d.ts*
 
 # Editor directories and files
 .vscode/*

@@ -53,7 +53,7 @@
             </my-button>
           </el-form-item>
         </el-form>
-        <div class="flex mt-6 items-center">
+        <div class="flex items-center">
           游客账号
           <MyButton type="text">一键登录</MyButton>
         </div>
@@ -147,7 +147,7 @@ onBeforeMount(() => {
 <style lang="scss" scoped>
 .login-box {
   width: 60vw;
-  height: 650px;
+  height: 60vh;
   background: var(--sys-box-bg-color);
   overflow: hidden;
 
