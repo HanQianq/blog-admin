@@ -27,8 +27,8 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
 </script>
 
 <template>
-  <div class="overflow-auto wh-full p-2">
-    <div v-for="item in items" :key="item.id" class="p-2 border-b">
+  <div class="overflow-auto wh-full">
+    <div v-for="item in items" :key="item.id" class="border-bottom">
       <slot name="item" :item="item">{{ item }}</slot>
     </div>
 

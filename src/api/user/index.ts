@@ -5,3 +5,6 @@ export const getUserProfileApi = (data = {}) =>
 
 export const updateUserProfileApi = (data: UserFormType) =>
   request.post<boolean>('/user/update/self', data);
+
+export const getUserActivityApi = (data: PageType) =>
+  request.post('/user/activity/list', data);
