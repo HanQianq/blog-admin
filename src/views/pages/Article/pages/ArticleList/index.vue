@@ -10,7 +10,7 @@
               class="!w-280px mr-4"
               placeholder="请输入关键词搜索"
               clearable
-              @change="getDataListHandler"
+              @change="filterDataListHandler"
             ></el-input>
             <my-tag size="large" class="mr-4">文章类别</my-tag>
             <el-tree-select
@@ -188,9 +188,9 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
   pageChangeHandler,
   filterDataListHandler,
+  initDataListHandler,
 } = useSearch<ArticleQueryType, ArticleListItemType>(
   originalParams,
   getArticleListApi
@@ -221,17 +221,12 @@ const changeCategory = async (category: string) => {
   await filterDataListHandler();
 };
 
-const initArticleList = async () => {
-  searchParams.value = { ...originalParams };
-  await filterDataListHandler();
-};
-
 const deleteArticleHandler = (id: string) => {
   confirmHandler('您将和删除这篇文章', async () => {
     const res = await deleteArticleApi(id);
     if (res) {
       ElMessage.success('删除成功');
-      await initArticleList();
+      await initDataListHandler();
     }
   });
 };
@@ -252,7 +247,7 @@ const gotoUpdateArticle = (id: string) => {
 
 onMounted(() => {
   getCategoryTree();
-  initArticleList();
+  initDataListHandler();
 });
 </script>
 <style lang="scss" scoped>

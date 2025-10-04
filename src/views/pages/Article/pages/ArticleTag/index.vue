@@ -8,7 +8,7 @@
             class="!w-280px mr-4"
             placeholder="请输入关键词搜索"
             clearable
-            @change="getDataListHandler"
+            @change="filterDataListHandler"
           ></el-input>
           <my-button @click="openDialog('add')"
             ><MyIcon name="add" class="mr-2"></MyIcon>新增标签</my-button
@@ -74,7 +74,7 @@
       :opt-type="formDialogProps.optType"
       :row="formDialogProps.row"
       :color-list="colorList"
-      @change-success="getDataListHandler"
+      @change-success="filterDataListHandler"
       @close="closeDialog"
     ></TagDialog>
   </div>
@@ -106,7 +106,8 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
+  filterDataListHandler,
+  initDataListHandler,
   pageChangeHandler,
 } = useSearch<SearchArticleTagType, ArticleTagItemType>(
   originalParams,
@@ -115,7 +116,7 @@ const {
 
 onMounted(async () => {
   await getColorList();
-  await getDataListHandler();
+  await initDataListHandler();
 });
 </script>
 <style lang="scss" scoped></style>

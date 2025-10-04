@@ -43,13 +43,13 @@
             placeholder="请输入名称"
             class="flex-1 w-0 mr-4"
             clearable
-            @change="filterIconList"
+            @change="filterDataListHandler"
           >
           </el-input>
           <el-button
             :icon="Search"
             type="primary"
-            @click="filterIconList"
+            @click="filterDataListHandler"
           ></el-button>
         </div>
         <ul class="icon-wrapper h-full w-full mb-4">
@@ -92,20 +92,10 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
   pageChangeHandler,
+  filterDataListHandler,
+  initDataListHandler,
 } = useSearch<IconSearchType, IconItemType>(originalParams, getIconListApi);
-
-const filterIconList = async () => {
-  pageConfig.pageNumber = 1;
-  await getDataListHandler();
-};
-
-const initIconList = async () => {
-  searchParams.value = { ...originalParams };
-  filterIconList();
-  getDataListHandler();
-};
 
 const popoverRef = ref();
 const hidePopover = () => {
@@ -124,7 +114,7 @@ const clearIcon = () => {
 };
 
 onBeforeMount(() => {
-  initIconList();
+  initDataListHandler();
 });
 </script>
 <style lang="scss" scoped>

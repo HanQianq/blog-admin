@@ -63,7 +63,7 @@
         :row="formDialogProps.row"
         :category-list="formDialogProps.categoryList"
         @close="closeDialog"
-        @change-success="getDataListHandler"
+        @change-success="filterDataListHandler"
       ></IconFormDialog>
     </div>
   </div>
@@ -103,18 +103,13 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
   pageChangeHandler,
   filterDataListHandler,
+  initDataListHandler,
 } = useSearch<IconSearchType, IconItemType>(originalParams, getIconListApi, 50);
 
 const changeCategory = async (category: string) => {
   searchParams.value.category = category;
-  await filterDataListHandler();
-};
-
-const initIconList = async () => {
-  searchParams.value = { ...originalParams };
   await filterDataListHandler();
 };
 
@@ -150,7 +145,7 @@ const closeDialog = () => {
 };
 
 const initData = async () => {
-  await initIconList();
+  await initDataListHandler();
   await getCategoryList();
 };
 

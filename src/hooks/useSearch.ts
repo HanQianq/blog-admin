@@ -40,6 +40,12 @@ export const useSearch = <T, K>(
     pageConfig.pageNumber = 1;
     await getDataListHandler();
   };
+
+  const initDataListHandler = async () => {
+    searchParams.value = { ...originalParams } as any;
+    storageParams.value = { ...originalParams } as any;
+    await filterDataListHandler();
+  };
   return {
     searchParams,
     dataList,
@@ -49,5 +55,6 @@ export const useSearch = <T, K>(
     getDataListHandler,
     pageChangeHandler,
     filterDataListHandler,
+    initDataListHandler,
   };
 };

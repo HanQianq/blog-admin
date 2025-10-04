@@ -83,15 +83,11 @@ const {
   pageConfig,
   pageChangeHandler,
   filterDataListHandler,
+  initDataListHandler,
 } = useSearch<ImageSearchType, ImageItemType>(originalParams, getImageListApi);
 
 const changeCategory = async (category: string) => {
   searchParams.value.category = category;
-  await filterDataListHandler();
-};
-
-const initImageList = async () => {
-  searchParams.value = { ...originalParams };
   await filterDataListHandler();
 };
 
@@ -127,7 +123,7 @@ const closeDialog = () => {
 };
 
 const initData = async () => {
-  await initImageList();
+  await initDataListHandler();
   await getCategoryList();
 };
 

@@ -8,7 +8,7 @@
             class="!w-280px mr-4"
             placeholder="请输入关键词搜索"
             clearable
-            @change="getDataListHandler"
+            @change="filterDataListHandler"
           ></el-input>
           <my-button @click="openDialog('add')"
             ><MyIcon name="add" class="mr-2"></MyIcon>新增专栏</my-button
@@ -70,7 +70,7 @@
       :visible="formDialogProps.visible"
       :opt-type="formDialogProps.optType"
       :row="formDialogProps.row"
-      @change-success="getDataListHandler"
+      @change-success="filterDataListHandler"
       @close="closeDialog"
     ></ColumnDialog>
   </div>
@@ -96,15 +96,16 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
+  initDataListHandler,
+  filterDataListHandler,
   pageChangeHandler,
 } = useSearch<SearchArticleColumnType, ArticleColumnItemType>(
   originalParams,
   getArticleColumnListApi
 );
 
-onMounted(async () => {
-  await getDataListHandler();
+onMounted(() => {
+  initDataListHandler();
 });
 </script>
 <style lang="scss" scoped></style>

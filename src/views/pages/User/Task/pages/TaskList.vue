@@ -101,6 +101,7 @@ const {
   pageConfig,
   getDataListHandler,
   pageChangeHandler,
+  initDataListHandler,
 } = useSearch<UserTaskSearchType, UserTaskItemType>(
   originalParams,
   getUserTaskListApi
@@ -133,7 +134,7 @@ defineExpose({
   filterUserTaskList,
 });
 onMounted(() => {
-  getDataListHandler();
+  initDataListHandler();
   emitter.on('task:refresh', filterUserTaskList);
 });
 

@@ -122,7 +122,6 @@
 import { getUserListApi } from '@/api/system/user';
 import { UserItemType, UserListQueryType } from '@/api/system/user/type';
 import { useSearch } from '@/hooks/useSearch';
-// import { columnList } from './service';
 import { fmtTime } from '@/utils/tool';
 import { RoleItemType } from '@/api/authority/role/type';
 import { getRoleListApi } from '@/api/authority/role';
@@ -154,16 +153,12 @@ const {
   pageConfig,
   pageChangeHandler,
   filterDataListHandler,
+  initDataListHandler,
 } = useSearch<UserListQueryType, UserItemType>(originalParams, getUserListApi);
-
-const initUserList = async () => {
-  searchParams.value = { ...originalParams };
-  await filterDataListHandler();
-};
 
 onMounted(() => {
   getRoleList();
-  initUserList();
+  initDataListHandler();
 });
 </script>
 <style lang="scss" scoped></style>

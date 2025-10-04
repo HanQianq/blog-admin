@@ -129,20 +129,16 @@ const {
   pageConfig,
   pageChangeHandler,
   filterDataListHandler,
+  initDataListHandler,
 } = useSearch<UpdateLogListQueryType, UpdateLogItemType>(
   originalParams,
   getUpdateLogListApi
 );
 
-const initUpdateLogList = async () => {
-  searchParams.value = { ...originalParams };
-  await filterDataListHandler();
-};
-
 onMounted(() => {
   getStatusList();
   getReleaseTypList();
-  initUpdateLogList();
+  initDataListHandler();
 });
 </script>
 <style lang="scss" scoped></style>
