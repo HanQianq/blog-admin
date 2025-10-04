@@ -1,6 +1,6 @@
 export const useSearch = <T, K>(
   originalParams: T,
-  cb: () => Promise<ResPageType<K>>,
+  getDataFn: (params: PageType & T) => Promise<ResType<ResPageType<K>>>,
   pageSize = 10
 ) => {
   const searchParams = ref<T>({
@@ -19,7 +19,12 @@ export const useSearch = <T, K>(
   const getDataListHandler = async () => {
     loading.value = true;
     storageParams.value = searchParams.value;
-    const { total: totalCount, result } = await cb();
+    const {
+      data: { total: totalCount, result },
+    } = await getDataFn({
+      ...pageConfig,
+      ...(searchParams.value as T),
+    });
     total.value = totalCount;
     dataList.value = result as any[];
     loading.value = false;
@@ -30,6 +35,11 @@ export const useSearch = <T, K>(
     pageConfig.pageSize = pageSize;
     getDataListHandler();
   };
+
+  const filterDataListHandler = async () => {
+    pageConfig.pageNumber = 1;
+    await getDataListHandler();
+  };
   return {
     searchParams,
     dataList,
@@ -38,5 +48,6 @@ export const useSearch = <T, K>(
     total,
     getDataListHandler,
     pageChangeHandler,
+    filterDataListHandler,
   };
 };

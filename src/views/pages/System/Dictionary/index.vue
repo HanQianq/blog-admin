@@ -1,13 +1,15 @@
 <template>
   <div class="wh-full p-4 flex">
-    <section class="dict-category-wrapper wrapper-item w-96 h-full">
+    <section
+      class="dict-category-wrapper wrapper-item w-96 h-full flex flex-col"
+    >
       <h3 class="py-2 px-4 flex items-center justify-between">
         <span class="font-title text-lg">系统模块</span>
         <el-button link type="primary" @click="openDialog('add')">
           <MyIcon name="plus" class="mr-1"></MyIcon>新增字典</el-button
         >
       </h3>
-      <el-collapse v-model="currentCategory">
+      <el-collapse v-model="currentCategory" class="overflow-auto flex-1 h-0">
         <el-collapse-item
           v-for="(item, index) in categoryList"
           :key="index"

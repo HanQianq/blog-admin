@@ -110,16 +110,8 @@ const {
   pageChangeHandler,
 } = useSearch<SearchArticleTagType, ArticleTagItemType>(
   originalParams,
-  getArticleTagList
+  getArticleTagListApi
 );
-
-async function getArticleTagList() {
-  const { data } = await getArticleTagListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  return data;
-}
 
 onMounted(async () => {
   await getColorList();

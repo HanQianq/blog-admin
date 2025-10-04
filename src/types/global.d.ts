@@ -33,3 +33,5 @@ type ResPageType<T> = {
   total: number;
   result: T[];
 };
+
+type ReqPageType<T extends object> = PageType & T;

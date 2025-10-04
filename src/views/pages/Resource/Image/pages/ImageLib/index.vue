@@ -9,7 +9,7 @@
           placeholder="输入名称搜索"
           class="mr-4 !w-280px"
           clearable
-          @change="filterImageList"
+          @change="filterDataListHandler"
         ></el-input>
         <my-button @click="openDialog('add')">
           <my-icon name="add" class="mr-2"></my-icon>
@@ -55,7 +55,7 @@
         :row="formDialogProps.row"
         :category-list="formDialogProps.categoryList"
         @close="closeDialog"
-        @change-success="filterImageList"
+        @change-success="filterDataListHandler"
       ></ImageFormDialog>
     </div>
   </div>
@@ -81,30 +81,18 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
   pageChangeHandler,
-} = useSearch<ImageSearchType, ImageItemType>(originalParams, getImageList);
-
-async function getImageList() {
-  const { data } = await getImageListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  return data;
-}
-const filterImageList = async () => {
-  pageConfig.pageNumber = 1;
-  await getDataListHandler();
-};
+  filterDataListHandler,
+} = useSearch<ImageSearchType, ImageItemType>(originalParams, getImageListApi);
 
 const changeCategory = async (category: string) => {
   searchParams.value.category = category;
-  await filterImageList();
+  await filterDataListHandler();
 };
 
 const initImageList = async () => {
   searchParams.value = { ...originalParams };
-  await filterImageList();
+  await filterDataListHandler();
 };
 
 const formDialogProps = reactive<FormDialogPropsType>({

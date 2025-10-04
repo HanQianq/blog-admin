@@ -10,7 +10,7 @@
               class="!w-280px mr-4"
               placeholder="请输入关键词搜索"
               clearable
-              @change="filterUserList"
+              @change="filterDataListHandler"
             ></el-input>
             <my-tag size="large" class="mr-4">用户角色</my-tag>
             <el-select
@@ -18,7 +18,7 @@
               clearable
               filterable
               class="!w-280px"
-              @change="filterUserList"
+              @change="filterDataListHandler"
             >
               <el-option
                 v-for="item in roleList"
@@ -113,7 +113,7 @@
         :row="formDialogProps.row"
         :role-list="roleList"
         @close="closeDialog"
-        @change-success="filterUserList"
+        @change-success="filterDataListHandler"
       ></AddUserDialog>
     </div>
   </div>
@@ -152,26 +152,13 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
   pageChangeHandler,
-} = useSearch<UserListQueryType, UserItemType>(originalParams, getUserList);
-
-async function getUserList() {
-  const { data } = await getUserListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-
-  return data;
-}
-const filterUserList = async () => {
-  pageConfig.pageNumber = 1;
-  await getDataListHandler();
-};
+  filterDataListHandler,
+} = useSearch<UserListQueryType, UserItemType>(originalParams, getUserListApi);
 
 const initUserList = async () => {
   searchParams.value = { ...originalParams };
-  await filterUserList();
+  await filterDataListHandler();
 };
 
 onMounted(() => {

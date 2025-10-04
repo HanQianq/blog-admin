@@ -1,6 +1,6 @@
 <template>
   <div class="wh-full">
-    <MySearchPanel :data-exist="dataList.length > 0" :loading="loading">
+    <MySearchPanel :data-exist="taskList.length > 0" :loading="loading">
       <template #header>
         <div class="w-full flex items-center gap-6">
           <span class="flex items-center gap-3 flex-shrink-0">
@@ -60,7 +60,7 @@
         ></MyPagination>
       </template>
       <ul class="list-content-wrapper p-4">
-        <li v-for="item in dataList" :key="item.id">
+        <li v-for="item in taskList" :key="item.id">
           <UserTaskCard
             :task="item"
             @edit="emits('edit', item)"
@@ -103,15 +103,11 @@ const {
   pageChangeHandler,
 } = useSearch<UserTaskSearchType, UserTaskItemType>(
   originalParams,
-  getUserTaskList
+  getUserTaskListApi
 );
 
-async function getUserTaskList() {
-  const { data } = await getUserTaskListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  data.result = data.result.map((item: UserTaskItemType) => {
+const taskList = computed(() => {
+  return dataList.value.map((item: UserTaskItemType) => {
     const taskItem: UserTaskItemType = {
       ...item,
       createTime: fmtTime(item.createTime, 'YYYY-MM-DD'),
@@ -119,8 +115,8 @@ async function getUserTaskList() {
     };
     return taskItem;
   });
-  return data;
-}
+});
+
 const filterUserTaskList = async () => {
   if (deadlineDateRange.value instanceof Array) {
     searchParams.value.startTime = deadlineDateRange.value[0];

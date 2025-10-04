@@ -82,6 +82,11 @@ export const dictCategoryList: DictCategoryItemType[] = [
         value: 'user_task_priority',
         code: 'USER_TASK_PRIORITY',
       },
+      {
+        label: '用户动态类型',
+        value: 'user_activity_type',
+        code: 'USER_ACTIVITY_TYPE',
+      },
     ],
   },
   {

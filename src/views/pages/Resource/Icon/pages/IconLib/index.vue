@@ -9,7 +9,7 @@
           placeholder="输入名称搜索"
           class="mr-4 !w-280px"
           clearable
-          @change="filterIconList"
+          @change="filterDataListHandler"
         ></el-input>
         <my-button @click="openDialog('add')">
           <my-icon name="add" class="mr-2"></my-icon>
@@ -105,28 +105,17 @@ const {
   pageConfig,
   getDataListHandler,
   pageChangeHandler,
-} = useSearch<IconSearchType, IconItemType>(originalParams, getIconList, 50);
-
-async function getIconList() {
-  const { data } = await getIconListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  return data;
-}
-const filterIconList = async () => {
-  pageConfig.pageNumber = 1;
-  await getDataListHandler();
-};
+  filterDataListHandler,
+} = useSearch<IconSearchType, IconItemType>(originalParams, getIconListApi, 50);
 
 const changeCategory = async (category: string) => {
   searchParams.value.category = category;
-  await filterIconList();
+  await filterDataListHandler();
 };
 
 const initIconList = async () => {
   searchParams.value = { ...originalParams };
-  await filterIconList();
+  await filterDataListHandler();
 };
 
 const formDialogProps = reactive<FormDialogPropsType>({

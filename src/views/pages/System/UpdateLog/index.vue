@@ -10,7 +10,7 @@
               class="!w-280px mr-4"
               placeholder="请输入关键词搜索"
               clearable
-              @change="filterUpdateLogList"
+              @change="filterDataListHandler"
             ></el-input>
 
             <my-button class="ml-4" @click="openDialog('add')">
@@ -92,7 +92,7 @@
         :status-list="statusList"
         :released-type-list="releaseTypeList"
         @close="closeDialog"
-        @change-success="filterUpdateLogList"
+        @change-success="filterDataListHandler"
       ></UpdateLogFormDialog>
     </div>
   </div>
@@ -127,29 +127,16 @@ const {
   loading,
   total,
   pageConfig,
-  getDataListHandler,
   pageChangeHandler,
+  filterDataListHandler,
 } = useSearch<UpdateLogListQueryType, UpdateLogItemType>(
   originalParams,
-  getUpdateLogList
+  getUpdateLogListApi
 );
-
-async function getUpdateLogList() {
-  const { data } = await getUpdateLogListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-
-  return data;
-}
-const filterUpdateLogList = async () => {
-  pageConfig.pageNumber = 1;
-  await getDataListHandler();
-};
 
 const initUpdateLogList = async () => {
   searchParams.value = { ...originalParams };
-  await filterUpdateLogList();
+  await filterDataListHandler();
 };
 
 onMounted(() => {

@@ -94,15 +94,8 @@ const {
   pageConfig,
   getDataListHandler,
   pageChangeHandler,
-} = useSearch<IconSearchType, IconItemType>(originalParams, getIconList);
+} = useSearch<IconSearchType, IconItemType>(originalParams, getIconListApi);
 
-async function getIconList() {
-  const { data } = await getIconListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  return data;
-}
 const filterIconList = async () => {
   pageConfig.pageNumber = 1;
   await getDataListHandler();

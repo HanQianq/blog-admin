@@ -100,16 +100,8 @@ const {
   pageChangeHandler,
 } = useSearch<SearchArticleColumnType, ArticleColumnItemType>(
   originalParams,
-  getArticleColumnList
+  getArticleColumnListApi
 );
-
-async function getArticleColumnList() {
-  const { data } = await getArticleColumnListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  return data;
-}
 
 onMounted(async () => {
   await getDataListHandler();

@@ -37,7 +37,7 @@
       <div class="p-4">
         <el-table
           v-if="currentLayout === 'list'"
-          :data="dataList"
+          :data="articleList"
           style="width: 100%"
           row-key="id"
           size="large"
@@ -132,7 +132,7 @@
         <ul v-else class="article-list-wrapper">
           <li
             class="article-item-wrapper"
-            v-for="item in dataList"
+            v-for="item in articleList"
             :key="item.id"
           >
             <ArticleCard
@@ -190,17 +190,14 @@ const {
   pageConfig,
   getDataListHandler,
   pageChangeHandler,
+  filterDataListHandler,
 } = useSearch<ArticleQueryType, ArticleListItemType>(
   originalParams,
-  getArticleList
+  getArticleListApi
 );
 
-async function getArticleList() {
-  const { data } = await getArticleListApi({
-    ...pageConfig,
-    ...searchParams.value,
-  });
-  data.result = data.result.map((item: any) => {
+const articleList = computed(() => {
+  return dataList.value.map((item: any) => {
     const articleItem: ArticleListItemType = {
       id: item.id,
       title: item.title,
@@ -209,7 +206,6 @@ async function getArticleList() {
       author: item.author.name,
       authorAvatar: item.author.avatar,
       status: item.status,
-
       category: item.category
         ? item.category.father + '·' + item.category.name
         : '',
@@ -218,21 +214,16 @@ async function getArticleList() {
     };
     return articleItem;
   });
-  return data;
-}
-const filterArticleList = async () => {
-  pageConfig.pageNumber = 1;
-  await getDataListHandler();
-};
+});
 
 const changeCategory = async (category: string) => {
   searchParams.value.category = category;
-  await filterArticleList();
+  await filterDataListHandler();
 };
 
 const initArticleList = async () => {
   searchParams.value = { ...originalParams };
-  await filterArticleList();
+  await filterDataListHandler();
 };
 
 const deleteArticleHandler = (id: string) => {
