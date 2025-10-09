@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-item overflow-hidden relative shadow-lg">
     <img
-      :src="article.cover || ArticleDraftImg"
+      :src="article.cover || ArticleCover"
       :alt="article.title"
       class="w-full h-52 object-cover"
     />
@@ -23,10 +23,13 @@
           article.title
         }}</span>
       </h2>
-      <p v-if="article.abstract" class="mb-2 line-clamp-2">
+      <p
+        v-if="article.abstract"
+        class="mb-2 text-sm leading-5 line-clamp-2 h-10 text-gray-500"
+      >
         {{ article.abstract }}
       </p>
-      <p v-else class="mb-2 line-clamp-2 text-gray-500">暂无摘要</p>
+      <p v-else class="mb-2 h-10 text-sm text-gray-500">暂无摘要</p>
       <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
         <span class="mr-4">{{ article.author }}</span>
         <span class="mr-4">{{ article.category }}</span>
@@ -35,13 +38,16 @@
     </div>
 
     <div class="option-btn flex items-center py-3 w-full border-top">
-      <div class="flex-1 xy-center">
+      <div v-if="article.status === 'publish'" class="flex-1 xy-center">
         <el-button link type="primary" @click="emits('view', article.id)">
           <MyIcon name="eyes" class="mr-2"></MyIcon>
           查 看
         </el-button>
       </div>
-      <el-divider direction="vertical"></el-divider>
+      <el-divider
+        v-if="article.status === 'publish'"
+        direction="vertical"
+      ></el-divider>
       <div class="flex-1 xy-center">
         <el-button link type="primary" @click="emits('edit', article.id)">
           <MyIcon name="edit" class="mr-2"></MyIcon>
@@ -63,8 +69,9 @@
 <script setup lang="ts">
 import { ArticleListItemType } from '@/api/article/type';
 import ArticleDraftImg from '@/assets/image/draft.jpg';
+import ArticleImg from '@/assets/image/cover.webp';
 
-defineProps<{
+const props = defineProps<{
   article: ArticleListItemType;
 }>();
 const emits = defineEmits<{
@@ -72,4 +79,8 @@ const emits = defineEmits<{
   (e: 'edit', id: string): void;
   (e: 'delete', id: string): void;
 }>();
+
+const ArticleCover = computed(() => {
+  return props.article.status === 'publish' ? ArticleImg : ArticleDraftImg;
+});
 </script>

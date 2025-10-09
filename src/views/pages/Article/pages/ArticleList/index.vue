@@ -104,7 +104,7 @@
             <template #default="{ row }">
               <div flex w-full class="justify-center">
                 <el-button
-                  v-if="row.cover"
+                  v-if="row.status === 'publish'"
                   link
                   type="primary"
                   @click="gotoArticleDetail(row.id)"
