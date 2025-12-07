@@ -14,7 +14,7 @@
             dayjs(articleDetail?.createTime).format('YYYY-MM-DD')
           }}</span>
         </span>
-        <span>
+        <span v-if="articleDetail?.categoryInfo?.base">
           {{
             articleDetail?.categoryInfo?.father +
             '·' +

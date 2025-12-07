@@ -73,7 +73,8 @@
 import { getUserProfileApi, updateUserProfileApi } from '@/api/user';
 import { UserInfoType, UserFormType } from '@/api/user/type';
 import UserProfileForm from './components/UserProFileForm.vue';
-import UserActivity from '../Activity//index.vue';
+import UserActivity from '../Activity/index.vue';
+import UserArticle from '../Article/index.vue';
 import UserTask from '../Task/index.vue';
 import type { Component } from 'vue';
 
@@ -108,6 +109,11 @@ const tabList: TabItem[] = [
     name: '动态',
     key: 'dynamic',
     component: shallowRef(UserActivity),
+  },
+  {
+    name: '我的创作',
+    key: 'article',
+    component: shallowRef(UserArticle),
   },
   {
     name: '个人事项',
