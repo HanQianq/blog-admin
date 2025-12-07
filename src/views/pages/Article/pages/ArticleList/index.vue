@@ -112,6 +112,7 @@
                   查看详情
                 </el-button>
                 <el-button
+                  v-if="isAuthor(row)"
                   link
                   type="primary"
                   @click="gotoUpdateArticle(row.id)"
@@ -119,6 +120,7 @@
                   编辑
                 </el-button>
                 <el-button
+                  v-if="isAuthor(row)"
                   link
                   type="danger"
                   @click="deleteArticleHandler(row.id)"
@@ -163,6 +165,10 @@ import { useSearch } from '@/hooks/useSearch';
 import { columnList } from './service';
 import { fmtTime } from '@/utils/tool';
 import ArticleCard from './components/ArticleCard.vue';
+import { storeToRefs } from 'pinia';
+import { useUserInfoStore } from '@/store/user';
+
+const { userId } = storeToRefs(useUserInfoStore());
 
 const router = useRouter();
 const { categoryList, getCategoryTree } = useArticleCategory();
@@ -181,7 +187,9 @@ const options = [
 ];
 
 const originalParams: ArticleQueryType = { title: '', category: '' };
-
+const isAuthor = (row: ArticleListItemType) => {
+  return row.authorId === userId.value;
+};
 const {
   searchParams,
   dataList,
@@ -204,6 +212,7 @@ const articleList = computed(() => {
       abstract: item.abstract,
       cover: item.cover,
       author: item.author.name,
+      authorId: item.author.id,
       authorAvatar: item.author.avatar,
       status: item.status,
       category: item.category

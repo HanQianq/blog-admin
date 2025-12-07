@@ -5,6 +5,8 @@ import { nanoid } from 'nanoid';
 
 import { uploadFileApi } from '@/api';
 import type { DictSimpleItemType } from '@/api/system/dict/type';
+import { storeToRefs } from 'pinia';
+import { useSystemStore } from '@/store/system';
 
 export const getImg = (baseUrl: string, detailUrl: string) => {
   return new URL(`../../assets/image/${baseUrl}/${detailUrl}`, import.meta.url)
@@ -188,10 +190,35 @@ function toRgba(color: string, alpha: number = 1): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+export function getColorPair(value: number): {
+  color: string;
+  borderColor: string;
+} {
+  const v = Math.max(-5, Math.min(5, value));
+  const { isDark } = storeToRefs(useSystemStore());
+  if (v === 0) {
+    const bg = isDark.value ? 'hsl(0, 0%, 80%)' : 'hsl(0, 0%, 30%)';
+    const border = isDark.value ? 'hsl(0, 0%, 65%)' : 'hsl(0, 0%, 50%)';
+    return { color: bg, borderColor: border };
+  }
+  const hue = v > 0 ? 0 : 120;
+  const intensity = Math.abs(v) / 5;
+  const lightnessBase = isDark.value ? 60 : 50;
+  const saturation = 40 + intensity * 50;
+  const lightness = lightnessBase - intensity * 20;
+  const bg = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  const borderSaturation = saturation * 0.6;
+  const borderLightness = lightness + (isDark.value ? 10 : 15);
+  const border = `hsl(${hue}, ${borderSaturation}%, ${borderLightness}%)`;
+
+  return { color: bg, borderColor: border };
+}
+
 export default {
   getImg,
   dateDiff,
   copyClick,
   getCookie,
   setCookie,
+  getColorPair,
 };

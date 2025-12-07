@@ -70,7 +70,7 @@ const getRecentTask = async () => {
       ...item,
       endTime: fmtTime(item.endTime as string, 'YYYY-MM-DD HH:mm:ss'),
       startTime: fmtTime(item.startTime as string, 'YYYY-MM-DD HH:mm:ss'),
-      style: randomColor(),
+      style: getColorPair(item.score),
     };
     return taskItem;
   });

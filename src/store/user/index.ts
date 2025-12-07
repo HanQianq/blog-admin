@@ -5,6 +5,7 @@ export const useUserInfoStore = defineStore(
   'user',
   () => {
     const baseInfo: UserInfoType = {
+      id: '',
       nickName: '',
       avatar: '',
       bgCover: null,
@@ -16,6 +17,8 @@ export const useUserInfoStore = defineStore(
     const userInfo = ref<UserInfoType>({
       ...baseInfo,
     });
+
+    const userId = computed(() => userInfo.value.id || '');
     const token = ref<string>('');
     const csrfToken = ref<string>('');
     const isLogin = ref<boolean>(false);
@@ -28,6 +31,7 @@ export const useUserInfoStore = defineStore(
     };
 
     return {
+      userId,
       userInfo,
       token,
       csrfToken,

@@ -78,6 +78,8 @@
     "generateColor": true,
     "uploadFile": true,
     "getDictLabelByKey": true,
-    "randomColor": true
+    "randomColor": true,
+    "getAlertColor": true,
+    "getColorPair": true
   }
 }

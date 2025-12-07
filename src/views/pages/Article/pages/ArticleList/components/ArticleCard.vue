@@ -38,25 +38,22 @@
     </div>
 
     <div class="option-btn flex items-center py-3 w-full border-top">
-      <div v-if="article.status === 'publish'" class="flex-1 xy-center">
+      <div class="flex-1 xy-center">
         <el-button link type="primary" @click="emits('view', article.id)">
           <MyIcon name="eyes" class="mr-2"></MyIcon>
           查 看
         </el-button>
       </div>
-      <el-divider
-        v-if="article.status === 'publish'"
-        direction="vertical"
-      ></el-divider>
-      <div class="flex-1 xy-center">
+      <el-divider v-if="isAuthor" direction="vertical"></el-divider>
+      <div v-if="isAuthor" class="flex-1 xy-center">
         <el-button link type="primary" @click="emits('edit', article.id)">
           <MyIcon name="edit" class="mr-2"></MyIcon>
           编 辑
         </el-button>
       </div>
 
-      <el-divider direction="vertical"></el-divider>
-      <div class="flex-1 xy-center">
+      <el-divider v-if="isAuthor" direction="vertical"></el-divider>
+      <div v-if="isAuthor" class="flex-1 xy-center">
         <el-button link type="danger" @click="emits('delete', article.id)">
           <MyIcon name="delete" class="mr-2"></MyIcon>
           删 除
@@ -70,6 +67,8 @@
 import { ArticleListItemType } from '@/api/article/type';
 import ArticleDraftImg from '@/assets/image/draft.jpg';
 import ArticleImg from '@/assets/image/cover.webp';
+import { useUserInfoStore } from '@/store/user';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
   article: ArticleListItemType;
@@ -79,8 +78,13 @@ const emits = defineEmits<{
   (e: 'edit', id: string): void;
   (e: 'delete', id: string): void;
 }>();
+const { userId } = storeToRefs(useUserInfoStore());
 
 const ArticleCover = computed(() => {
   return props.article.status === 'publish' ? ArticleImg : ArticleDraftImg;
+});
+
+const isAuthor = computed(() => {
+  return props.article.authorId === userId.value;
 });
 </script>

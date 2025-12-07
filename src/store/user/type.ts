@@ -1,4 +1,5 @@
 export type UserInfoType = {
+  id: string;
   nickName: string;
   avatar: string | null;
   bgCover: string | null;
