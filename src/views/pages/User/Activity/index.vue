@@ -38,7 +38,7 @@ const {
   getDataListHandler,
   total,
   initDataListHandler,
-} = useSearch<object, IActivityItem>({}, getUserActivityApi);
+} = useSearch<object, IActivityItem>({}, getUserActivityApi, 20, true);
 
 const loadMoreHandler = () => {
   pageConfig.pageNumber += 1;

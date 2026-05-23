@@ -6,21 +6,31 @@
       <h3 class="title-wrapper text-3xl font-bold py-6 px-8">
         {{ articleDetail?.baseInfo?.title || '' }}
       </h3>
-      <div class="info-wrapper flex items-center px-8 mb-4">
-        <span class="mr-6">{{ articleDetail?.authorInfo?.nickName }}</span>
-        <span class="flex items-center mr-6">
-          <MyIcon name="calendar" class="mr-1 relative top-1px"></MyIcon>
-          <span>{{
-            dayjs(articleDetail?.createTime).format('YYYY-MM-DD')
-          }}</span>
-        </span>
-        <span v-if="articleDetail?.categoryInfo?.base">
-          {{
-            articleDetail?.categoryInfo?.father +
-            '·' +
-            articleDetail?.categoryInfo?.base?.name
+      <div class="info-wrapper flex items-center justify-between px-8 mb-4">
+        <div class="flex items-center">
+          <span class="mr-6">{{ articleDetail?.authorInfo?.nickName }}</span>
+          <span class="flex items-center mr-6">
+            <MyIcon name="calendar" class="mr-1 relative top-1px"></MyIcon>
+            <span>{{
+              dayjs(articleDetail?.createTime).format('YYYY-MM-DD')
+            }}</span>
+          </span>
+          <span v-if="articleDetail?.categoryInfo?.base">
+            {{
+              articleDetail?.categoryInfo?.father +
+              '·' +
+              articleDetail?.categoryInfo?.base?.name
+            }}
+          </span>
+        </div>
+
+        <div class="mr-4">
+          最近更新于{{
+            dayjs(articleDetail?.baseInfo?.updateTime).format(
+              'YYYY-MM-DD HH:mm'
+            )
           }}
-        </span>
+        </div>
       </div>
 
       <div class="content-wrapper flex-1 h-0 overflow-auto">

@@ -1,7 +1,8 @@
 export const useSearch = <T, K>(
   originalParams: T,
   getDataFn: (params: PageType & T) => Promise<ResType<ResPageType<K>>>,
-  pageSize = 10
+  pageSize = 10,
+  isScroll = false
 ) => {
   const searchParams = ref<T>({
     ...originalParams,
@@ -26,7 +27,11 @@ export const useSearch = <T, K>(
       ...(searchParams.value as T),
     });
     total.value = totalCount;
-    dataList.value = result as any[];
+    if (isScroll) {
+      dataList.value = [...dataList.value, ...(result as any[])];
+    } else {
+      dataList.value = result as any[];
+    }
     loading.value = false;
   };
   const pageChangeHandler = async ({ pageNumber, pageSize }: PageType) => {
