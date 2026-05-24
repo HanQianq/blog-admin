@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p e:/myself/project/myBlog/blog-admin/src/api/blogger)",
+      "Bash(mkdir -p e:/myself/project/myBlog/blog-admin/src/views/pages/User/BloggerProfile)"
+    ]
+  }
+}

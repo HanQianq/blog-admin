@@ -28,4 +28,13 @@ export const SystemRouteList: RouteRecordRaw[] = [
       icon: 'data-user',
     },
   },
+  {
+    path: '/user-profile',
+    name: 'BloggerProfile',
+    component: () => import('@/views/pages/System/BloggerProfile/index.vue'),
+    meta: {
+      name: '博主档案',
+      icon: 'file-doc',
+    },
+  },
 ];
